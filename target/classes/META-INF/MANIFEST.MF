@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: simon
+Build-Jdk: 16.0.2
+Implementation-Title: verifoo
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: verifoo
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/verifoo
+Created-By: Maven Integration for Eclipse
+
