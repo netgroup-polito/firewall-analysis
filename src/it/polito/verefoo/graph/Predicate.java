@@ -207,6 +207,6 @@ public class Predicate {
 			System.out.print(proto);
 			i++;
 		}
-		System.out.print("}\n");
+		System.out.print("}");
 	}
 }

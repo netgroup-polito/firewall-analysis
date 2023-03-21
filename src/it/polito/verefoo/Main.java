@@ -48,26 +48,6 @@ public class Main {
 				m.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "./xsd/nfvSchema.xsd");
 				VerefooSerializer test = new VerefooSerializer((NFV) u.unmarshal(new FileInputStream("./testfile/firewall-analysis/test.xml")));
 
-				/* 
-				if (test.isSat()) {
-					loggerResult.info("SAT");
-					loggerResult.info("----------------------OUTPUT----------------------");
-					StringWriter stringWriter = new StringWriter();
-					m.marshal(test.getResult(), stringWriter);
-					loggerResult.info(stringWriter.toString());
-					loggerResult.info("--------------------------------------------------");
-					//System.out.println(stringWriter);
-					System.out.println(test.getZ3Model());
-				} else {
-					loggerResult.info("UNSAT");
-					loggerResult.info("----------------------OUTPUT----------------------");
-					StringWriter stringWriter = new StringWriter();
-					m.marshal(test.getResult(), stringWriter);
-					loggerResult.info(stringWriter.toString());
-					loggerResult.info("--------------------------------------------------");
-					System.exit(1);
-				}
-				*/
 				
 			} catch (BadGraphError | FileNotFoundException e) {
 				loggerInfo.error("Graph semantically incorrect");

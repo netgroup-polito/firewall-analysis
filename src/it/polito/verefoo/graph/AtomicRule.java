@@ -56,5 +56,15 @@ public class AtomicRule implements Comparable<AtomicRule>{
 	public int compareTo(AtomicRule o) {
 		return this.priority - o.getPriority();
 	}
+
+
+	public void print() {
+		System.out.print("Atomic rule " + this.priority + ", " + this.action);
+		this.originalPredicate.print();
+		System.out.print(", {");
+		for(int ap: this.atomicPredicates)
+			System.out.print(ap + " ");
+		System.out.println("}");	
+	}
 	
 }
