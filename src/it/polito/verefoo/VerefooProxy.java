@@ -1,12 +1,15 @@
 package it.polito.verefoo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +29,7 @@ import it.polito.verefoo.graph.PortInterval;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.graph.SecurityRequirement;
 import it.polito.verefoo.graph.AtomicFlow;
+import it.polito.verefoo.graph.AtomicRule;
 import it.polito.verefoo.graph.FlowPath;
 import it.polito.verefoo.jaxb.*;
 import it.polito.verefoo.jaxb.NodeConstraints.NodeMetrics;
@@ -61,6 +65,15 @@ public class VerefooProxy {
 	private HashMap<Integer, Predicate> networkAtomicPredicates = new HashMap<>();
 	HashMap<String, Node> transformersNode = new HashMap<>();
 	private TestResults testResults = new TestResults();
+	
+	/* Firewall Analysis */
+	private HashMap<String, List<AtomicRule>> firewallAtomicRulesMap = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallPFAllowedAPs = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallPFDeniedAPs = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallAFAllowedAPs = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallAFDeniedAPs = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallDFAllowedAPs = new HashMap<>();
+	private HashMap<String, SortedSet<Integer>> firewallDFDeniedAPs = new HashMap<>();
 	
 	/**
 	 * Public constructor for the Verefoo proxy service
@@ -122,6 +135,8 @@ public class VerefooProxy {
 		networkAtomicPredicates = generateAtomicPredicatesForFirewallAnalysis();
 		
 		rewriteFirewallRules();
+		
+		solveFirewallAnomalies();
 		
 		/*
 		long t2 = System.currentTimeMillis();
@@ -442,33 +457,130 @@ public class VerefooProxy {
 			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
 				System.out.println("FIREWALL " + node.getName());
 				
-				int count = 0;
-				
+				int count = 1;
+				List<AtomicRule> atomicRules = new ArrayList<>();
+				firewallAtomicRulesMap.put(node.getName(), atomicRules);
+	
 				for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-					List<Integer> ruleApList = new ArrayList<>();
+
 					Predicate rulePred = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
 							rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
+					
+					AtomicRule newAtomicRule = new AtomicRule(rule.getAction(), count, rulePred);
 					
 					for(HashMap.Entry<Integer, Predicate> apEntry: networkAtomicPredicates.entrySet()) {
 						Predicate intersectionPredicate = aputils.computeIntersection(apEntry.getValue(), rulePred);
 						if(intersectionPredicate != null && aputils.APCompare(intersectionPredicate, apEntry.getValue())
 								&& !apEntry.getValue().hasIPDstOnlyNegs()) {
 							//System.out.print(apEntry.getKey() + " "); apEntry.getValue().print();
-							ruleApList.add(apEntry.getKey());
+							newAtomicRule.addAtomicPredicates(apEntry.getKey());
 						}
 					}
-					
-					//DEBUG
-					System.out.print("Rule " + count + "\t" + rule.getAction()); count++; rulePred.print();
-					System.out.print("\t");
-					for(Integer i: ruleApList) {
-						System.out.print(i + " ");
-					}
-					System.out.println();
-						
-					
-					
+					count++;
 				}
+			}
+		}
+	}
+	
+	private void solveFirewallAnomalies() {
+		
+		/* Priority first:
+		 * Ordino le regole all'interno del firewall per priorità. Scansiono una regola per volta e un suo ap per volta.
+		 * Se l'ap è già presente in una delle due liste, allowed o denied, non faccio nulla
+		 * Altrimenti lo inserisco nella lista corrsipondente in base all'azione della regola
+		 */
+		for(Node node: transformersNode.values()) {
+			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
+				
+				List<AtomicRule> atomicRules = firewallAtomicRulesMap.get(node.getName());
+				Collections.sort(atomicRules);	//rules sorted by priority
+				
+				SortedSet<Integer> allowedAPs = new TreeSet<>();
+				SortedSet<Integer> deniedAPs = new TreeSet<>();
+				
+				for(AtomicRule rule: atomicRules) {
+					
+					for(int ap: rule.getAtomicPredicates()) {
+						if(!allowedAPs.contains(ap) && !deniedAPs.contains(ap)) {
+							//First time we find this ap -> insert it into allowed or denied, based on rule action
+							if(rule.getAction().equals(ActionTypes.DENY))
+								deniedAPs.add(ap);
+							else allowedAPs.add(ap);
+						}
+					}
+				}
+				
+				firewallPFAllowedAPs.put(node.getName(), allowedAPs);
+				firewallPFDeniedAPs.put(node.getName(), deniedAPs);
+			}
+		}
+		
+		/* Allow First:
+		 * Scansiono prima tutte le regole ALLOW e inserisco i loro ap all'interno della lista allowed (se non sono già presenti).
+		 * Poi scansiono le regole DENY e aggiungo a denied gli ap che non sono già presenti in allowed
+		*/
+		for(Node node: transformersNode.values()) {
+			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
+				
+				List<AtomicRule> atomicRules = firewallAtomicRulesMap.get(node.getName());
+				
+				SortedSet<Integer> allowedAPs = new TreeSet<>();
+				SortedSet<Integer> deniedAPs = new TreeSet<>();
+				
+				for(AtomicRule rule: atomicRules) {
+					if(rule.getAction().equals(ActionTypes.ALLOW)) {
+						for(int ap: rule.getAtomicPredicates()) {
+							if(!allowedAPs.contains(ap))
+								allowedAPs.add(ap);
+						}
+					}
+				}
+				
+				for(AtomicRule rule: atomicRules) {
+					if(rule.getAction().equals(ActionTypes.DENY)) {
+						for(int ap: rule.getAtomicPredicates()) {
+							if(!allowedAPs.contains(ap) && !deniedAPs.contains(ap))
+								deniedAPs.add(ap);
+						}
+					}
+				}
+				
+				firewallAFAllowedAPs.put(node.getName(), allowedAPs);
+				firewallAFDeniedAPs.put(node.getName(), deniedAPs);
+				
+			}
+		}
+		
+		/* Deny First: stesso ragionamento di Allow first */
+		for(Node node: transformersNode.values()) {
+			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
+				
+				List<AtomicRule> atomicRules = firewallAtomicRulesMap.get(node.getName());
+				
+				SortedSet<Integer> allowedAPs = new TreeSet<>();
+				SortedSet<Integer> deniedAPs = new TreeSet<>();
+				
+				for(AtomicRule rule: atomicRules) {
+					if(rule.getAction().equals(ActionTypes.DENY)) {
+						for(int ap: rule.getAtomicPredicates()) {
+							if(!deniedAPs.contains(ap))
+								deniedAPs.add(ap);
+						}
+					}
+				}
+				
+				for(AtomicRule rule: atomicRules) {
+					if(rule.getAction().equals(ActionTypes.ALLOW)) {
+						for(int ap: rule.getAtomicPredicates()) {
+							if(!deniedAPs.contains(ap) && !allowedAPs.contains(ap))
+								allowedAPs.add(ap);
+						}
+					}
+				}
+				
+				firewallDFAllowedAPs.put(node.getName(), allowedAPs);
+				firewallDFDeniedAPs.put(node.getName(), deniedAPs);
+				
 			}
 		}
 	}

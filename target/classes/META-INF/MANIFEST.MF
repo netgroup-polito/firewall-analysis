@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: simon
-Build-Jdk: 16.0.2
+Built-By: simone
+Build-Jdk: 17.0.6
 Implementation-Title: verifoo
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: verifoo
