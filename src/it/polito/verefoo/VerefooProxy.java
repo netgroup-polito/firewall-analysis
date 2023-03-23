@@ -90,9 +90,21 @@ public class VerefooProxy {
 		aputils = new APUtils();
 		parallelConflictAnalysis();
 		
-		//DEBUG: print firewall original rule and related atomic rules
+		//DEBUG: print firewall Atomic Predicates
 		for(FW fw: firewalls.values()) {
 			System.out.println("FIREWALL " + fw.getName() + " Number of APs " + fw.getFirewallAtomicPredicates().size());
+			for(HashMap.Entry<Integer, Predicate> entry: fw.getFirewallAtomicPredicates().entrySet()) {
+				System.out.print(entry.getKey() + " ");
+				entry.getValue().print();
+				System.out.println();
+			}
+		}
+		
+		//END DEBUG
+		
+		//DEBUG: print firewall original rule and related atomic rules
+		for(FW fw: firewalls.values()) {
+			System.out.println("FIREWALL RULES");
 			for(AtomicRule rule: fw.getAtomicRules()) {
 				rule.print();
 			}
