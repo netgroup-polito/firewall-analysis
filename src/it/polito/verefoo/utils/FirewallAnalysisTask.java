@@ -37,40 +37,10 @@ public class FirewallAnalysisTask implements Runnable {
 		List<Predicate> atomicPredicates = new ArrayList<>();
 		HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
 		
-		List<Predicate> allowedList = new ArrayList<>();
-		List<Predicate> deniedList = new ArrayList<>();
-		
-		boolean deniedListChanged = false;
 		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-			if(rule.getAction().equals(ActionTypes.DENY)) {
-				//deny <--- deny V rule-i
-				deniedList.add(new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-						rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol()));
-				deniedListChanged = true;
-			} else {
-				//allowed <--- allowed V (rule-i AND !denied)
-				Predicate toAdd = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-						rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-				List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-				for(Predicate allow: allowedToAdd) {
-					if(!aputils.isPredicateContainedIn(allow, allowedList))
-						allowedList.add(allow);
-				}
-			}
-		}
-		//Check default action: if DENY do nothing
-		if(node.getConfiguration().getFirewall().getDefaultAction().equals(ActionTypes.ALLOW)) {
-			Predicate toAdd = new Predicate("*", false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY);
-			List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-			for(Predicate allow: allowedToAdd) {
-				if(!aputils.isPredicateContainedIn(allow, allowedList))
-					allowedList.add(allow);
-			}
-		}
-		
-		for(Predicate p: allowedList) {
-			if(!predicates.contains(p))
-				predicates.add(p);
+			Predicate newp = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
+					rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
+			predicates.add(newp);
 		}
 		
 		//Starting from this list of predicates we can compute the corresponding set of Atomic Predicates

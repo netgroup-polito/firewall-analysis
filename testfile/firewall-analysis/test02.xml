@@ -22,8 +22,8 @@
                             <dst_port>*</dst_port>
                         </elements>
                         <elements>
-                            <action>ALLOW</action>
-                            <source>10.0.0.*</source>
+                            <action>DENY</action>
+                            <source>10.0.0.-1</source>
                             <destination>30.0.0.2</destination>
                             <protocol>UDP</protocol>
                             <src_port>*</src_port>
