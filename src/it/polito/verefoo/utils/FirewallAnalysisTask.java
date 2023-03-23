@@ -12,7 +12,6 @@ import it.polito.verefoo.graph.FW;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
-import it.polito.verefoo.jaxb.L4ProtocolTypes;
 import it.polito.verefoo.jaxb.Node;
 
 public class FirewallAnalysisTask implements Runnable {
@@ -95,15 +94,38 @@ public class FirewallAnalysisTask implements Runnable {
 		SortedSet<Integer> PFDeniedAPs = new TreeSet<>();
 
 		for (AtomicRule rule : atomicRules) {
+			boolean inAllowed = false;
+			boolean inDenied = false;
+			List<Predicate> allowedRulePredicates = new ArrayList<>();
+			List<Predicate> deniedRulePredicates = new ArrayList<>();
+			
+			
 			for (int ap : rule.getAtomicPredicates()) {
-				if (!PFAllowedAPs.contains(ap) && !PFDeniedAPs.contains(ap)) {
-					// First time we find this ap -> insert it into allowed or denied, based on rule
-					// action
-					if (rule.getAction().equals(ActionTypes.DENY))
+				if(PFDeniedAPs.contains(ap)) {
+					inDenied = true;
+				} else if(PFAllowedAPs.contains(ap)) {
+					inAllowed = true;
+				} else {
+					if (rule.getAction().equals(ActionTypes.DENY)) {
 						PFDeniedAPs.add(ap);
-					else
+						deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+						inDenied = true;
+					} else {
 						PFAllowedAPs.add(ap);
-				}
+						allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+						inAllowed = true;
+					}
+				}	
+			}
+			
+			if(inDenied && inAllowed) {
+				//The original rule has been split
+				fw.addPFAllowedPredicates(allowedRulePredicates);
+				fw.addPFDeniedPredicates(deniedRulePredicates);
+			} else if (inDenied) {
+				fw.addPFDeniedPredicate(rule.getOriginalPredicate());
+			} else if(inAllowed) {
+				fw.addPFAllowedPredicate(rule.getOriginalPredicate());
 			}
 		}
 
@@ -121,6 +143,7 @@ public class FirewallAnalysisTask implements Runnable {
 
 		for(AtomicRule rule: atomicRules) {
 			if(rule.getAction().equals(ActionTypes.ALLOW)) {
+				fw.addAFAllowedPredicate(rule.getOriginalPredicate());
 				for(int ap: rule.getAtomicPredicates()) {
 					if(!AFAllowedAPs.contains(ap))
 						AFAllowedAPs.add(ap);
@@ -130,9 +153,21 @@ public class FirewallAnalysisTask implements Runnable {
 
 		for(AtomicRule rule: atomicRules) {
 			if(rule.getAction().equals(ActionTypes.DENY)) {
+				List<Predicate> deniedRulePredicates = new ArrayList<>();
+				boolean split = false;
 				for(int ap: rule.getAtomicPredicates()) {
-					if(!AFAllowedAPs.contains(ap) && !AFDeniedAPs.contains(ap))
+					if(AFAllowedAPs.contains(ap)) {
+						split = true;
+					} else if(!AFDeniedAPs.contains(ap)) {
 						AFDeniedAPs.add(ap);
+						deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+					}
+				}
+				if(split) {
+					fw.addAFDeniedPredicates(deniedRulePredicates);
+				} else {
+					//Not split, so insert the original rule
+					fw.addAFDeniedPredicate(rule.getOriginalPredicate());
 				}
 			}
 		}
@@ -148,6 +183,7 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		for(AtomicRule rule: atomicRules) {
 			if(rule.getAction().equals(ActionTypes.DENY)) {
+				fw.addDFDeniedPredicate(rule.getOriginalPredicate());
 				for(int ap: rule.getAtomicPredicates()) {
 					if(!DFDeniedAPs.contains(ap))
 						DFDeniedAPs.add(ap);
@@ -157,9 +193,21 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		for(AtomicRule rule: atomicRules) {
 			if(rule.getAction().equals(ActionTypes.ALLOW)) {
+				List<Predicate> allowedRulePredicates = new ArrayList<>();
+				boolean split = false;
 				for(int ap: rule.getAtomicPredicates()) {
-					if(!DFDeniedAPs.contains(ap) && !DFAllowedAPs.contains(ap))
+					if(DFDeniedAPs.contains(ap)) {
+						split = true;
+					} else if(!DFAllowedAPs.contains(ap)) {
 						DFAllowedAPs.add(ap);
+						allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+					}
+				}
+				if(split) {
+					fw.addDFAllowedPredicates(allowedRulePredicates);
+				} else {
+					//Not split, so insert the original rule
+					fw.addDFAllowedPredicate(rule.getOriginalPredicate());
 				}
 			}
 		}

@@ -116,25 +116,43 @@ public class VerefooProxy {
 			System.out.print("PRIORITY FIRST Allowed: ");
 			for(int ap: fw.getPFAllowedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getPFAllowedPredicates())
+				ap.print();
 			System.out.print("\nPRIORITY FIRST Denied: ");
 			for(int ap: fw.getPFDeniedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getPFDeniedPredicates())
+				ap.print();
 			System.out.println();
 			
 			System.out.print("ALLOWED FIRST Allowed: ");
 			for(int ap: fw.getAFAllowedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getAFAllowedPredicates())
+				ap.print();
 			System.out.print("\nALLOWED FIRST Denied: ");
 			for(int ap: fw.getAFDeniedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getAFDeniedPredicates())
+				ap.print();
 			System.out.println();
 			
 			System.out.print("DENIED FIRST Allowed: ");
 			for(int ap: fw.getDFAllowedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getDFAllowedPredicates())
+				ap.print();
 			System.out.print("\nDENIED FIRST Denied: ");
 			for(int ap: fw.getDFDeniedAPs())
 				System.out.print(ap + " ");
+			System.out.print(", PRED ");
+			for(Predicate ap: fw.getDFDeniedPredicates())
+				ap.print();
 			System.out.println();
 		}
 		//END DEBUG
