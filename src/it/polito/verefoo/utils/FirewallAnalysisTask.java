@@ -9,6 +9,8 @@ import java.util.TreeSet;
 
 import it.polito.verefoo.graph.AtomicRule;
 import it.polito.verefoo.graph.FW;
+import it.polito.verefoo.graph.IPAddress;
+import it.polito.verefoo.graph.IPAddressRange;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
@@ -214,6 +216,42 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		fw.setDFAllowedAPs(DFAllowedAPs);
 		fw.setDFDeniedAPs(DFDeniedAPs);
+		
+		
+		
+		/* MERGE PREDICATES PROCESS */
+		
+		/* Priority First */
+		for(Predicate ap: fw.getPFDeniedPredicates()) {
+			SortedSet<IPAddressRange> PFDeniedSetIPSrcs = new TreeSet<>();
+			SortedSet<IPAddressRange> PFDeniedSetIPDsts = new TreeSet<>();
+			
+			for(IPAddress ip: ap.getIPSrcList()) {
+				IPAddressRange iprange = new IPAddressRange(ip);
+				PFDeniedSetIPSrcs.add(iprange);
+			}
+			
+			for(IPAddress ip: ap.getIPDstList()) {
+				IPAddressRange iprange = new IPAddressRange(ip);
+				PFDeniedSetIPDsts.add(iprange);
+			}
+			
+			//chiama la funzione che fa merge, ovvero che trasforma gli IPAddressRanges nella lista da AND a OR
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		firewalls.put(node.getName(), fw);
 

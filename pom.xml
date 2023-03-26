@@ -152,8 +152,7 @@
 			<artifactId>z3</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>/home/simone/z3-4.8.5-x64-ubuntu-16.04/bin/com.microsoft.z3.jar</systemPath>
-			<!--<systemPath>${env.Z3}/com.microsoft.z3.jar</systemPath>-->
+			<systemPath>${env.Z3}/com.microsoft.z3.jar</systemPath>
 		</dependency>
 
 

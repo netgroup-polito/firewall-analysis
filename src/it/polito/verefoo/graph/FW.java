@@ -24,6 +24,9 @@ public class FW {
 	List<Predicate> DFAllowedPredicates = new ArrayList<>();
 	List<Predicate> DFDeniedPredicates = new ArrayList<>();
 	
+	List<PredicateRange> PFAllowedPredicatesRange = new ArrayList<>();
+	List<PredicateRange> PFDeniedPredicatesRange = new ArrayList<>();
+	
 	private HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
 	
 	public FW(String name) {
