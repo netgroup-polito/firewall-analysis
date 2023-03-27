@@ -10,6 +10,10 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 	Range fourthByte;
 	
 	IPAddress original;
+	int wildcardPosition;
+	
+	public IPAddressRange() {
+	}
 	
 	public IPAddressRange(IPAddress original) {
 		
@@ -19,6 +23,8 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 		secondByte = new Range(original.getSecondByte());
 		thirdByte = new Range(original.getThirdByte());
 		fourthByte = new Range(original.getFourthByte());
+		
+		wildcardPosition = original.hasWildcardsInByte();
 	}
 	
 	
@@ -41,6 +47,10 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 
 	public IPAddress getOriginal() {
 		return original;
+	}
+	
+	public int getWildcardPosition() {
+		return wildcardPosition;
 	}
 
 
@@ -66,6 +76,32 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 		return firstByte.compareTo(o.getFirstByte());
 	}
 	
+	//true if this is included in other
+	public boolean isIncludedIn(IPAddressRange other) {
+		if(firstByte.isIncludedIn(other.getFirstByte()) && secondByte.isIncludedIn(other.getSecondByte())
+				&& thirdByte.isIncludedIn(other.getThirdByte()) && fourthByte.isIncludedIn(other.getFourthByte()))
+			return true;
+		return false;
+	}
 	
-
+	
+	public Range getByteInPosition(int position) {
+		if(position == 1)
+			return firstByte;
+		else if(position == 2)
+			return secondByte;
+		else if(position == 3)
+			return thirdByte;
+		else return fourthByte;
+	}
+	
+	public void setByteInPosition(int position, Range r) {
+		if(position == 1)
+			this.firstByte = r;
+		else if(position == 2)
+			this.secondByte = r;
+		else if(position == 3)
+			this.thirdByte = r;
+		else this.fourthByte = r;
+	}
 }

@@ -164,5 +164,4 @@ public class IPAddress {
 			else
 				fourthByte = String.valueOf(value);
 		}
-
 }

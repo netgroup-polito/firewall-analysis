@@ -126,30 +126,6 @@ public class VerefooProxy {
 			System.out.print(", PRED ");
 			for(Predicate ap: fw.getPFDeniedPredicates())
 				ap.print();
-			
-			
-			
-			
-			
-			SortedSet<IPAddressRange> set = new TreeSet<>();
-			for(Predicate ap: fw.getPFDeniedPredicates()) {
-				for(IPAddress ip: ap.getIPSrcList()) {
-					IPAddressRange iprange = new IPAddressRange(ip);
-					if(!set.contains(iprange))
-						set.add(iprange);
-				}
-			}
-			
-			for(IPAddressRange iprange: set) {
-				System.out.print("Range " + iprange);
-			}
-			
-			
-			
-			
-			
-			
-			
 			System.out.println();
 			
 			System.out.print("ALLOWED FIRST Allowed: ");

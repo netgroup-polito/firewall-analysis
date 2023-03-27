@@ -12,6 +12,7 @@ import it.polito.verefoo.graph.FW;
 import it.polito.verefoo.graph.IPAddress;
 import it.polito.verefoo.graph.IPAddressRange;
 import it.polito.verefoo.graph.Predicate;
+import it.polito.verefoo.graph.PredicateRange;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
 import it.polito.verefoo.jaxb.Node;
@@ -236,7 +237,26 @@ public class FirewallAnalysisTask implements Runnable {
 				PFDeniedSetIPDsts.add(iprange);
 			}
 			
+			//DEBUG:
+			System.out.println("HERE PREDICATE");
+			ap.print();
+			System.out.print("\nSources: ");
+			for(IPAddressRange ipr: PFDeniedSetIPSrcs)
+				System.out.print(ipr + " ");
+			System.out.println();
+			
+			System.out.print("Destinations: ");
+			for(IPAddressRange ipr: PFDeniedSetIPDsts)
+				System.out.print(ipr + " ");
+			System.out.println();
+			
 			//chiama la funzione che fa merge, ovvero che trasforma gli IPAddressRanges nella lista da AND a OR
+			PredicateRange prange = new PredicateRange();
+			prange.setIPSrcList(PFDeniedSetIPSrcs);
+			
+			
+			
+			
 		}
 		
 		
