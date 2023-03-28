@@ -24,10 +24,10 @@ public class PredicateRange implements Comparable<PredicateRange>{
 		IPSrcList = fromANDtoORIPAddressRange(list);
 		
 		//DEBUG: print IPAddressRange in OR
-		System.out.println("NEW IP SOURCE LIST");
-		for(IPAddressRange ip: IPSrcList)
-			System.out.print(ip + ", ");
-		System.out.println();
+//		System.out.println("NEW IP SOURCE LIST");
+//		for(IPAddressRange ip: IPSrcList)
+//			System.out.print(ip + ", ");
+//		System.out.println();
 		//END DEBUG
 	}
 	
@@ -144,19 +144,19 @@ public class PredicateRange implements Comparable<PredicateRange>{
 
 
 	public void setpSrcList(SortedSet<Range> pSrcList) {
-		pSrcList = fromANDtoORPortRange(pSrcList);
+		this.pSrcList = fromANDtoORPortRange(pSrcList);
 		
 		//DEBUG: print pSrcRange in OR
-		System.out.println("NEW PORT SOURCE LIST");
-		for(Range r: pSrcList) {
-			System.out.print(r + " ");
-		System.out.println();
-		}
+//		System.out.println("NEW PORT SOURCE LIST");
+//		for(Range r: pSrcList) {
+//			System.out.print(r + " ");
+//		System.out.println();
+//		}
 		//END DEBUG
 	}
 
 	public void setpDstList(SortedSet<Range> pDstList) {
-		pDstList = fromANDtoORPortRange(pDstList);
+		this.pDstList = fromANDtoORPortRange(pDstList);
 	}
 	 
 	
@@ -219,5 +219,45 @@ public class PredicateRange implements Comparable<PredicateRange>{
 	public int compareTo(PredicateRange o) {
 		return IPSrcList.first().compareTo(o.getIPSrcList().first());
 	}
+	
+	//Just for DEBUG
+		public void print() {
+			System.out.print(": {");
+			int i=0;
+			for(IPAddressRange IPSrc: IPSrcList) {
+				if(i!=0) System.out.print(" OR ");
+				System.out.print(IPSrc);
+				i++;
+			}
+			i=0;
+			System.out.print(", ");
+			for(Range pSrc: pSrcList) {
+				if(i!=0) System.out.print(" OR ");
+				System.out.print(pSrc);
+				i++;
+			}
+			i=0;
+			System.out.print(", ");
+			for(IPAddressRange IPDst: IPDstList) {
+				if(i!=0) System.out.print(" OR ");
+				System.out.print(IPDst);
+				i++;
+			}
+			i=0;
+			System.out.print(", ");
+			for(Range pDst: pDstList) {
+				if(i!=0) System.out.print(" OR ");
+				System.out.print(pDst);
+				i++;
+			}
+			i=0;
+			System.out.print(", ");
+			for(L4ProtocolTypes proto: protoTypeList) {
+				if(i!=0) System.out.print("-");
+				System.out.print(proto);
+				i++;
+			}
+			System.out.print("}");
+		}
 
 }

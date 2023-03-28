@@ -51,8 +51,6 @@ public class FW {
 		allowedPredicatesRange.add(prange);
 	}
 	
-	
-	
 	public SortedSet<Integer> getAllowedAPs() {
 		return allowedAPs;
 	}
@@ -97,9 +95,15 @@ public class FW {
 		return name;
 	}
 	
-	
-	
-	
+	public SortedSet<PredicateRange> getAllowedPredicatesRange() {
+		return allowedPredicatesRange;
+	}
+
+	public SortedSet<PredicateRange> getDeniedPredicatesRange() {
+		return deniedPredicatesRange;
+	}
+
+
 	public Predicate getAtomicPredicate(int id) {
 		if(firewallAtomicPredicates.containsKey(id)) {
 			return firewallAtomicPredicates.get(id);

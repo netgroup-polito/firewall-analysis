@@ -124,12 +124,22 @@ public class VerefooProxy {
 			System.out.print(", PRED ");
 			for(Predicate ap: fw.getAllowedPredicates())
 				ap.print();
+			System.out.println();
+			System.out.print("\tPRED IN OR: ");
+			for(PredicateRange prange: fw.getAllowedPredicatesRange())
+				prange.print();
+			
 			System.out.print("\n" + strategy + " Denied: ");
 			for(int ap: fw.getDeniedAPs())
 				System.out.print(ap + " ");
 			System.out.print(", PRED ");
 			for(Predicate ap: fw.getDeniedPredicates())
 				ap.print();
+			System.out.println();
+			System.out.print("\tPRED IN OR: ");
+			for(PredicateRange prange: fw.getDeniedPredicatesRange())
+				prange.print();
+			System.out.println();
 			System.out.println();
 		
 		}

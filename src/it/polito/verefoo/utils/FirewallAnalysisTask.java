@@ -224,7 +224,6 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		/* FROM AND TO OR */
 		
-		/* Priority First */
 		for(Predicate ap: fw.getDeniedPredicates()) {
 			fw.addDeniedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
@@ -240,49 +239,35 @@ public class FirewallAnalysisTask implements Runnable {
 	PredicateRange fromPredicateToPredicateRange(Predicate ap) {
 		PredicateRange prange = new PredicateRange();
 		
-		SortedSet<IPAddressRange> PFDeniedSetIPSrcs = new TreeSet<>();
-		SortedSet<IPAddressRange> PFDeniedSetIPDsts = new TreeSet<>();
-		SortedSet<Range> PFDeniedSetPSrcs = new TreeSet<>();
-		SortedSet<Range> PFDeniedSetPDsts = new TreeSet<>();
+		SortedSet<IPAddressRange> setIPSrcs = new TreeSet<>();
+		SortedSet<IPAddressRange> setIPDsts = new TreeSet<>();
+		SortedSet<Range> setPSrcs = new TreeSet<>();
+		SortedSet<Range> setPDsts = new TreeSet<>();
 		
 		for(IPAddress ip: ap.getIPSrcList()) {
 			IPAddressRange iprange = new IPAddressRange(ip);
-			PFDeniedSetIPSrcs.add(iprange);
+			setIPSrcs.add(iprange);
 		}
 		
 		for(IPAddress ip: ap.getIPDstList()) {
 			IPAddressRange iprange = new IPAddressRange(ip);
-			PFDeniedSetIPDsts.add(iprange);
+			setIPDsts.add(iprange);
 		}
 		
-		//DEBUG: print IPAddressRange in AND
-//		System.out.println("HERE PREDICATE");
-//		ap.print();
-//		System.out.print("\nSources: ");
-//		for(IPAddressRange ipr: PFDeniedSetIPSrcs)
-//			System.out.print(ipr + " ");
-//		System.out.println();
-//		
-//		System.out.print("Destinations: ");
-//		for(IPAddressRange ipr: PFDeniedSetIPDsts)
-//			System.out.print(ipr + " ");
-//		System.out.println();
-		//END DEBUG
-		
-		prange.setIPSrcList(PFDeniedSetIPSrcs);
-		prange.setIPDstList(PFDeniedSetIPDsts);
+		prange.setIPSrcList(setIPSrcs);
+		prange.setIPDstList(setIPDsts);
 		
 		for(PortInterval pi: ap.getpSrcList()) {
 			//add and sort
-			PFDeniedSetPSrcs.add(new Range(pi.getMin(), pi.getMax()));
+			setPSrcs.add(new Range(pi.getMin(), pi.getMax()));
 		}
-		prange.setpSrcList(PFDeniedSetPSrcs);
+		prange.setpSrcList(setPSrcs);
 		
 		for(PortInterval pi: ap.getpDstList()) {
 			//add and sort
-			PFDeniedSetPDsts.add(new Range(pi.getMin(), pi.getMax()));
+			setPDsts.add(new Range(pi.getMin(), pi.getMax()));
 		}
-		prange.setpDstList(PFDeniedSetPDsts);
+		prange.setpDstList(setPDsts);
 		
 		prange.setProtoTypeList(ap.getProtoTypeList());
 		
