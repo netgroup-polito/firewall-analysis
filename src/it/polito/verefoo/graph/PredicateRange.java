@@ -1,19 +1,20 @@
 package it.polito.verefoo.graph;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import it.polito.verefoo.jaxb.L4ProtocolTypes;
 import it.polito.verefoo.utils.Range;
 
-public class PredicateRange {
+public class PredicateRange implements Comparable<PredicateRange>{
 	
 	SortedSet<IPAddressRange> IPSrcList; //in OR
 	SortedSet<IPAddressRange> IPDstList; //in oR
 	SortedSet<Range> pSrcList; //in OR
 	SortedSet<Range> pDstList; //in OR
-	SortedSet<L4ProtocolTypes> protoTypeList; //in OR
+	List<L4ProtocolTypes> protoTypeList; //in OR
 	
 	public PredicateRange() {
 	}
@@ -23,10 +24,10 @@ public class PredicateRange {
 		IPSrcList = fromANDtoORIPAddressRange(list);
 		
 		//DEBUG: print IPAddressRange in OR
-//		System.out.println("NEW IP SOURCE LIST");
-//		for(IPAddressRange ip: IPSrcList)
-//			System.out.print(ip + ", ");
-//		System.out.println();
+		System.out.println("NEW IP SOURCE LIST");
+		for(IPAddressRange ip: IPSrcList)
+			System.out.print(ip + ", ");
+		System.out.println();
 		//END DEBUG
 	}
 	
@@ -43,8 +44,6 @@ public class PredicateRange {
 		return IPDstList;
 	}
 	
-	
-
 	public SortedSet<IPAddressRange> fromANDtoORIPAddressRange(SortedSet<IPAddressRange> list){
 		SortedSet<IPAddressRange> ORList = new TreeSet<>();
 		
@@ -142,7 +141,83 @@ public class PredicateRange {
 		
 		split(newIPAdd, ipar2, list, bytePosition+1);	
 	}
+
+
+	public void setpSrcList(SortedSet<Range> pSrcList) {
+		pSrcList = fromANDtoORPortRange(pSrcList);
+		
+		//DEBUG: print pSrcRange in OR
+		System.out.println("NEW PORT SOURCE LIST");
+		for(Range r: pSrcList) {
+			System.out.print(r + " ");
+		System.out.println();
+		}
+		//END DEBUG
+	}
+
+	public void setpDstList(SortedSet<Range> pDstList) {
+		pDstList = fromANDtoORPortRange(pDstList);
+	}
 	 
 	
+	public SortedSet<Range> fromANDtoORPortRange(SortedSet<Range> list){
+		SortedSet<Range> ORList = new TreeSet<>();
+		
+		ORList.add(list.first());
+		Iterator<Range> it = list.iterator();
+		it.next();
 	
+		while(it.hasNext()) {
+			Range next = it.next();
+			SortedSet<Range> newORList = new TreeSet<>();
+			
+			for(Range r:ORList) {
+				if(next.isIncludedIn(r)) {
+					//split happens between next and ipar
+					splitRange(r, next, newORList);
+				}
+				else {
+					newORList.add(r);
+				}
+			}
+			ORList = newORList;
+		}
+		return ORList;
+	}
+	
+	public void splitRange(Range r1, Range r2, SortedSet<Range> list) {
+		//r1 includes r2
+		
+		if(r1.getMin() != r2.getMin()) {
+			Range newr = new Range(r1.getMin(), r2.getMin()-1);
+			list.add(newr);
+		}
+		
+		if(r1.getMax() != r2.getMax()) {
+			Range newr2 = new Range(r2.getMax()+1, r1.getMax());
+			list.add(newr2);
+		}
+	}
+
+	public SortedSet<Range> getpSrcList() {
+		return pSrcList;
+	}
+
+	public SortedSet<Range> getpDstList() {
+		return pDstList;
+	}
+
+	public List<L4ProtocolTypes> getProtoTypeList() {
+		return protoTypeList;
+	}
+
+	public void setProtoTypeList(List<L4ProtocolTypes> protoTypeList) {
+		this.protoTypeList = protoTypeList;
+	}
+
+	@Override
+	public int compareTo(PredicateRange o) {
+		return IPSrcList.first().compareTo(o.getIPSrcList().first());
+	}
+
 }

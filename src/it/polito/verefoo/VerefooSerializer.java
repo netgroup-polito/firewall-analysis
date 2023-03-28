@@ -13,7 +13,6 @@ import it.polito.verefoo.jaxb.Graph;
 import it.polito.verefoo.jaxb.NFV;
 import it.polito.verefoo.jaxb.Path;
 import it.polito.verefoo.jaxb.Property;
-import it.polito.verefoo.translator.Translator;
 import it.polito.verefoo.utils.TestResults;
 import it.polito.verefoo.utils.VerificationResult;
 

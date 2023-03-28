@@ -51,7 +51,6 @@ import it.polito.verefoo.jaxb.PName;
 import it.polito.verefoo.jaxb.Path;
 import it.polito.verefoo.jaxb.Property;
 import it.polito.verefoo.jaxb.TypeOfHost;
-import it.polito.verefoo.translator.Translator;
 import it.polito.verefoo.utils.VerificationResult;
 /**
  * 

@@ -33,6 +33,7 @@ import it.polito.verefoo.jaxb.Path.PathNode;
 import it.polito.verefoo.utils.APUtils;
 import it.polito.verefoo.utils.FirewallAnalysisTask;
 import it.polito.verefoo.utils.GenerateFlowsTask;
+import it.polito.verefoo.utils.Range;
 import it.polito.verefoo.utils.TestResults;
 
 /**
@@ -161,22 +162,30 @@ public class VerefooProxy {
 		
 		
 		//DEBUG: test SPLIT
-//		System.out.println("NUOVO TEST SPLITTTT");
-//		IPAddress ip1 = new IPAddress("10.0.-1.-1", false);
-//		IPAddress ip2 = new IPAddress("10.0.3.-1", true);
-//		IPAddress ip3 = new IPAddress("10.0.0.4", true);
-//		IPAddress ip4 = new IPAddress("10.0.5.4", true);
-//		
-//		IPAddressRange ipar1 = new IPAddressRange(ip1);
-//		IPAddressRange ipar2 = new IPAddressRange(ip2);
-//		IPAddressRange ipar3 = new IPAddressRange(ip3);
-//		IPAddressRange ipar4 = new IPAddressRange(ip4);
-//		
-//		SortedSet<IPAddressRange> list = new TreeSet<>();
-//		list.add(ipar1); list.add(ipar2); list.add(ipar3); list.add(ipar4);
-//		
-//		PredicateRange pred = new PredicateRange();
-//		pred.setIPSrcList(list);
+		System.out.println("NUOVO TEST SPLITTTT");
+		IPAddress ip1 = new IPAddress("10.0.-1.-1", false);
+		IPAddress ip2 = new IPAddress("10.0.3.-1", true);
+		IPAddress ip3 = new IPAddress("10.0.0.4", true);
+		IPAddress ip4 = new IPAddress("10.0.5.4", true);
+		
+		IPAddressRange ipar1 = new IPAddressRange(ip1);
+		IPAddressRange ipar2 = new IPAddressRange(ip2);
+		IPAddressRange ipar3 = new IPAddressRange(ip3);
+		IPAddressRange ipar4 = new IPAddressRange(ip4);
+		
+		SortedSet<IPAddressRange> list = new TreeSet<>();
+		list.add(ipar1); list.add(ipar2); list.add(ipar3); list.add(ipar4);
+		
+		Range p1 = new Range(10, 200);
+		Range p2 = new Range(15, 18);
+		Range p3 = new Range(39, 80);
+		
+		SortedSet<Range> pList = new TreeSet<>();
+		pList.add(p1); pList.add(p2); pList.add(p3);
+		
+		PredicateRange pred = new PredicateRange();
+		pred.setIPSrcList(list);
+		pred.setpSrcList(pList);
 		//END DEBUG
 		
 		

@@ -11,6 +11,7 @@ import it.polito.verefoo.graph.AtomicRule;
 import it.polito.verefoo.graph.FW;
 import it.polito.verefoo.graph.IPAddress;
 import it.polito.verefoo.graph.IPAddressRange;
+import it.polito.verefoo.graph.PortInterval;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.graph.PredicateRange;
 import it.polito.verefoo.jaxb.ActionTypes;
@@ -220,64 +221,88 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		
 		
-		/* MERGE PREDICATES PROCESS */
+		/* FROM AND TO OR */
 		
 		/* Priority First */
-		
-		/* DENIED */
 		for(Predicate ap: fw.getPFDeniedPredicates()) {
-			SortedSet<IPAddressRange> PFDeniedSetIPSrcs = new TreeSet<>();
-			SortedSet<IPAddressRange> PFDeniedSetIPDsts = new TreeSet<>();
-			
-			for(IPAddress ip: ap.getIPSrcList()) {
-				IPAddressRange iprange = new IPAddressRange(ip);
-				PFDeniedSetIPSrcs.add(iprange);
-			}
-			
-			for(IPAddress ip: ap.getIPDstList()) {
-				IPAddressRange iprange = new IPAddressRange(ip);
-				PFDeniedSetIPDsts.add(iprange);
-			}
-			
-			//DEBUG: print IPAddressRange in AND
-//			System.out.println("HERE PREDICATE");
-//			ap.print();
-//			System.out.print("\nSources: ");
-//			for(IPAddressRange ipr: PFDeniedSetIPSrcs)
-//				System.out.print(ipr + " ");
-//			System.out.println();
-//			
-//			System.out.print("Destinations: ");
-//			for(IPAddressRange ipr: PFDeniedSetIPDsts)
-//				System.out.print(ipr + " ");
-//			System.out.println();
-			//END DEBUG
-			
-			//chiama la funzione che fa merge, ovvero che trasforma gli IPAddressRanges nella lista da AND a OR
-			PredicateRange prange = new PredicateRange();
-			prange.setIPSrcList(PFDeniedSetIPSrcs);
-			prange.setIPDstList(PFDeniedSetIPDsts);
-			
-			
-			
+			fw.addPFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+		}
+		for(Predicate ap: fw.getPFAllowedPredicates()) {
+			fw.addPFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
 		
+		/* Allowed First */
+		for(Predicate ap: fw.getAFDeniedPredicates()) {
+			fw.addAFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+		}
+		for(Predicate ap: fw.getAFAllowedPredicates()) {
+			fw.addAFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		/* Denied First */
+		for(Predicate ap: fw.getDFDeniedPredicates()) {
+			fw.addDFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+		}
+		for(Predicate ap: fw.getDFAllowedPredicates()) {
+			fw.addDFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
+		}
 		
 		firewalls.put(node.getName(), fw);
 
+	}
+	
+	
+	PredicateRange fromPredicateToPredicateRange(Predicate ap) {
+		PredicateRange prange = new PredicateRange();
+		
+		SortedSet<IPAddressRange> PFDeniedSetIPSrcs = new TreeSet<>();
+		SortedSet<IPAddressRange> PFDeniedSetIPDsts = new TreeSet<>();
+		SortedSet<Range> PFDeniedSetPSrcs = new TreeSet<>();
+		SortedSet<Range> PFDeniedSetPDsts = new TreeSet<>();
+		
+		for(IPAddress ip: ap.getIPSrcList()) {
+			IPAddressRange iprange = new IPAddressRange(ip);
+			PFDeniedSetIPSrcs.add(iprange);
+		}
+		
+		for(IPAddress ip: ap.getIPDstList()) {
+			IPAddressRange iprange = new IPAddressRange(ip);
+			PFDeniedSetIPDsts.add(iprange);
+		}
+		
+		//DEBUG: print IPAddressRange in AND
+//		System.out.println("HERE PREDICATE");
+//		ap.print();
+//		System.out.print("\nSources: ");
+//		for(IPAddressRange ipr: PFDeniedSetIPSrcs)
+//			System.out.print(ipr + " ");
+//		System.out.println();
+//		
+//		System.out.print("Destinations: ");
+//		for(IPAddressRange ipr: PFDeniedSetIPDsts)
+//			System.out.print(ipr + " ");
+//		System.out.println();
+		//END DEBUG
+		
+		prange.setIPSrcList(PFDeniedSetIPSrcs);
+		prange.setIPDstList(PFDeniedSetIPDsts);
+		
+		for(PortInterval pi: ap.getpSrcList()) {
+			//add and sort
+			PFDeniedSetPSrcs.add(new Range(pi.getMin(), pi.getMax()));
+		}
+		prange.setpSrcList(PFDeniedSetPSrcs);
+		
+		for(PortInterval pi: ap.getpDstList()) {
+			//add and sort
+			PFDeniedSetPDsts.add(new Range(pi.getMin(), pi.getMax()));
+		}
+		prange.setpDstList(PFDeniedSetPDsts);
+		
+		prange.setProtoTypeList(ap.getProtoTypeList());
+		
+		
+		return prange;
 	}
 
 }

@@ -25,7 +25,6 @@ import com.microsoft.z3.Sort;
 
 import it.polito.verefoo.allocation.AllocationNode;
 import it.polito.verefoo.extra.WildcardManager;
-import it.polito.verefoo.utils.PortInterval;
 import it.polito.verefoo.utils.Tuple;
 
 /**

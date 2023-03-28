@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class FW {
 	String name;
@@ -24,8 +25,12 @@ public class FW {
 	List<Predicate> DFAllowedPredicates = new ArrayList<>();
 	List<Predicate> DFDeniedPredicates = new ArrayList<>();
 	
-	List<PredicateRange> PFAllowedPredicatesRange = new ArrayList<>();
-	List<PredicateRange> PFDeniedPredicatesRange = new ArrayList<>();
+	SortedSet<PredicateRange> PFAllowedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> PFDeniedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> AFAllowedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> AFDeniedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> DFAllowedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> DFDeniedPredicatesRange = new TreeSet<>();
 	
 	private HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
 	
@@ -180,6 +185,30 @@ public class FW {
 	
 	public List<Predicate> getDFDeniedPredicates(){
 		return DFDeniedPredicates;
+	}
+	
+	public void addPFDeniedPredicateRange(PredicateRange prange) {
+		PFDeniedPredicatesRange.add(prange);
+	}
+	
+	public void addPFAllowedPredicateRange(PredicateRange prange) {
+		PFAllowedPredicatesRange.add(prange);
+	}
+
+	public void addAFDeniedPredicateRange(PredicateRange prange) {
+		AFDeniedPredicatesRange.add(prange);
+	}
+	
+	public void addAFAllowedPredicateRange(PredicateRange prange) {
+		AFAllowedPredicatesRange.add(prange);
+	}
+	
+	public void addDFDeniedPredicateRange(PredicateRange prange) {
+		DFDeniedPredicatesRange.add(prange);
+	}
+	
+	public void addDFAllowedPredicateRange(PredicateRange prange) {
+		DFAllowedPredicatesRange.add(prange);
 	}
 	
 }

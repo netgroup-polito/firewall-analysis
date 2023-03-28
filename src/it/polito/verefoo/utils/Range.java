@@ -8,6 +8,18 @@ public class Range implements Comparable<Range>{
 	public Range() {
 	}
 	
+	//To use only for Ports
+	public Range(int min, int max) {
+		if(min == -1 && max == -1) {
+			this.min = 0;
+			this.max = 65535;
+		} else {
+			this.min = min;
+			this.max = max;
+		}
+	}
+	
+	//To use only for IP Address
 	public Range(String s) {
 		if(s.equals("-1")) {
 			min = 0;
