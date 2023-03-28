@@ -1,2 +1,12 @@
-/target/
+/build/
 /gen-src/
+/target/
+/gen-protobuf/
+/log/
+/bin/
+/results.xml
+/testfile/tmp.xml
+.settings
+.classpath
+*.log
+/pom.xml
