@@ -22,6 +22,7 @@ import it.polito.verefoo.graph.IPAddress;
 import it.polito.verefoo.graph.IPAddressRange;
 import it.polito.verefoo.graph.PortInterval;
 import it.polito.verefoo.graph.Predicate;
+import it.polito.verefoo.graph.PredicateRange;
 import it.polito.verefoo.graph.SecurityRequirement;
 import it.polito.verefoo.graph.AtomicFlow;
 import it.polito.verefoo.graph.AtomicRule;
@@ -157,6 +158,29 @@ public class VerefooProxy {
 			System.out.println();
 		}
 		//END DEBUG
+		
+		
+		//DEBUG: test SPLIT
+//		System.out.println("NUOVO TEST SPLITTTT");
+//		IPAddress ip1 = new IPAddress("10.0.-1.-1", false);
+//		IPAddress ip2 = new IPAddress("10.0.3.-1", true);
+//		IPAddress ip3 = new IPAddress("10.0.0.4", true);
+//		IPAddress ip4 = new IPAddress("10.0.5.4", true);
+//		
+//		IPAddressRange ipar1 = new IPAddressRange(ip1);
+//		IPAddressRange ipar2 = new IPAddressRange(ip2);
+//		IPAddressRange ipar3 = new IPAddressRange(ip3);
+//		IPAddressRange ipar4 = new IPAddressRange(ip4);
+//		
+//		SortedSet<IPAddressRange> list = new TreeSet<>();
+//		list.add(ipar1); list.add(ipar2); list.add(ipar3); list.add(ipar4);
+//		
+//		PredicateRange pred = new PredicateRange();
+//		pred.setIPSrcList(list);
+		//END DEBUG
+		
+		
+		
 		
 	}
 	

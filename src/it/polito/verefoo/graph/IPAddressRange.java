@@ -57,8 +57,8 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 
 	@Override
 	public String toString() {
-		return new String("[" + firstByte + "].[" + secondByte + "].["
-				+ thirdByte + "].[" + fourthByte  + "]");
+		return new String(firstByte + "." + secondByte + "."
+				+ thirdByte + "." + fourthByte);
 	}
 
 	@Override

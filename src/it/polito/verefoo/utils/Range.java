@@ -36,7 +36,7 @@ public class Range implements Comparable<Range>{
 
 	@Override
 	public String toString() {
-		return min == max ? String.valueOf(min) : String.valueOf(min)+"-"+String.valueOf(max);
+		return min == max ? String.valueOf(min) : "["+String.valueOf(min)+"-"+String.valueOf(max)+"]";
 	}
 
 	@Override

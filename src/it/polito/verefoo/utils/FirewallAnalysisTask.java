@@ -223,6 +223,8 @@ public class FirewallAnalysisTask implements Runnable {
 		/* MERGE PREDICATES PROCESS */
 		
 		/* Priority First */
+		
+		/* DENIED */
 		for(Predicate ap: fw.getPFDeniedPredicates()) {
 			SortedSet<IPAddressRange> PFDeniedSetIPSrcs = new TreeSet<>();
 			SortedSet<IPAddressRange> PFDeniedSetIPDsts = new TreeSet<>();
@@ -237,23 +239,24 @@ public class FirewallAnalysisTask implements Runnable {
 				PFDeniedSetIPDsts.add(iprange);
 			}
 			
-			//DEBUG:
-			System.out.println("HERE PREDICATE");
-			ap.print();
-			System.out.print("\nSources: ");
-			for(IPAddressRange ipr: PFDeniedSetIPSrcs)
-				System.out.print(ipr + " ");
-			System.out.println();
-			
-			System.out.print("Destinations: ");
-			for(IPAddressRange ipr: PFDeniedSetIPDsts)
-				System.out.print(ipr + " ");
-			System.out.println();
+			//DEBUG: print IPAddressRange in AND
+//			System.out.println("HERE PREDICATE");
+//			ap.print();
+//			System.out.print("\nSources: ");
+//			for(IPAddressRange ipr: PFDeniedSetIPSrcs)
+//				System.out.print(ipr + " ");
+//			System.out.println();
+//			
+//			System.out.print("Destinations: ");
+//			for(IPAddressRange ipr: PFDeniedSetIPDsts)
+//				System.out.print(ipr + " ");
+//			System.out.println();
+			//END DEBUG
 			
 			//chiama la funzione che fa merge, ovvero che trasforma gli IPAddressRanges nella lista da AND a OR
 			PredicateRange prange = new PredicateRange();
 			prange.setIPSrcList(PFDeniedSetIPSrcs);
-			
+			prange.setIPDstList(PFDeniedSetIPDsts);
 			
 			
 			
