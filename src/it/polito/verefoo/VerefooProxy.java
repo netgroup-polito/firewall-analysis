@@ -23,6 +23,7 @@ import it.polito.verefoo.graph.IPAddressRange;
 import it.polito.verefoo.graph.PortInterval;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.graph.PredicateRange;
+import it.polito.verefoo.graph.ResolutionStrategy;
 import it.polito.verefoo.graph.SecurityRequirement;
 import it.polito.verefoo.graph.AtomicFlow;
 import it.polito.verefoo.graph.AtomicRule;
@@ -55,6 +56,7 @@ public class VerefooProxy {
 	private TestResults testResults = new TestResults();
 	
 	private HashMap<String, FW> firewalls = new HashMap<>();
+	private ResolutionStrategy strategy = ResolutionStrategy.ALLOW_FIRST;
 	
 	/**
 	 * Public constructor for the Verefoo proxy service
@@ -116,76 +118,49 @@ public class VerefooProxy {
 		
 		//DEBUG: print firewall anomalies
 		for(FW fw: firewalls.values()) {
-			System.out.print("PRIORITY FIRST Allowed: ");
-			for(int ap: fw.getPFAllowedAPs())
+			System.out.print(strategy + " Allowed: ");
+			for(int ap: fw.getAllowedAPs())
 				System.out.print(ap + " ");
 			System.out.print(", PRED ");
-			for(Predicate ap: fw.getPFAllowedPredicates())
+			for(Predicate ap: fw.getAllowedPredicates())
 				ap.print();
-			System.out.print("\nPRIORITY FIRST Denied: ");
-			for(int ap: fw.getPFDeniedAPs())
+			System.out.print("\n" + strategy + " Denied: ");
+			for(int ap: fw.getDeniedAPs())
 				System.out.print(ap + " ");
 			System.out.print(", PRED ");
-			for(Predicate ap: fw.getPFDeniedPredicates())
-				ap.print();
-			System.out.println();
-			
-			System.out.print("ALLOWED FIRST Allowed: ");
-			for(int ap: fw.getAFAllowedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getAFAllowedPredicates())
-				ap.print();
-			System.out.print("\nALLOWED FIRST Denied: ");
-			for(int ap: fw.getAFDeniedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getAFDeniedPredicates())
+			for(Predicate ap: fw.getDeniedPredicates())
 				ap.print();
 			System.out.println();
-			
-			System.out.print("DENIED FIRST Allowed: ");
-			for(int ap: fw.getDFAllowedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getDFAllowedPredicates())
-				ap.print();
-			System.out.print("\nDENIED FIRST Denied: ");
-			for(int ap: fw.getDFDeniedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getDFDeniedPredicates())
-				ap.print();
-			System.out.println();
+		
 		}
 		//END DEBUG
 		
 		
 		//DEBUG: test SPLIT
-		System.out.println("NUOVO TEST SPLITTTT");
-		IPAddress ip1 = new IPAddress("10.0.-1.-1", false);
-		IPAddress ip2 = new IPAddress("10.0.3.-1", true);
-		IPAddress ip3 = new IPAddress("10.0.0.4", true);
-		IPAddress ip4 = new IPAddress("10.0.5.4", true);
-		
-		IPAddressRange ipar1 = new IPAddressRange(ip1);
-		IPAddressRange ipar2 = new IPAddressRange(ip2);
-		IPAddressRange ipar3 = new IPAddressRange(ip3);
-		IPAddressRange ipar4 = new IPAddressRange(ip4);
-		
-		SortedSet<IPAddressRange> list = new TreeSet<>();
-		list.add(ipar1); list.add(ipar2); list.add(ipar3); list.add(ipar4);
-		
-		Range p1 = new Range(10, 200);
-		Range p2 = new Range(15, 18);
-		Range p3 = new Range(39, 80);
-		
-		SortedSet<Range> pList = new TreeSet<>();
-		pList.add(p1); pList.add(p2); pList.add(p3);
-		
-		PredicateRange pred = new PredicateRange();
-		pred.setIPSrcList(list);
-		pred.setpSrcList(pList);
+//		System.out.println("NUOVO TEST SPLITTTT");
+//		IPAddress ip1 = new IPAddress("10.0.-1.-1", false);
+//		IPAddress ip2 = new IPAddress("10.0.3.-1", true);
+//		IPAddress ip3 = new IPAddress("10.0.0.4", true);
+//		IPAddress ip4 = new IPAddress("10.0.5.4", true);
+//		
+//		IPAddressRange ipar1 = new IPAddressRange(ip1);
+//		IPAddressRange ipar2 = new IPAddressRange(ip2);
+//		IPAddressRange ipar3 = new IPAddressRange(ip3);
+//		IPAddressRange ipar4 = new IPAddressRange(ip4);
+//		
+//		SortedSet<IPAddressRange> list = new TreeSet<>();
+//		list.add(ipar1); list.add(ipar2); list.add(ipar3); list.add(ipar4);
+//		
+//		Range p1 = new Range(10, 200);
+//		Range p2 = new Range(15, 18);
+//		Range p3 = new Range(39, 80);
+//		
+//		SortedSet<Range> pList = new TreeSet<>();
+//		pList.add(p1); pList.add(p2); pList.add(p3);
+//		
+//		PredicateRange pred = new PredicateRange();
+//		pred.setIPSrcList(list);
+//		pred.setpSrcList(pList);
 		//END DEBUG
 		
 		
@@ -641,7 +616,7 @@ public class VerefooProxy {
 			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
 				//For each firewall, compute its related Atomic Predicates and perform Conflict Analysis
 				APUtils aputilsNew = new APUtils(); 
-				tasks.add(threadPool.submit(new FirewallAnalysisTask(node, firewalls, aputilsNew)));	
+				tasks.add(threadPool.submit(new FirewallAnalysisTask(node, firewalls, aputilsNew, strategy)));	
 			}
 		}
 		

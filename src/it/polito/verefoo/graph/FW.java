@@ -11,26 +11,14 @@ public class FW {
 	
 	List<AtomicRule> atomicRules;
 	
-	SortedSet<Integer> PFAllowedAPs;
-	SortedSet<Integer> PFDeniedAPs;
-	SortedSet<Integer> AFAllowedAPs;
-	SortedSet<Integer> AFDeniedAPs;
-	SortedSet<Integer> DFAllowedAPs;
-	SortedSet<Integer> DFDeniedAPs;
+	SortedSet<Integer> allowedAPs;
+	SortedSet<Integer> deniedAPs;
 	
-	List<Predicate> PFAllowedPredicates = new ArrayList<>();
-	List<Predicate> PFDeniedPredicates = new ArrayList<>();
-	List<Predicate> AFAllowedPredicates = new ArrayList<>();
-	List<Predicate> AFDeniedPredicates = new ArrayList<>();
-	List<Predicate> DFAllowedPredicates = new ArrayList<>();
-	List<Predicate> DFDeniedPredicates = new ArrayList<>();
+	List<Predicate> allowedPredicates = new ArrayList<>();
+	List<Predicate> deniedPredicates = new ArrayList<>();
 	
-	SortedSet<PredicateRange> PFAllowedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> PFDeniedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> AFAllowedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> AFDeniedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> DFAllowedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> DFDeniedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> allowedPredicatesRange = new TreeSet<>();
+	SortedSet<PredicateRange> deniedPredicatesRange = new TreeSet<>();
 	
 	private HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
 	
@@ -54,106 +42,62 @@ public class FW {
 	public List<AtomicRule> getAtomicRules() {
 		return atomicRules;
 	}
-
-	public SortedSet<Integer> getPFAllowedAPs() {
-		return PFAllowedAPs;
+	
+	public void addDeniedPredicateRange(PredicateRange prange) {
+		deniedPredicatesRange.add(prange);
+	}
+	
+	public void addAllowedPredicateRange(PredicateRange prange) {
+		allowedPredicatesRange.add(prange);
+	}
+	
+	
+	
+	public SortedSet<Integer> getAllowedAPs() {
+		return allowedAPs;
 	}
 
-	public void setPFAllowedAPs(SortedSet<Integer> pFAllowedAPs) {
-		PFAllowedAPs = pFAllowedAPs;
+	public void setAllowedAPs(SortedSet<Integer> allowedAPs) {
+		this.allowedAPs = allowedAPs;
 	}
 
-	public SortedSet<Integer> getPFDeniedAPs() {
-		return PFDeniedAPs;
+	public SortedSet<Integer> getDeniedAPs() {
+		return deniedAPs;
 	}
 
-	public void setPFDeniedAPs(SortedSet<Integer> pFDeniedAPs) {
-		PFDeniedAPs = pFDeniedAPs;
+	public void setDeniedAPs(SortedSet<Integer> deniedAPs) {
+		this.deniedAPs = deniedAPs;
 	}
 
-	public SortedSet<Integer> getAFAllowedAPs() {
-		return AFAllowedAPs;
+	public void addAllowedPredicates(List<Predicate> list) {
+		allowedPredicates.addAll(list);
+	}
+	
+	public void addDeniedPredicates(List<Predicate> list) {
+		deniedPredicates.addAll(list);
+	}
+	
+	public void addAllowedPredicate(Predicate pred) {
+		allowedPredicates.add(pred);
+	}
+	
+	public void addDeniedPredicate(Predicate pred) {
+		deniedPredicates.add(pred);
 	}
 
-	public void setAFAllowedAPs(SortedSet<Integer> aFAllowedAPs) {
-		AFAllowedAPs = aFAllowedAPs;
+	public List<Predicate> getAllowedPredicates(){
+		return allowedPredicates;
 	}
-
-	public SortedSet<Integer> getAFDeniedAPs() {
-		return AFDeniedAPs;
+	
+	public List<Predicate> getDeniedPredicates(){
+		return deniedPredicates;
 	}
-
-	public void setAFDeniedAPs(SortedSet<Integer> aFDeniedAPs) {
-		AFDeniedAPs = aFDeniedAPs;
-	}
-
-	public SortedSet<Integer> getDFAllowedAPs() {
-		return DFAllowedAPs;
-	}
-
-	public void setDFAllowedAPs(SortedSet<Integer> dFAllowedAPs) {
-		DFAllowedAPs = dFAllowedAPs;
-	}
-
-	public SortedSet<Integer> getDFDeniedAPs() {
-		return DFDeniedAPs;
-	}
-
-	public void setDFDeniedAPs(SortedSet<Integer> dFDeniedAPs) {
-		DFDeniedAPs = dFDeniedAPs;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
 	
-	public void addPFAllowedPredicates(List<Predicate> list) {
-		PFAllowedPredicates.addAll(list);
-	}
 	
-	public void addPFDeniedPredicates(List<Predicate> list) {
-		PFDeniedPredicates.addAll(list);
-	}
-	
-	public void addPFAllowedPredicate(Predicate pred) {
-		PFAllowedPredicates.add(pred);
-	}
-	
-	public void addPFDeniedPredicate(Predicate pred) {
-		PFDeniedPredicates.add(pred);
-	}
-	
-	public void addAFAllowedPredicates(List<Predicate> list) {
-		AFAllowedPredicates.addAll(list);
-	}
-	
-	public void addAFDeniedPredicates(List<Predicate> list) {
-		AFDeniedPredicates.addAll(list);
-	}
-	
-	public void addAFAllowedPredicate(Predicate pred) {
-		AFAllowedPredicates.add(pred);
-	}
-	
-	public void addAFDeniedPredicate(Predicate pred) {
-		AFDeniedPredicates.add(pred);
-	}
-	
-	public void addDFAllowedPredicates(List<Predicate> list) {
-		DFAllowedPredicates.addAll(list);
-	}
-	
-	public void addDFDeniedPredicates(List<Predicate> list) {
-		DFDeniedPredicates.addAll(list);
-	}
-	
-	public void addDFAllowedPredicate(Predicate pred) {
-		DFAllowedPredicates.add(pred);
-	}
-	
-	public void addDFDeniedPredicate(Predicate pred) {
-		DFDeniedPredicates.add(pred);
-	}
 	
 	
 	public Predicate getAtomicPredicate(int id) {
@@ -161,54 +105,6 @@ public class FW {
 			return firewallAtomicPredicates.get(id);
 		}
 		return null;
-	}
-	
-	public List<Predicate> getPFAllowedPredicates(){
-		return PFAllowedPredicates;
-	}
-	
-	public List<Predicate> getPFDeniedPredicates(){
-		return PFDeniedPredicates;
-	}
-	
-	public List<Predicate> getAFAllowedPredicates(){
-		return AFAllowedPredicates;
-	}
-	
-	public List<Predicate> getAFDeniedPredicates(){
-		return AFDeniedPredicates;
-	}
-	
-	public List<Predicate> getDFAllowedPredicates(){
-		return DFAllowedPredicates;
-	}
-	
-	public List<Predicate> getDFDeniedPredicates(){
-		return DFDeniedPredicates;
-	}
-	
-	public void addPFDeniedPredicateRange(PredicateRange prange) {
-		PFDeniedPredicatesRange.add(prange);
-	}
-	
-	public void addPFAllowedPredicateRange(PredicateRange prange) {
-		PFAllowedPredicatesRange.add(prange);
-	}
-
-	public void addAFDeniedPredicateRange(PredicateRange prange) {
-		AFDeniedPredicatesRange.add(prange);
-	}
-	
-	public void addAFAllowedPredicateRange(PredicateRange prange) {
-		AFAllowedPredicatesRange.add(prange);
-	}
-	
-	public void addDFDeniedPredicateRange(PredicateRange prange) {
-		DFDeniedPredicatesRange.add(prange);
-	}
-	
-	public void addDFAllowedPredicateRange(PredicateRange prange) {
-		DFAllowedPredicatesRange.add(prange);
 	}
 	
 }

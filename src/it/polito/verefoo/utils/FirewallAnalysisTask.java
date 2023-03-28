@@ -14,6 +14,7 @@ import it.polito.verefoo.graph.IPAddressRange;
 import it.polito.verefoo.graph.PortInterval;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.graph.PredicateRange;
+import it.polito.verefoo.graph.ResolutionStrategy;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
 import it.polito.verefoo.jaxb.Node;
@@ -23,11 +24,13 @@ public class FirewallAnalysisTask implements Runnable {
 	Node node;
 	APUtils aputils;
 	HashMap<String, FW> firewalls;
+	ResolutionStrategy strategy;
 	
-	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils) {
+	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy) {
 		this.node = node;
 		this.aputils = aputils;
 		this.firewalls = firewalls;
+		this.strategy = strategy;
 	}
 	
 
@@ -85,6 +88,8 @@ public class FirewallAnalysisTask implements Runnable {
 		fw.setAtomicRules(atomicRules);
 		
 		/* SOLVE FIREWALL ANOMALIES */
+		SortedSet<Integer> allowedAPs = new TreeSet<>();
+		SortedSet<Integer> deniedAPs = new TreeSet<>();
 		
 		/* Priority first:
 		 * Ordino le regole all'interno del firewall per priorità. Scansiono una regola per volta e un suo ap per volta.
@@ -92,159 +97,139 @@ public class FirewallAnalysisTask implements Runnable {
 		 * Altrimenti lo inserisco nella lista corrsipondente in base all'azione della regola
 		 */
 		
-		Collections.sort(atomicRules); // rules sorted by priority, probably it is superfluous
-		
-		SortedSet<Integer> PFAllowedAPs = new TreeSet<>();
-		SortedSet<Integer> PFDeniedAPs = new TreeSet<>();
-
-		for (AtomicRule rule : atomicRules) {
-			boolean inAllowed = false;
-			boolean inDenied = false;
-			List<Predicate> allowedRulePredicates = new ArrayList<>();
-			List<Predicate> deniedRulePredicates = new ArrayList<>();
+		if(strategy.equals(ResolutionStrategy.PIORITY_FIRST)) {
 			
+			Collections.sort(atomicRules); // rules sorted by priority, probably it is superfluous
 			
-			for (int ap : rule.getAtomicPredicates()) {
-				if(PFDeniedAPs.contains(ap)) {
-					inDenied = true;
-				} else if(PFAllowedAPs.contains(ap)) {
-					inAllowed = true;
-				} else {
-					if (rule.getAction().equals(ActionTypes.DENY)) {
-						PFDeniedAPs.add(ap);
-						deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+			for (AtomicRule rule : atomicRules) {
+				boolean inAllowed = false;
+				boolean inDenied = false;
+				List<Predicate> allowedRulePredicates = new ArrayList<>();
+				List<Predicate> deniedRulePredicates = new ArrayList<>();
+				
+				
+				for (int ap : rule.getAtomicPredicates()) {
+					if(deniedAPs.contains(ap)) {
 						inDenied = true;
-					} else {
-						PFAllowedAPs.add(ap);
-						allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+					} else if(allowedAPs.contains(ap)) {
 						inAllowed = true;
-					}
-				}	
+					} else {
+						if (rule.getAction().equals(ActionTypes.DENY)) {
+							deniedAPs.add(ap);
+							deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+							inDenied = true;
+						} else {
+							allowedAPs.add(ap);
+							allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+							inAllowed = true;
+						}
+					}	
+				}
+				
+				if(inDenied && inAllowed) {
+					//The original rule has been split
+					fw.addAllowedPredicates(allowedRulePredicates);
+					fw.addDeniedPredicates(deniedRulePredicates);
+				} else if (inDenied) {
+					fw.addDeniedPredicate(rule.getOriginalPredicate());
+				} else if(inAllowed) {
+					fw.addAllowedPredicate(rule.getOriginalPredicate());
+				}
 			}
-			
-			if(inDenied && inAllowed) {
-				//The original rule has been split
-				fw.addPFAllowedPredicates(allowedRulePredicates);
-				fw.addPFDeniedPredicates(deniedRulePredicates);
-			} else if (inDenied) {
-				fw.addPFDeniedPredicate(rule.getOriginalPredicate());
-			} else if(inAllowed) {
-				fw.addPFAllowedPredicate(rule.getOriginalPredicate());
-			}
-		}
 
-		fw.setPFAllowedAPs(PFAllowedAPs);
-		fw.setPFDeniedAPs(PFDeniedAPs);
+			fw.setAllowedAPs(allowedAPs);
+			fw.setDeniedAPs(deniedAPs);
+		}
 		
 		
 		/* Allow First:
 		 * Scansiono prima tutte le regole ALLOW e inserisco i loro ap all'interno della lista allowed (se non sono già presenti).
 		 * Poi scansiono le regole DENY e aggiungo a denied gli ap che non sono già presenti in allowed
 		*/
-
-		SortedSet<Integer> AFAllowedAPs = new TreeSet<>();
-		SortedSet<Integer> AFDeniedAPs = new TreeSet<>();
-
-		for(AtomicRule rule: atomicRules) {
-			if(rule.getAction().equals(ActionTypes.ALLOW)) {
-				fw.addAFAllowedPredicate(rule.getOriginalPredicate());
-				for(int ap: rule.getAtomicPredicates()) {
-					if(!AFAllowedAPs.contains(ap))
-						AFAllowedAPs.add(ap);
-				}
-			}
-		}
-
-		for(AtomicRule rule: atomicRules) {
-			if(rule.getAction().equals(ActionTypes.DENY)) {
-				List<Predicate> deniedRulePredicates = new ArrayList<>();
-				boolean split = false;
-				for(int ap: rule.getAtomicPredicates()) {
-					if(AFAllowedAPs.contains(ap)) {
-						split = true;
-					} else if(!AFDeniedAPs.contains(ap)) {
-						AFDeniedAPs.add(ap);
-						deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+		else if(strategy.equals(ResolutionStrategy.ALLOW_FIRST)) {
+			
+			for(AtomicRule rule: atomicRules) {
+				if(rule.getAction().equals(ActionTypes.ALLOW)) {
+					fw.addAllowedPredicate(rule.getOriginalPredicate());
+					for(int ap: rule.getAtomicPredicates()) {
+						if(!allowedAPs.contains(ap))
+							allowedAPs.add(ap);
 					}
 				}
-				if(split) {
-					fw.addAFDeniedPredicates(deniedRulePredicates);
-				} else {
-					//Not split, so insert the original rule
-					fw.addAFDeniedPredicate(rule.getOriginalPredicate());
+			}
+
+			for(AtomicRule rule: atomicRules) {
+				if(rule.getAction().equals(ActionTypes.DENY)) {
+					List<Predicate> deniedRulePredicates = new ArrayList<>();
+					boolean split = false;
+					for(int ap: rule.getAtomicPredicates()) {
+						if(allowedAPs.contains(ap)) {
+							split = true;
+						} else if(!deniedAPs.contains(ap)) {
+							deniedAPs.add(ap);
+							deniedRulePredicates.add(fw.getAtomicPredicate(ap));
+						}
+					}
+					if(split) {
+						fw.addDeniedPredicates(deniedRulePredicates);
+					} else {
+						//Not split, so insert the original rule
+						fw.addDeniedPredicate(rule.getOriginalPredicate());
+					}
 				}
 			}
-		}
 
-		fw.setAFAllowedAPs(AFAllowedAPs);
-		fw.setAFDeniedAPs(AFDeniedAPs);
-		
+			fw.setAllowedAPs(allowedAPs);
+			fw.setDeniedAPs(deniedAPs);
+		}
 		
 		/* Deny First: stesso ragionamento di Allow first */
-		
-		SortedSet<Integer> DFAllowedAPs = new TreeSet<>();
-		SortedSet<Integer> DFDeniedAPs = new TreeSet<>();
-		
-		for(AtomicRule rule: atomicRules) {
-			if(rule.getAction().equals(ActionTypes.DENY)) {
-				fw.addDFDeniedPredicate(rule.getOriginalPredicate());
-				for(int ap: rule.getAtomicPredicates()) {
-					if(!DFDeniedAPs.contains(ap))
-						DFDeniedAPs.add(ap);
-				}
-			}
-		}
-		
-		for(AtomicRule rule: atomicRules) {
-			if(rule.getAction().equals(ActionTypes.ALLOW)) {
-				List<Predicate> allowedRulePredicates = new ArrayList<>();
-				boolean split = false;
-				for(int ap: rule.getAtomicPredicates()) {
-					if(DFDeniedAPs.contains(ap)) {
-						split = true;
-					} else if(!DFAllowedAPs.contains(ap)) {
-						DFAllowedAPs.add(ap);
-						allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+		else if(strategy.equals(ResolutionStrategy.DENY_FIRST)) {
+			
+			for(AtomicRule rule: atomicRules) {
+				if(rule.getAction().equals(ActionTypes.DENY)) {
+					fw.addDeniedPredicate(rule.getOriginalPredicate());
+					for(int ap: rule.getAtomicPredicates()) {
+						if(!deniedAPs.contains(ap))
+							deniedAPs.add(ap);
 					}
 				}
-				if(split) {
-					fw.addDFAllowedPredicates(allowedRulePredicates);
-				} else {
-					//Not split, so insert the original rule
-					fw.addDFAllowedPredicate(rule.getOriginalPredicate());
+			}
+			
+			for(AtomicRule rule: atomicRules) {
+				if(rule.getAction().equals(ActionTypes.ALLOW)) {
+					List<Predicate> allowedRulePredicates = new ArrayList<>();
+					boolean split = false;
+					for(int ap: rule.getAtomicPredicates()) {
+						if(deniedAPs.contains(ap)) {
+							split = true;
+						} else if(!allowedAPs.contains(ap)) {
+							allowedAPs.add(ap);
+							allowedRulePredicates.add(fw.getAtomicPredicate(ap));
+						}
+					}
+					if(split) {
+						fw.addAllowedPredicates(allowedRulePredicates);
+					} else {
+						//Not split, so insert the original rule
+						fw.addAllowedPredicate(rule.getOriginalPredicate());
+					}
 				}
 			}
+			
+			fw.setAllowedAPs(allowedAPs);
+			fw.setDeniedAPs(deniedAPs);
+			
 		}
-		
-		fw.setDFAllowedAPs(DFAllowedAPs);
-		fw.setDFDeniedAPs(DFDeniedAPs);
-		
-		
 		
 		/* FROM AND TO OR */
 		
 		/* Priority First */
-		for(Predicate ap: fw.getPFDeniedPredicates()) {
-			fw.addPFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+		for(Predicate ap: fw.getDeniedPredicates()) {
+			fw.addDeniedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
-		for(Predicate ap: fw.getPFAllowedPredicates()) {
-			fw.addPFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
-		}
-		
-		/* Allowed First */
-		for(Predicate ap: fw.getAFDeniedPredicates()) {
-			fw.addAFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
-		}
-		for(Predicate ap: fw.getAFAllowedPredicates()) {
-			fw.addAFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
-		}
-		
-		/* Denied First */
-		for(Predicate ap: fw.getDFDeniedPredicates()) {
-			fw.addDFDeniedPredicateRange(fromPredicateToPredicateRange(ap));
-		}
-		for(Predicate ap: fw.getDFAllowedPredicates()) {
-			fw.addDFAllowedPredicateRange(fromPredicateToPredicateRange(ap));
+		for(Predicate ap: fw.getAllowedPredicates()) {
+			fw.addAllowedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
 		
 		firewalls.put(node.getName(), fw);
