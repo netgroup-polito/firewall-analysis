@@ -72,6 +72,10 @@ public class Range implements Comparable<Range>{
 		return false;
 	}
 	
-	
+	public boolean isContiguousTo(Range o) {
+		if(this.min == o.getMax()+1)
+			return true;
+		else return false;
+	}
 	
 }

@@ -1,5 +1,6 @@
 package it.polito.verefoo.graph;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
@@ -212,13 +213,35 @@ public class PredicateRange implements Comparable<PredicateRange>{
 	}
 
 	public void setProtoTypeList(List<L4ProtocolTypes> protoTypeList) {
-		this.protoTypeList = protoTypeList;
+		List<L4ProtocolTypes> newlist = new ArrayList<>();
+		
+		for(L4ProtocolTypes p: protoTypeList) {
+			if(p.equals(L4ProtocolTypes.ANY)) {
+				newlist.add(L4ProtocolTypes.TCP);
+				newlist.add(L4ProtocolTypes.UDP);
+				newlist.add(L4ProtocolTypes.OTHER);
+			} else {
+				newlist.add(p);
+			}
+		}
+		
+		this.protoTypeList = newlist;
 	}
 
 	@Override
 	public int compareTo(PredicateRange o) {
 		return IPSrcList.first().compareTo(o.getIPSrcList().first());
 	}
+	
+	
+	public PredicateRange isContiguousTo(PredicateRange o) {
+		
+		//Check IPsrc
+		
+		return null;
+	}
+	
+	
 	
 	//Just for DEBUG
 		public void print() {

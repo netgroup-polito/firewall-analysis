@@ -174,7 +174,12 @@ public class VerefooProxy {
 		//END DEBUG
 		
 		
+		//DEBUG: test merge IPAddress
+		IPAddressRange newipar1 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(5,8), new Range(4,4));
+		IPAddressRange newipar2 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(9,200), new Range(4,4));
 		
+		IPAddressRange res = newipar2.isContiguousTo(newipar1);
+		System.out.println("MERGE " + res);
 		
 	}
 	

@@ -231,6 +231,14 @@ public class FirewallAnalysisTask implements Runnable {
 			fw.addAllowedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
 		
+		
+		
+		/* MERGE */
+		SortedSet mergedDeniedPredicatesRange = merge(fw.getDeniedPredicatesRange());
+		
+		
+		
+		
 		firewalls.put(node.getName(), fw);
 
 	}
@@ -273,6 +281,15 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		
 		return prange;
+	}
+	
+	
+	public SortedSet<PredicateRange> merge(SortedSet<PredicateRange> predicates){
+		SortedSet<PredicateRange> newset = new TreeSet<>();
+		
+		
+		
+		return newset;
 	}
 
 }

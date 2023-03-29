@@ -27,6 +27,19 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 		wildcardPosition = original.hasWildcardsInByte();
 	}
 	
+	public IPAddressRange(IPAddressRange copy) {
+		this.firstByte = copy.getFirstByte();
+		this.secondByte = copy.getSecondByte();
+		this.thirdByte = copy.getThirdByte();
+		this.fourthByte = copy.getFourthByte();
+	}
+	
+	public IPAddressRange(Range firstByte, Range secondByte, Range thirdByte, Range fourthByte) {
+		this.firstByte = firstByte;
+		this.secondByte = secondByte;
+		this.thirdByte = thirdByte;
+		this.fourthByte = fourthByte;
+	}
 	
 
 	public Range getFirstByte() {
@@ -104,4 +117,56 @@ public class IPAddressRange implements Comparable<IPAddressRange>{
 			this.thirdByte = r;
 		else this.fourthByte = r;
 	}
+	
+	//check if this is contiguous to o. In case it is, return the aggregation. Null otherwise
+	public IPAddressRange isContiguousTo(IPAddressRange o) {
+		//If all the bytes are equal a part from one that has min = o.max+1
+		if(this.fourthByte.isContiguousTo(o.getFourthByte()) && this.thirdByte.equals(o.getThirdByte())
+				&& this.secondByte.equals(o.getSecondByte()) && this.firstByte.equals(o.getFirstByte())) {
+			
+			IPAddressRange newipar = new IPAddressRange(o);
+			Range newr = new Range(o.getFourthByte().getMin(), this.fourthByte.getMax());
+			newipar.setByteInPosition(4, newr);
+			return newipar;
+			
+		} else if(this.fourthByte.equals(o.getFourthByte()) && this.thirdByte.isContiguousTo(o.getThirdByte())
+				&& this.secondByte.equals(o.getSecondByte()) && this.firstByte.equals(o.getFirstByte())) {
+			
+			IPAddressRange newipar = new IPAddressRange(o);
+			Range newr = new Range(o.getThirdByte().getMin(), this.thirdByte.getMax());
+			newipar.setByteInPosition(3, newr);
+			return newipar;
+			
+		} else if(this.fourthByte.equals(o.getFourthByte()) && this.thirdByte.equals(o.getThirdByte())
+				&& this.secondByte.isContiguousTo(o.getSecondByte()) && this.firstByte.equals(o.getFirstByte())) {
+			
+			IPAddressRange newipar = new IPAddressRange(o);
+			Range newr = new Range(o.getSecondByte().getMin(), this.secondByte.getMax());
+			newipar.setByteInPosition(2, newr);
+			return newipar;
+			
+		} else if(this.fourthByte.equals(o.getFourthByte()) && this.thirdByte.equals(o.getThirdByte())
+				&& this.secondByte.equals(o.getSecondByte()) && this.firstByte.isContiguousTo(o.getFirstByte())) {
+			
+			IPAddressRange newipar = new IPAddressRange(o);
+			Range newr = new Range(o.getFirstByte().getMin(), this.firstByte.getMax());
+			newipar.setByteInPosition(1, newr);
+			return newipar;
+		}
+		
+		return null;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		IPAddressRange o = (IPAddressRange) obj;
+		
+		if(this.firstByte.equals(o.getFirstByte()) && this.secondByte.equals(o.getSecondByte()) 
+				&& this.thirdByte.equals(o.getThirdByte()) && this.fourthByte.equals(o.getFourthByte()))
+			return true;
+		return false;
+	}
+	
+	
+	
 }
