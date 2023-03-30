@@ -55,8 +55,11 @@ public class FirewallAnalysisTask implements Runnable {
 		//Assign to each Atomic Predicate an identifier
 		int index = 0;
 		for(Predicate p: atomicPredicates) {
-			firewallAtomicPredicates.put(index, p);
-			index++;
+			if(!p.hasIPSrcOnlyNegs() && !p.hasIPDstOnlyNegs() 
+					&& !p.hasPSrcOnlyNegs() && !p.hasPDstOnlyNegs()) {
+				firewallAtomicPredicates.put(index, p);
+				index++;
+			}
 		}
 		
 		fw.setFirewallAtomicPredicates(firewallAtomicPredicates);

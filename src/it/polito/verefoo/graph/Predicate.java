@@ -162,6 +162,28 @@ public class Predicate {
 		return true;
 	}
 	
+	public boolean hasPSrcOnlyNegs() {
+		if(pSrcList.size() == 1 && pSrcList.get(0).toString().equals("*"))
+			return false;
+		
+		for(PortInterval pi: pSrcList) {
+			if(!pi.isNeg() && !pi.toString().equals("*"))
+				return false;
+		}
+		return true;
+	}
+	
+	public boolean hasPDstOnlyNegs() {
+		if(pDstList.size() == 1 && pDstList.get(0).toString().equals("*"))
+			return false;
+		
+		for(PortInterval pi: pDstList) {
+			if(!pi.isNeg() && !pi.toString().equals("*"))
+				return false;
+		}
+		return true;
+	}
+	
 	//Just for DEBUG
 	public void print() {
 		System.out.print(": {");
