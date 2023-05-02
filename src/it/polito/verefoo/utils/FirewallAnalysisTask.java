@@ -237,7 +237,7 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		
 		/* MERGE */
-		SortedSet mergedDeniedPredicatesRange = merge(fw.getDeniedPredicatesRange());
+		//SortedSet mergedDeniedPredicatesRange = merge(fw.getDeniedPredicatesRange());
 		
 		
 		
