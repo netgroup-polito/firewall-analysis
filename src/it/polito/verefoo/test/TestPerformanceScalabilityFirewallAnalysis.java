@@ -39,13 +39,13 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	
 	public static void main(String[] args)  {
 		
-		runs = 30;
+		runs = 1;
 		
 		/* FIREWALL ANALYSIS */
 		percReqWithPorts = 0.0; //from 0.0 to 1.0
 		nfirewalls = 1;
-		nrules = 50;
-		nanomalies = 20;
+		nrules = 100;
+		nanomalies = 30;
 		
 		seed  = 66361;
 
