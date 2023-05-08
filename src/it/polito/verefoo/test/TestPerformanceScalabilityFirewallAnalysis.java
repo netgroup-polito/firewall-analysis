@@ -42,10 +42,11 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 		runs = 1;
 		
 		/* FIREWALL ANALYSIS */
-		percReqWithPorts = 0.0; //from 0.0 to 1.0
+		percReqWithPorts = 0.3; //from 0.0 to 1.0
+		percReqWithProtoType = 0.6; //from 0.0 to 1.0
 		nfirewalls = 1;
 		nrules = 100;
-		nanomalies = 30;
+		nanomalies = 50;	//Each anomaly inserts 2 rules
 		
 		seed  = 66361;
 
@@ -72,6 +73,7 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	private static int nrules;
 	private static int nanomalies;
 	private static double percReqWithPorts;
+	private static double percReqWithProtoType;
 	
 	
 	/**
@@ -121,7 +123,7 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	@Test
 	public static void testScalabilityPerformance(){
 		    rand= new Random(seed);
-		    pathfile = "NRules"+nrules+"NAnomalies"+nanomalies+"PRP"+percReqWithPorts+"FWAnalysisLogs.log";
+		    pathfile = "NRules"+nrules+"NAnomalies"+nanomalies+"PRP"+percReqWithPorts+"PRPT"+percReqWithProtoType+"FWAnalysisLogs.log";
 		    
 	        logger =  Package1LoggingClass.createLoggerFor(pathfile, "log/"+pathfile);
 
@@ -134,7 +136,7 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	        int k=0, i=0;
 	        try {
 	        	List<TestCaseGeneratorFirewallAnalysis> nfv = new ArrayList<>();
-	        	nfv.add(new TestCaseGeneratorFirewallAnalysis("Test case generator firewall analysis", nfirewalls, nrules, nanomalies, percReqWithPorts, 1));
+	        	nfv.add(new TestCaseGeneratorFirewallAnalysis("Test case generator firewall analysis", nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, 1));
 
 	        	for(TestCaseGeneratorFirewallAnalysis f : nfv){
 
@@ -161,7 +163,7 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	        					m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 	        					m.setProperty( Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION,"./xsd/nfvSchema.xsd");
 
-	        					root = f.changeIP(nfirewalls, nrules, nanomalies, percReqWithPorts, seeds[k]);
+	        					root = f.changeIP(nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, seeds[k]);
 
 	        					//for debug purpose 
 	        					//m.marshal( root, System.out );  

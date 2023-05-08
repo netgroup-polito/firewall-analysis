@@ -41,7 +41,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 	List<Tuple<String, Node>> lastAPs;
 		
 	public TestCaseGeneratorFirewallAnalysis(String name, int nfirewalls, int nrules, int nanomalies, 
-			double percReqWithPorts, int seed) {
+			double percReqWithPorts, double percReqWithProtoType, int seed) {
 		this.name = name;
 		this.rand = new Random(seed); 
 
@@ -53,11 +53,11 @@ public class TestCaseGeneratorFirewallAnalysis {
 		lastAPs = new ArrayList<Tuple<String, Node>>();
 
 		allIPs = new HashSet<String>();
-		nfv = generateNFV(nfirewalls, nrules, nanomalies, percReqWithPorts, rand);
+		//nfv = generateNFV(nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, rand);
 	}
 	
 	
-	public NFV changeIP(int nfirewalls, int nrules, int nanomalies, double percReqWithPorts, int seed) {
+	public NFV changeIP(int nfirewalls, int nrules, int nanomalies, double percReqWithPorts, double percReqWithProtoType, int seed) {
 		this.rand = new Random(seed);
 		allClients = new ArrayList<Node>();
 		allServers = new ArrayList<Node>();
@@ -67,7 +67,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		lastAPs = new ArrayList<Tuple<String, Node>>();
 
 		allIPs = new HashSet<String>();
-		return generateNFV(nfirewalls, nrules, nanomalies, percReqWithPorts, rand);
+		return generateNFV(nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, rand);
 	}
 	
 	
@@ -83,7 +83,36 @@ public class TestCaseGeneratorFirewallAnalysis {
 		ip = new String(first + "." + second + "." + third + "." + forth);
 		return ip;
 	}
+
+	// IP that does not contain wildcards
+	private String createIPSource() {
+		String ip;
+		int first, second, third, forth;
+		first = 140;
+		second = 192;
+		third = rand.nextInt(10) + 30;
+		forth = rand.nextInt(256);
+		ip = new String(first + "." + second + "." + third + "." + forth);
+		return ip;
+	}
 	
+	// IP that does not contain wildcards
+	private String createIPDestination() {
+		String ip;
+		int first, second, third, forth;
+		first = 161;
+		second = 120;
+		third = rand.nextInt(10) + 30;
+		forth = rand.nextInt(256);
+		ip = new String(first + "." + second + "." + third + "." + forth);
+		return ip;
+	}
+	
+	private String createPort() {
+		int n = rand.nextInt(5)+1;
+		return String.valueOf(n);
+	}
+
 	private String createRandomIP() {
 		boolean notCreated = true;
 		String ip = null;
@@ -112,7 +141,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 	}
 	
 	
-	public NFV generateNFV(int nfirewalls, int nrules, int nanomalies, double percReqWithPorts, Random rand) {
+	public NFV generateNFV(int nfirewalls, int nrules, int nanomalies, double percReqWithPorts, double percReqWithProtoType, Random rand) {
 		
 		/* Creation of the test */
 		
@@ -184,7 +213,6 @@ public class TestCaseGeneratorFirewallAnalysis {
 		firstFirewall.getNeighbour().add(neighForFirewall);
 		firstClient.getNeighbour().add(neighForClient);
 		
-		
 		for(int i = 1; i < nfirewalls; i++) {
 			Node currentFirewall = allFirewalls.get(i);
 			Node previousFirewall = allFirewalls.get(i-1);
@@ -251,7 +279,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 			}
 			
 			//GENERATE REMAINING RULES
-			for(int i=0; i<nrules-nanomalies; i++) {
+			for(int i=0; i<nrules-nanomalies*2; i++) {
 				
 				Elements R = new Elements();
 				
@@ -285,6 +313,48 @@ public class TestCaseGeneratorFirewallAnalysis {
 				firewall.getConfiguration().getFirewall().getElements().add(R);
 			}
 			
+			//ADD PORT NUMBER INFO
+			int nrulesWithPorts = (int) (nrules * percReqWithPorts);
+			for(int i=0; i<nrulesWithPorts; i++) {
+				String port = createPort();
+				
+				//Extract one rule
+				Elements rule = firewall.getConfiguration().getFirewall().getElements()
+						.get(rand.nextInt(firewall.getConfiguration().getFirewall().getElements().size()));
+				
+//				if(rand.nextBoolean()) {
+//					//Port source
+//					if(rule.getSrcPort().equals("*"))
+//						rule.setSrcPort(port);
+//					else i--;
+//				} else {
+					//Port destination
+					if(rule.getDstPort().equals("*"))
+						rule.setDstPort(port);
+					else i--;
+//				}
+			}
+			
+			
+			//ADD PROTOCOL TYPE INFO
+			int nrulesWithProtoType = (int) (nrules * percReqWithProtoType);
+			for(int i=0; i<nrulesWithProtoType; i++) {
+				//Extract one rule
+				Elements rule = firewall.getConfiguration().getFirewall().getElements()
+						.get(rand.nextInt(firewall.getConfiguration().getFirewall().getElements().size()));
+				
+				if(!rule.getProtocol().equals(L4ProtocolTypes.ANY)) {
+					i--;
+					continue;
+				}
+				
+				if(rand.nextBoolean()) {
+					rule.setProtocol(L4ProtocolTypes.TCP);
+				} else {
+					rule.setProtocol(L4ProtocolTypes.UDP);
+				}
+			}
+			
 		}
 
 		//add the nodes in the graph
@@ -315,7 +385,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		}
 		
 		//IP source: IPsrc1 is a subset of IPsrc2
-		String IPsrc1 = createIP();
+		String IPsrc1 = createIPSource();
 		String IPsrc2;
 		if(rand.nextBoolean()) {
 			//IPsrc2 superset of IPsrc1
@@ -334,7 +404,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		}
 			
 		//IP dest: IPdst1 is a subset of IPdst2
-		String IPdst1 = createIP();
+		String IPdst1 = createIPDestination();
 		String IPdst2;
 		if(rand.nextBoolean()) {
 			//IPdst2 superset of IPdst1
@@ -382,7 +452,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		}
 		
 		//IP source
-		String IPsrcy = createIP();
+		String IPsrcy = createIPSource();
 		String IPsrcx;
 		
 		if(rand.nextBoolean()) {
@@ -397,7 +467,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setSource(IPsrcy);
 		
 		//IP dst
-		String IPdsty = createIP();
+		String IPdsty = createIPDestination();
 		String IPdstx;
 		
 		if(rand.nextBoolean()) {
@@ -441,7 +511,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		}
 		
 		//IP source
-		String IPsrcx = createIP();
+		String IPsrcx = createIPSource();
 		String IPsrcy;
 		
 		if(rand.nextBoolean() || different == 0) {
@@ -454,7 +524,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setSource(IPsrcy);
 		
 		//IP dst
-		String IPdstx = createIP();
+		String IPdstx = createIPDestination();
 		String IPdsty;
 		
 		if(rand.nextBoolean() || different == 1) {
@@ -498,7 +568,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		}
 		
 		//IP source
-		String IPsrcy = createIP();
+		String IPsrcy = createIPSource();
 		String IPsrcx;
 		
 		if(rand.nextBoolean()) {
@@ -513,7 +583,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setSource(IPsrcy);
 		
 		//IP dst
-		String IPdsty = createIP();
+		String IPdsty = createIPDestination();
 		String IPdstx;
 		
 		if(rand.nextBoolean()) {

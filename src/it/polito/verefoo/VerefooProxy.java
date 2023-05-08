@@ -116,32 +116,32 @@ public class VerefooProxy {
 		//END DEBUG
 		
 		//DEBUG: print firewall anomalies
-		for(FW fw: firewalls.values()) {
-			System.out.print(strategy + " Allowed: ");
-			for(int ap: fw.getAllowedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getAllowedPredicates())
-				ap.print();
-			System.out.println();
-			System.out.print("\tPRED IN OR: ");
-			for(PredicateRange prange: fw.getAllowedPredicatesRange())
-				prange.print();
-			
-			System.out.print("\n" + strategy + " Denied: ");
-			for(int ap: fw.getDeniedAPs())
-				System.out.print(ap + " ");
-			System.out.print(", PRED ");
-			for(Predicate ap: fw.getDeniedPredicates())
-				ap.print();
-			System.out.println();
-			System.out.print("\tPRED IN OR: ");
-			for(PredicateRange prange: fw.getDeniedPredicatesRange())
-				prange.print();
-			System.out.println();
-			System.out.println();
-		
-		}
+//		for(FW fw: firewalls.values()) {
+//			System.out.print(strategy + " Allowed: ");
+//			for(int ap: fw.getAllowedAPs())
+//				System.out.print(ap + " ");
+//			System.out.print(", PRED ");
+//			for(Predicate ap: fw.getAllowedPredicates())
+//				ap.print();
+//			System.out.println();
+//			System.out.print("\tPRED IN OR: ");
+//			for(PredicateRange prange: fw.getAllowedPredicatesRange())
+//				prange.print();
+//			
+//			System.out.print("\n" + strategy + " Denied: ");
+//			for(int ap: fw.getDeniedAPs())
+//				System.out.print(ap + " ");
+//			System.out.print(", PRED ");
+//			for(Predicate ap: fw.getDeniedPredicates())
+//				ap.print();
+//			System.out.println();
+//			System.out.print("\tPRED IN OR: ");
+//			for(PredicateRange prange: fw.getDeniedPredicatesRange())
+//				prange.print();
+//			System.out.println();
+//			System.out.println();
+//		
+//		}
 		//END DEBUG
 		
 		
@@ -174,11 +174,11 @@ public class VerefooProxy {
 		
 		
 		//DEBUG: test merge IPAddress
-		IPAddressRange newipar1 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(5,8), new Range(4,4));
-		IPAddressRange newipar2 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(9,200), new Range(4,4));
-		
-		IPAddressRange res = newipar2.isContiguousTo(newipar1);
-		System.out.println("MERGE " + res);
+//		IPAddressRange newipar1 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(5,8), new Range(4,4));
+//		IPAddressRange newipar2 = new IPAddressRange(new Range(10,10), new Range(0,0), new Range(9,200), new Range(4,4));
+//		
+//		IPAddressRange res = newipar2.isContiguousTo(newipar1);
+//		System.out.println("MERGE " + res);
 		
 	}
 	
