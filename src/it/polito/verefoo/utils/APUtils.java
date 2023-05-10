@@ -787,6 +787,58 @@ public class APUtils {
 		
 		
 		
+		public List<List<PortInterval>> computeAtomicPortIntervals(List<PortInterval> portIntervalList){
+			List<List<PortInterval>> atomicPortIntervals = new ArrayList<>();
+			
+			List<List<PortInterval>> remainingList = new ArrayList<>();
+			for(PortInterval pi: portIntervalList) {
+				List<PortInterval> piInAND = new ArrayList<>();
+				piInAND.add(pi);
+				remainingList.add(piInAND);
+			}
+			
+			boolean listContainsSuperset = true;
+			
+			while(listContainsSuperset) {
+				
+				listContainsSuperset = false;
+				List<List<PortInterval>> superset = new ArrayList<>();
+				
+				for(int i=0; i<remainingList.size(); i++) {
+					//The first in the list is the only not neg
+					PortInterval r1 = remainingList.get(i).get(0);
+					List<PortInterval> newR1inAND = new ArrayList<>();
+					newR1inAND.add(r1);
+					boolean isSuperset = false;
+					
+					for(int j=0; j<remainingList.size(); j++) {
+						if(j == i) continue;
+						
+						PortInterval r2 = remainingList.get(j).get(0);
+						
+						if(r2.isIncludedInPortInterval(r1)) {
+							//r1 is a superset of r2
+							isSuperset = true;
+							listContainsSuperset = true;
+							PortInterval r2Neg = new PortInterval(r2.getMin(), r2.getMax(), true);
+							newR1inAND.add(r2Neg);
+						}
+					}
+					
+					if(isSuperset) {
+						superset.add(newR1inAND);
+					} else {
+						atomicPortIntervals.add(remainingList.get(i));
+					}
+				}
+				
+				remainingList = new ArrayList<>(superset);	
+			}
+			
+			
+			
+			return atomicPortIntervals;
+		}
 		
 		
 }

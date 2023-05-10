@@ -133,6 +133,42 @@ public class VerefooProxy {
 			}
 			System.out.println();
 		}
+		System.out.println();
+		
+		
+		List<PortInterval> portIntervalList = new ArrayList<>();
+		
+		PortInterval pi1 = new PortInterval(50, 100, false);
+		PortInterval pi2 = new PortInterval(61, 69, false);
+		PortInterval pi3 = new PortInterval(200, 500, false);
+		PortInterval pi4 = new PortInterval(5, 5, false);
+		PortInterval pi5 = new PortInterval(65, 65, false);
+		PortInterval pi6 = new PortInterval(251, 255, false);
+		
+		portIntervalList.add(pi1);
+		portIntervalList.add(pi2);
+		portIntervalList.add(pi3);
+		portIntervalList.add(pi4);
+		portIntervalList.add(pi5);
+		portIntervalList.add(pi6);
+		
+		List<List<PortInterval>> atomicPortIntervals = aputils.computeAtomicPortIntervals(portIntervalList);
+		
+		for(List<PortInterval> atomicPortInterval: atomicPortIntervals) {
+			int i=0;
+			for(PortInterval pi: atomicPortInterval) {
+				if(atomicPortInterval.size() > 1 && pi.toString().equals("*")) continue;
+				if(i!=0) System.out.print("AND");
+				if(pi.isNeg()) System.out.print("!");
+				System.out.print(pi.toString());
+				i++;
+			}
+			System.out.println();
+		}
+		
+		
+		
+		
 		
 		
 		
