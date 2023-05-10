@@ -681,5 +681,112 @@ public class APUtils {
 		}
 		
 		
-
+		
+		/* REFACTOR: new algorithm to compute Atomic Predicates */
+		
+		
+		/* IPAddressList contains the list of distinct IPAddresses from firewall rules
+		   All the IPAddresses has neg = false */
+		public List<List<IPAddress>> computeAtomicIPAddresses(List<IPAddress> IPAddressList){
+			
+			/* Split IPAddressList in 4 different lists based on the number of wildcards */
+			List<IPAddress> IPAddressesWith3Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith2Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith1Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith0Wildcards = new ArrayList<>();
+			
+			for(IPAddress ip: IPAddressList) {
+				if(ip.hasWildcardsInByte() == 2)
+					IPAddressesWith3Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 3)
+					IPAddressesWith2Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 4)
+					IPAddressesWith1Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 5) 
+					IPAddressesWith0Wildcards.add(ip);
+			}
+			
+			
+			List<List<IPAddress>> atomicIPAddresses = new ArrayList<>();
+			List<IPAddress> supersetIPAddresses = new ArrayList<>();
+			
+			//Start with IPAddresses with 0W and insert them both in atomicIPAddresses and supersetIPAddresses
+			for(IPAddress ip0: IPAddressesWith0Wildcards) {
+				List<IPAddress> ip0AND = new ArrayList<>();
+				ip0AND.add(ip0);
+				
+				atomicIPAddresses.add(ip0AND);
+				supersetIPAddresses.add(ip0);
+			}
+			
+			//Continue with IPAddress with 1 W
+			for(IPAddress ip1: IPAddressesWith1Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip1);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip1)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip1);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			//Continue with IPAddress with 2 W
+			for(IPAddress ip2: IPAddressesWith2Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip2);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip2)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip2);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			//Continue with IPAddress with 3 W
+			for(IPAddress ip3: IPAddressesWith3Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip3);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip3)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip3);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			return atomicIPAddresses;
+		}
+		
+		
+		
+		
+		
 }

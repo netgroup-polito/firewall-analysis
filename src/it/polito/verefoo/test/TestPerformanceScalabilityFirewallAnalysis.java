@@ -40,10 +40,10 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	
 	public static void main(String[] args)  {
 		
-		runs = 10;
+		runs = 5;
 		
 		/* FIREWALL ANALYSIS */
-		percReqWithPorts = 0.4; //from 0.0 to 1.0
+		percReqWithPorts = 0.8; //from 0.0 to 1.0
 		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
 		nrules = 100;
