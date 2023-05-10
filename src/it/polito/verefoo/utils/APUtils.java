@@ -834,10 +834,33 @@ public class APUtils {
 				
 				remainingList = new ArrayList<>(superset);	
 			}
-			
-			
-			
+
 			return atomicPortIntervals;
+		}
+		
+		
+		public List<Predicate> computeAtomicPredicatesNewAlgorithm(List<List<IPAddress>> IPSrcList, List<List<IPAddress>> IPDstList, 
+				List<List<PortInterval>> PSrcList, List<List<PortInterval>> PDstList, List<L4ProtocolTypes> ProtoList){
+			
+			List<Predicate> atomicPredicates = new ArrayList<>();
+			
+			for(List<IPAddress> IPSrc: IPSrcList) {
+				for(List<IPAddress> IPDst: IPDstList) {
+					for(List<PortInterval> PSrc: PSrcList) {
+						for(List<PortInterval> PDst: PDstList) {
+							Predicate ap = new Predicate();
+							ap.setIPSrcList(IPSrc);
+							ap.setIPDstList(IPDst);
+							ap.setpSrcList(PSrc);
+							ap.setpDstList(PDst);
+							ap.setProtoTypeList(ProtoList);
+							atomicPredicates.add(ap);
+						}
+					}
+				}
+			}
+			
+			return atomicPredicates;
 		}
 		
 		

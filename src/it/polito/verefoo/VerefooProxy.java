@@ -98,74 +98,74 @@ public class VerefooProxy {
 		
 		
 		//DEBUG: new algorithm to compute Atomic Predicates
-		List<IPAddress> listIPAddress = new ArrayList<>();
-		
-		IPAddress ip1 = new IPAddress("10","0","0","-1", false);
-		IPAddress ip2 = new IPAddress("10","0","5","-1", false);
-		IPAddress ip3 = new IPAddress("10","0","0","1", false);
-		IPAddress ip4 = new IPAddress("10","0","0","2", false);
-		IPAddress ip5 = new IPAddress("10","0","5","4", false);
-		IPAddress ip6 = new IPAddress("10","9","5","1", false);
-		IPAddress ip7 = new IPAddress("10","-1","-1","-1", false);
-		IPAddress ip8 = new IPAddress("10","0","-1","-1", false);
-		IPAddress ip9 = new IPAddress("10","8","-1","-1", false);
-		
-		listIPAddress.add(ip1);
-		listIPAddress.add(ip2);
-		listIPAddress.add(ip3);
-		listIPAddress.add(ip4);
-		listIPAddress.add(ip5);
-		listIPAddress.add(ip6);
-		listIPAddress.add(ip7);
-		listIPAddress.add(ip8);
-		listIPAddress.add(ip9);
-		
-		List<List<IPAddress>> atomicIPAddresses = aputils.computeAtomicIPAddresses(listIPAddress);
-		
-		for(List<IPAddress> atomicIPAddress: atomicIPAddresses) {
-			int i = 0;
-			for(IPAddress IP: atomicIPAddress) {
-				if(atomicIPAddress.size() > 1 && atomicIPAddress.toString().equals("*")) continue;
-				if(i!=0) System.out.print("AND");
-				if(IP.isNeg()) System.out.print("!");
-				System.out.print(IP.toString());
-				i++;
-			}
-			System.out.println();
-		}
-		System.out.println();
-		
-		
-		List<PortInterval> portIntervalList = new ArrayList<>();
-		
-		PortInterval pi1 = new PortInterval(50, 100, false);
-		PortInterval pi2 = new PortInterval(61, 69, false);
-		PortInterval pi3 = new PortInterval(200, 500, false);
-		PortInterval pi4 = new PortInterval(5, 5, false);
-		PortInterval pi5 = new PortInterval(65, 65, false);
-		PortInterval pi6 = new PortInterval(251, 255, false);
-		
-		portIntervalList.add(pi1);
-		portIntervalList.add(pi2);
-		portIntervalList.add(pi3);
-		portIntervalList.add(pi4);
-		portIntervalList.add(pi5);
-		portIntervalList.add(pi6);
-		
-		List<List<PortInterval>> atomicPortIntervals = aputils.computeAtomicPortIntervals(portIntervalList);
-		
-		for(List<PortInterval> atomicPortInterval: atomicPortIntervals) {
-			int i=0;
-			for(PortInterval pi: atomicPortInterval) {
-				if(atomicPortInterval.size() > 1 && pi.toString().equals("*")) continue;
-				if(i!=0) System.out.print("AND");
-				if(pi.isNeg()) System.out.print("!");
-				System.out.print(pi.toString());
-				i++;
-			}
-			System.out.println();
-		}
-		
+//		List<IPAddress> listIPAddress = new ArrayList<>();
+//		
+//		IPAddress ip1 = new IPAddress("10","0","0","-1", false);
+//		IPAddress ip2 = new IPAddress("10","0","5","-1", false);
+//		IPAddress ip3 = new IPAddress("10","0","0","1", false);
+//		IPAddress ip4 = new IPAddress("10","0","0","2", false);
+//		IPAddress ip5 = new IPAddress("10","0","5","4", false);
+//		IPAddress ip6 = new IPAddress("10","9","5","1", false);
+//		IPAddress ip7 = new IPAddress("10","-1","-1","-1", false);
+//		IPAddress ip8 = new IPAddress("10","0","-1","-1", false);
+//		IPAddress ip9 = new IPAddress("10","8","-1","-1", false);
+//		
+//		listIPAddress.add(ip1);
+//		listIPAddress.add(ip2);
+//		listIPAddress.add(ip3);
+//		listIPAddress.add(ip4);
+//		listIPAddress.add(ip5);
+//		listIPAddress.add(ip6);
+//		listIPAddress.add(ip7);
+//		listIPAddress.add(ip8);
+//		listIPAddress.add(ip9);
+//		
+//		List<List<IPAddress>> atomicIPAddresses = aputils.computeAtomicIPAddresses(listIPAddress);
+//		
+//		for(List<IPAddress> atomicIPAddress: atomicIPAddresses) {
+//			int i = 0;
+//			for(IPAddress IP: atomicIPAddress) {
+//				if(atomicIPAddress.size() > 1 && atomicIPAddress.toString().equals("*")) continue;
+//				if(i!=0) System.out.print("AND");
+//				if(IP.isNeg()) System.out.print("!");
+//				System.out.print(IP.toString());
+//				i++;
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();
+//		
+//		
+//		List<PortInterval> portIntervalList = new ArrayList<>();
+//		
+//		PortInterval pi1 = new PortInterval(50, 100, false);
+//		PortInterval pi2 = new PortInterval(61, 69, false);
+//		PortInterval pi3 = new PortInterval(200, 500, false);
+//		PortInterval pi4 = new PortInterval(5, 5, false);
+//		PortInterval pi5 = new PortInterval(65, 65, false);
+//		PortInterval pi6 = new PortInterval(251, 255, false);
+//		
+//		portIntervalList.add(pi1);
+//		portIntervalList.add(pi2);
+//		portIntervalList.add(pi3);
+//		portIntervalList.add(pi4);
+//		portIntervalList.add(pi5);
+//		portIntervalList.add(pi6);
+//		
+//		List<List<PortInterval>> atomicPortIntervals = aputils.computeAtomicPortIntervals(portIntervalList);
+//		
+//		for(List<PortInterval> atomicPortInterval: atomicPortIntervals) {
+//			int i=0;
+//			for(PortInterval pi: atomicPortInterval) {
+//				if(atomicPortInterval.size() > 1 && pi.toString().equals("*")) continue;
+//				if(i!=0) System.out.print("AND");
+//				if(pi.isNeg()) System.out.print("!");
+//				System.out.print(pi.toString());
+//				i++;
+//			}
+//			System.out.println();
+//		}
+		//END DEBUG
 		
 		
 		

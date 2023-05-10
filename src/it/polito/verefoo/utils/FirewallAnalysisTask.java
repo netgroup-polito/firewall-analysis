@@ -17,6 +17,7 @@ import it.polito.verefoo.graph.PredicateRange;
 import it.polito.verefoo.graph.ResolutionStrategy;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
+import it.polito.verefoo.jaxb.L4ProtocolTypes;
 import it.polito.verefoo.jaxb.Node;
 
 public class FirewallAnalysisTask implements Runnable {
@@ -42,18 +43,42 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		/* COMPUTE FIREWALL ATOMIC PREDICATES */
 		long beginAP = System.currentTimeMillis();
-		List<Predicate> predicates = new ArrayList<>();
+		
 		List<Predicate> atomicPredicates = new ArrayList<>();
 		HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
+		List<IPAddress> distinctIPSrcList = new ArrayList<>();
+		List<IPAddress> distinctIPDstList = new ArrayList<>();
+		List<PortInterval> distinctPSrcList = new ArrayList<>();
+		List<PortInterval> distinctPDstList = new ArrayList<>();
+		List<L4ProtocolTypes> ProtoList = new ArrayList<>();
+		
+		ProtoList.add(L4ProtocolTypes.ANY);
 		
 		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-			Predicate newp = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-					rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-			predicates.add(newp);
+			
+			IPAddress ipsrc = new IPAddress(rule.getSource(), false);
+			if(!distinctIPSrcList.contains(ipsrc))
+				distinctIPSrcList.add(ipsrc);
+			
+			IPAddress ipdst = new IPAddress(rule.getDestination(), false);
+			if(!distinctIPDstList.contains(ipdst))
+				distinctIPDstList.add(ipdst);
+			
+			PortInterval psrc = new PortInterval(rule.getSrcPort(), false);
+			if(!distinctPSrcList.contains(psrc))
+				distinctPSrcList.add(psrc);
+			
+			PortInterval pdst = new PortInterval(rule.getDstPort(), false);
+			if(!distinctPDstList.contains(pdst))
+				distinctPDstList.add(pdst);
+			
 		}
 		
 		//Starting from this list of predicates we can compute the corresponding set of Atomic Predicates
-		atomicPredicates = aputils.computeAtomicPredicates(atomicPredicates, predicates);
+		atomicPredicates = aputils.computeAtomicPredicatesNewAlgorithm(
+				aputils.computeAtomicIPAddresses(distinctIPSrcList), aputils.computeAtomicIPAddresses(distinctIPDstList), 
+				aputils.computeAtomicPortIntervals(distinctPSrcList), aputils.computeAtomicPortIntervals(distinctPDstList),
+				ProtoList);
 		
 		//Assign to each Atomic Predicate an identifier
 		int index = 0;
