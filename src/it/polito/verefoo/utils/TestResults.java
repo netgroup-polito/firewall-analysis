@@ -2,10 +2,14 @@ package it.polito.verefoo.utils;
 
 public class TestResults {
 	private long atomicPredCompTime;
-	private long atomicFlowsCompTime;
-	private long beginMaxSMTTime;
+	private long rewriteRuleCompTime;
+	private long solveAnomaliesCompTime;
+	private long andToORCompTime;
+	private long totalTime;
+	
 	private String z3Result;
 	private long totalFlows;
+	private long numberAP;
 	
 	public TestResults() {	
 	}
@@ -18,20 +22,20 @@ public class TestResults {
 		this.atomicPredCompTime = atomicPredCompTime;
 	}
 
-	public long getAtomicFlowsCompTime() {
-		return atomicFlowsCompTime;
+	public long getRewriteRuleCompTime() {
+		return rewriteRuleCompTime;
 	}
 
-	public void setAtomicFlowsCompTime(long atomicFlowsCompTime) {
-		this.atomicFlowsCompTime = atomicFlowsCompTime;
+	public void setRewriteRuleCompTime(long rewriteRuleCompTime) {
+		this.rewriteRuleCompTime = rewriteRuleCompTime;
 	}
 
-	public long getBeginMaxSMTTime() {
-		return beginMaxSMTTime;
+	public long getSolveAnomaliesCompTime() {
+		return solveAnomaliesCompTime;
 	}
 
-	public void setBeginMaxSMTTime(long beginMaxSMTTime) {
-		this.beginMaxSMTTime = beginMaxSMTTime;
+	public void setSolveAnomaliesCompTime(long solveAnomaliesCompTime) {
+		this.solveAnomaliesCompTime = solveAnomaliesCompTime;
 	}
 
 	public String getZ3Result() {
@@ -48,5 +52,29 @@ public class TestResults {
 
 	public void setTotalFlows(long totalFlows) {
 		this.totalFlows = totalFlows;
+	}
+
+	public long getAndToORCompTime() {
+		return andToORCompTime;
+	}
+
+	public void setAndToORCompTime(long andToORCompTime) {
+		this.andToORCompTime = andToORCompTime;
+	}
+
+	public long getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(long totalTime) {
+		this.totalTime = totalTime;
+	}
+
+	public long getNumberAP() {
+		return numberAP;
+	}
+
+	public void setNumberAP(long numberAP) {
+		this.numberAP = numberAP;
 	}
 }

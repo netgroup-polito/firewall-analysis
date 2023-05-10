@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -39,14 +40,14 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	
 	public static void main(String[] args)  {
 		
-		runs = 1;
+		runs = 10;
 		
 		/* FIREWALL ANALYSIS */
-		percReqWithPorts = 0.3; //from 0.0 to 1.0
-		percReqWithProtoType = 0.6; //from 0.0 to 1.0
+		percReqWithPorts = 0.4; //from 0.0 to 1.0
+		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
 		nrules = 100;
-		nanomalies = 50;	//Each anomaly inserts 2 rules
+		nanomalies = 40;	//Each anomaly inserts 2 rules
 		
 		seed  = 66361;
 
@@ -108,14 +109,20 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 		long beginAll=System.currentTimeMillis();
 		VerefooSerializer test = new VerefooSerializer(root);
 		long endAll=System.currentTimeMillis();
-		TestResults results = test.getTestTimeResults();
+		HashMap<String, TestResults> results = test.getTestResults();
 		
 		long totalTime = endAll - beginAll;
 		
-		String resString = new String("Total time " + totalTime);
+		for(String fwname: results.keySet()) {
+			TestResults fresult = results.get(fwname);
+			String resString = new String("Total time " +  fresult.getTotalTime() + "\tTime AP " + fresult.getAtomicPredCompTime() + "\tTime rewrite rule " +
+					fresult.getRewriteRuleCompTime() + "\tTime solve anomalies " + fresult.getSolveAnomaliesCompTime() + "\tTime AND to OR " 
+					+ fresult.getAndToORCompTime() + "\tNumber AP " + fresult.getNumberAP());
+			
+			System.out.println(resString);
+			logger.info(resString);
+		}
 		
-		System.out.println(resString);
-		logger.info(totalTime + "\t");
         return test.getResult();
 	}
 	
@@ -123,9 +130,10 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	@Test
 	public static void testScalabilityPerformance(){
 		    rand= new Random(seed);
-		    pathfile = "NRules"+nrules+"NAnomalies"+nanomalies+"PRP"+percReqWithPorts+"PRPT"+percReqWithProtoType+"FWAnalysisLogs.log";
+		    pathfile = "FIREWALL-ANALYSIS.log";
 		    
-	        logger =  Package1LoggingClass.createLoggerFor(pathfile, "log/"+pathfile);
+	        logger =  Package1LoggingClass.createLoggerFor(pathfile, "logSimo/"+pathfile);
+	        logger.info("\n\nNRules "+nrules+"\tNAnomalies "+nanomalies+"\tPRP "+percReqWithPorts+"\tPRPT "+percReqWithProtoType);
 
 	        int[] seeds = new int[runs];
 	        for(int m=0;m<runs;m++) { 

@@ -25,12 +25,14 @@ public class FirewallAnalysisTask implements Runnable {
 	APUtils aputils;
 	HashMap<String, FW> firewalls;
 	ResolutionStrategy strategy;
+	TestResults fresult;
 	
-	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy) {
+	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy, TestResults fresult) {
 		this.node = node;
 		this.aputils = aputils;
 		this.firewalls = firewalls;
 		this.strategy = strategy;
+		this.fresult = fresult;
 	}
 	
 
@@ -39,6 +41,7 @@ public class FirewallAnalysisTask implements Runnable {
 		FW fw = new FW(node.getName());
 		
 		/* COMPUTE FIREWALL ATOMIC PREDICATES */
+		long beginAP = System.currentTimeMillis();
 		List<Predicate> predicates = new ArrayList<>();
 		List<Predicate> atomicPredicates = new ArrayList<>();
 		HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
@@ -63,7 +66,9 @@ public class FirewallAnalysisTask implements Runnable {
 		}
 		
 		fw.setFirewallAtomicPredicates(firewallAtomicPredicates);
-		
+		long endAP = System.currentTimeMillis();
+		fresult.setAtomicPredCompTime(endAP - beginAP);
+		fresult.setNumberAP(firewallAtomicPredicates.size());
 		
 		/* REWRITE FIREWALL RULES */
 		int count = 1;
@@ -89,6 +94,8 @@ public class FirewallAnalysisTask implements Runnable {
 		}
 		
 		fw.setAtomicRules(atomicRules);
+		long endRWR = System.currentTimeMillis();
+		fresult.setRewriteRuleCompTime(endRWR - endAP);
 		
 		/* SOLVE FIREWALL ANOMALIES */
 		SortedSet<Integer> allowedAPs = new TreeSet<>();
@@ -225,6 +232,10 @@ public class FirewallAnalysisTask implements Runnable {
 			
 		}
 		
+		long endSA = System.currentTimeMillis();
+		fresult.setSolveAnomaliesCompTime(endSA - endRWR);
+		
+		
 		/* FROM AND TO OR */
 		
 		for(Predicate ap: fw.getDeniedPredicates()) {
@@ -234,6 +245,8 @@ public class FirewallAnalysisTask implements Runnable {
 			fw.addAllowedPredicateRange(fromPredicateToPredicateRange(ap));
 		}
 		
+		long endAndToOr = System.currentTimeMillis();
+		fresult.setAndToORCompTime(endAndToOr - endSA);
 		
 		
 		/* MERGE */
@@ -243,6 +256,8 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		
 		firewalls.put(node.getName(), fw);
+		long endAll = System.currentTimeMillis();
+		fresult.setTotalTime(endAll - beginAP);
 
 	}
 	

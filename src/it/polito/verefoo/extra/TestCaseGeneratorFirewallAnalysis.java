@@ -108,8 +108,8 @@ public class TestCaseGeneratorFirewallAnalysis {
 		return ip;
 	}
 	
-	private String createPort() {
-		int n = rand.nextInt(5)+1;
+	private String createPort(int interval) {
+		int n = rand.nextInt((int)(interval * 0.3))+1;
 		return String.valueOf(n);
 	}
 
@@ -316,7 +316,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 			//ADD PORT NUMBER INFO
 			int nrulesWithPorts = (int) (nrules * percReqWithPorts);
 			for(int i=0; i<nrulesWithPorts; i++) {
-				String port = createPort();
+				String port = createPort(nrulesWithPorts);
 				
 				//Extract one rule
 				Elements rule = firewall.getConfiguration().getFirewall().getElements()

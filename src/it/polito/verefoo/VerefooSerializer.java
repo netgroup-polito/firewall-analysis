@@ -1,5 +1,6 @@
 package it.polito.verefoo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class VerefooSerializer {
 	private NFV nfv, result;
 	private boolean sat = false;
 	private String z3Model;
-	private TestResults testResults;
+	private HashMap<String, TestResults> testResults;
 	
 	int time = 0;
 	
@@ -62,7 +63,7 @@ public class VerefooSerializer {
 							EType.INVALID_PROPERTY_DEFINITION);
 				VerefooProxy test = new VerefooProxy(g, root.getHosts(), root.getConnections(), root.getConstraints(),
 						prop, paths);
-				testResults = test.getTestTimeResults();
+				testResults = test.getTestResults();
 
 			} 
 		} catch (BadGraphError e) {
@@ -102,7 +103,7 @@ public class VerefooSerializer {
 		return sat;
 	}
 	
-	public TestResults getTestTimeResults() {
+	public HashMap<String, TestResults> getTestResults() {
 		return testResults;
 	}
 

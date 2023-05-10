@@ -53,7 +53,7 @@ public class VerefooProxy {
 	
 	/* Atomic predicates */
 	HashMap<String, Node> transformersNode = new HashMap<>();
-	private TestResults testResults = new TestResults();
+	private HashMap<String, TestResults> firewallTestResults = new HashMap<>();	//one TestResult for each firewall
 	
 	private HashMap<String, FW> firewalls = new HashMap<>();
 	private ResolutionStrategy strategy = ResolutionStrategy.ALLOW_FIRST;
@@ -107,12 +107,12 @@ public class VerefooProxy {
 		//END DEBUG
 		
 		//DEBUG: print firewall original rule and related atomic rules
-		for(FW fw: firewalls.values()) {
-			System.out.println("FIREWALL RULES");
-			for(AtomicRule rule: fw.getAtomicRules()) {
-				rule.print();
-			}
-		}
+//		for(FW fw: firewalls.values()) {
+//			System.out.println("FIREWALL RULES");
+//			for(AtomicRule rule: fw.getAtomicRules()) {
+//				rule.print();
+//			}
+//		}
 		//END DEBUG
 		
 		//DEBUG: print firewall anomalies
@@ -629,8 +629,10 @@ public class VerefooProxy {
 		for(Node node: transformersNode.values()) {
 			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
 				//For each firewall, compute its related Atomic Predicates and perform Conflict Analysis
-				APUtils aputilsNew = new APUtils(); 
-				tasks.add(threadPool.submit(new FirewallAnalysisTask(node, firewalls, aputilsNew, strategy)));	
+				APUtils aputilsNew = new APUtils();
+				TestResults fresult = new TestResults();
+				tasks.add(threadPool.submit(new FirewallAnalysisTask(node, firewalls, aputilsNew, strategy, fresult)));
+				firewallTestResults.put(node.getName(), fresult);
 			}
 		}
 		
@@ -1193,10 +1195,6 @@ public class VerefooProxy {
 	public Map<Integer, FlowPath> getTrafficFlowsMap(){
 		return trafficFlowsMap;
 	}
-	
-	public TestResults getTestTimeResults() {
-		return testResults;
-	}
 
 	public List<Property> getProperties() {
 		return properties;
@@ -1223,8 +1221,8 @@ public class VerefooProxy {
 		return transformersNode;
 	}
 
-	public TestResults getTestResults() {
-		return testResults;
+	public HashMap<String, TestResults> getTestResults() {
+		return firewallTestResults;
 	}
 	
 	
