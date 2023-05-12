@@ -74,6 +74,9 @@ public class Predicate {
 	public int getIPDstListSize() {
 		return IPDstList.size();
 	}
+	public void addSingleProtoType(L4ProtocolTypes proto) {
+		this.protoTypeList.add(proto);
+	}
 	
 	//IPSrc should be single not neg (the check sould be done before calling the method)
 	public boolean hasIPSrcEqualOrIncludedIn(List<IPAddress> ipList) {

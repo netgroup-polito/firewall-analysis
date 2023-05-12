@@ -1,5 +1,9 @@
 package it.polito.verefoo.utils;
 
+import java.util.HashMap;
+
+import it.polito.verefoo.graph.Predicate;
+
 public class TestResults {
 	private long atomicPredCompTime;
 	private long rewriteRuleCompTime;
@@ -10,6 +14,7 @@ public class TestResults {
 	private String z3Result;
 	private long totalFlows;
 	private long numberAP;
+	private HashMap<Integer, Predicate> atomicPredicates = new HashMap<>();
 	
 	public TestResults() {	
 	}
@@ -76,5 +81,13 @@ public class TestResults {
 
 	public void setNumberAP(long numberAP) {
 		this.numberAP = numberAP;
+	}
+
+	public HashMap<Integer, Predicate> getAtomicPredicates() {
+		return atomicPredicates;
+	}
+
+	public void setAtomicPredicates(HashMap<Integer, Predicate> atomicPredicates) {
+		this.atomicPredicates = atomicPredicates;
 	}
 }

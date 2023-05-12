@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -26,10 +27,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.common.collect.Multiset.Entry;
+
 import it.polito.verefoo.VerefooSerializer;
 import it.polito.verefoo.extra.Package1LoggingClass;
 import it.polito.verefoo.extra.TestCaseGeneratorAtomicPredicates;
 import it.polito.verefoo.extra.TestCaseGeneratorFirewallAnalysis;
+import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.jaxb.NFV;
 import it.polito.verefoo.utils.TestResults;
 
@@ -40,10 +44,10 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	
 	public static void main(String[] args)  {
 		
-		runs = 5;
+		runs = 10;
 		
 		/* FIREWALL ANALYSIS */
-		percReqWithPorts = 0.2; //from 0.0 to 1.0
+		percReqWithPorts = 0.4; //from 0.0 to 1.0
 		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
 		nrules = 100;
@@ -121,6 +125,13 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 			
 			System.out.println(resString);
 			logger.info(resString);
+			
+			//DEBUG: print atomic predicates
+//			for(Map.Entry<Integer, Predicate> entry: fresult.getAtomicPredicates().entrySet()) {
+//				System.out.print(entry.getKey()); entry.getValue().print();
+//				System.out.println();
+//			}
+			//END DEBUG
 		}
 		
         return test.getResult();

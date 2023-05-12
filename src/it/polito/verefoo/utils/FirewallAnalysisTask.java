@@ -50,9 +50,7 @@ public class FirewallAnalysisTask implements Runnable {
 		List<IPAddress> distinctIPDstList = new ArrayList<>();
 		List<PortInterval> distinctPSrcList = new ArrayList<>();
 		List<PortInterval> distinctPDstList = new ArrayList<>();
-		List<L4ProtocolTypes> ProtoList = new ArrayList<>();
-		
-		ProtoList.add(L4ProtocolTypes.ANY);
+		List<L4ProtocolTypes> distinctProtoList = new ArrayList<>();
 		
 		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
 			
@@ -72,13 +70,17 @@ public class FirewallAnalysisTask implements Runnable {
 			if(!distinctPDstList.contains(pdst))
 				distinctPDstList.add(pdst);
 			
+			L4ProtocolTypes proto = rule.getProtocol();
+			if(!distinctProtoList.contains(proto))
+				distinctProtoList.add(proto);
+			
 		}
 		
 		//Starting from this list of predicates we can compute the corresponding set of Atomic Predicates
 		atomicPredicates = aputils.computeAtomicPredicatesNewAlgorithm(
 				aputils.computeAtomicIPAddresses(distinctIPSrcList), aputils.computeAtomicIPAddresses(distinctIPDstList), 
 				aputils.computeAtomicPortIntervals(distinctPSrcList), aputils.computeAtomicPortIntervals(distinctPDstList),
-				ProtoList);
+				aputils.computeAtomicPrototypes(distinctProtoList));
 		
 		//Assign to each Atomic Predicate an identifier
 		int index = 0;
@@ -94,6 +96,7 @@ public class FirewallAnalysisTask implements Runnable {
 		long endAP = System.currentTimeMillis();
 		fresult.setAtomicPredCompTime(endAP - beginAP);
 		fresult.setNumberAP(firewallAtomicPredicates.size());
+		fresult.setAtomicPredicates(firewallAtomicPredicates);
 		
 		/* REWRITE FIREWALL RULES */
 		int count = 1;

@@ -839,6 +839,28 @@ public class APUtils {
 		}
 		
 		
+		public List<L4ProtocolTypes> computeAtomicPrototypes(List<L4ProtocolTypes> protoTypeList) {
+			List<L4ProtocolTypes> atomicProtoTypes = new ArrayList<>();
+			
+			if(protoTypeList.contains(L4ProtocolTypes.ANY) && protoTypeList.size() == 1) {
+				//protoTypeList contains only ANY
+				atomicProtoTypes.add(L4ProtocolTypes.ANY);
+			} else if(protoTypeList.contains(L4ProtocolTypes.ANY) && protoTypeList.size() != 1) {
+				//protoTypeList contains ANY and other ProtoTypes -> add all ProtoTypes
+				atomicProtoTypes.add(L4ProtocolTypes.UDP);
+				atomicProtoTypes.add(L4ProtocolTypes.TCP);
+				atomicProtoTypes.add(L4ProtocolTypes.OTHER);
+			} else {
+				//protoTypeList does not contain ANY -> add ProtoTypes present in protoTypeList
+				atomicProtoTypes.addAll(protoTypeList);
+			}
+			
+			return atomicProtoTypes;
+		}
+		
+		
+		
+		
 		public List<Predicate> computeAtomicPredicatesNewAlgorithm(List<List<IPAddress>> IPSrcList, List<List<IPAddress>> IPDstList, 
 				List<List<PortInterval>> PSrcList, List<List<PortInterval>> PDstList, List<L4ProtocolTypes> ProtoList){
 			
@@ -848,13 +870,15 @@ public class APUtils {
 				for(List<IPAddress> IPDst: IPDstList) {
 					for(List<PortInterval> PSrc: PSrcList) {
 						for(List<PortInterval> PDst: PDstList) {
-							Predicate ap = new Predicate();
-							ap.setIPSrcList(IPSrc);
-							ap.setIPDstList(IPDst);
-							ap.setpSrcList(PSrc);
-							ap.setpDstList(PDst);
-							ap.setProtoTypeList(ProtoList);
-							atomicPredicates.add(ap);
+							for(L4ProtocolTypes proto: ProtoList) {
+								Predicate ap = new Predicate();
+								ap.setIPSrcList(IPSrc);
+								ap.setIPDstList(IPDst);
+								ap.setpSrcList(PSrc);
+								ap.setpDstList(PDst);
+								ap.addSingleProtoType(proto);
+								atomicPredicates.add(ap);
+							}
 						}
 					}
 				}
