@@ -888,4 +888,107 @@ public class APUtils {
 		}
 		
 		
+		
+		//Check if sub is equal/subset of sup PREDICATE
+		public boolean isIncludedPredicateNew(Predicate sub, Predicate sup) {
+
+			//Check IP source
+			if(isIncludedIPAddressListNew(sub.getIPSrcList(), sup.getIPSrcList())) {
+				//Check IP destination
+				if(isIncludedIPAddressListNew(sub.getIPDstList(), sup.getIPDstList())) {
+					//Check Port source
+					if(isIncludedPortIntervalListNew(sub.getpSrcList(), sup.getpSrcList())) {
+						//Check Port destination
+						if(isIncludedPortIntervalListNew(sub.getpDstList(), sup.getpDstList())) {
+							//Check ProtoType
+							if(isIncludedProtoTypeListNew(sub.getProtoTypeList(), sup.getProtoTypeList())) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+
+			return false;
+		}
+		
+		
+		//Check if sub is equal/subset of sup PROTOTYPE
+		public boolean isIncludedProtoTypeListNew(List<L4ProtocolTypes> sub, List<L4ProtocolTypes> sup) {
+			
+			//If sup = ANY return true
+			if(sup.contains(L4ProtocolTypes.ANY))
+				return true;
+			
+			//All the elements in sub should be present in sup
+			if(sup.containsAll(sub))
+				return true;
+			
+			return false;
+		}
+		
+		
+		//Check if sub is equal/subset of sup IPADDRESS
+		public boolean isIncludedIPAddressListNew(List<IPAddress> sub, List<IPAddress> sup) {
+			
+			IPAddress subFirst = sub.get(0);	//The one not neg
+			IPAddress supFirst = sup.get(0);	//The one not neg
+			
+			if(!subFirst.isIncludedIn(supFirst))
+				return false;
+			
+			//All neg of sup (if included in subFirst) should be also neg in sub
+			boolean present;
+			for(int i=1; i<sup.size(); i++) {
+				
+				IPAddress supNeg = sup.get(i);
+				if(supNeg.isIncludedIn(subFirst)) {
+					
+					present = false;
+					for(int j=1; j<sub.size(); j++) {
+						if(supNeg.equals(sub.get(j)))
+							present = true;
+					}
+					
+					if(!present)
+						return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		
+		//Check if sub is equal/subset of sup PORT INTERVAL
+		public boolean isIncludedPortIntervalListNew(List<PortInterval> sub, List<PortInterval> sup) {
+			
+			PortInterval subFirst = sub.get(0);	//The one not neg
+			PortInterval supFirst = sup.get(0);	//The one not neg
+			
+			if(!subFirst.isIncludedInPortInterval(supFirst))
+				return false;
+			
+			//All neg of sup (if included in subFirst) should be also neg in sub
+			boolean present;
+			for(int i=1; i<sup.size(); i++) {
+				
+				PortInterval supNeg = sup.get(i);
+				if(supNeg.isIncludedInPortInterval(subFirst)) {
+					
+					present = false;
+					for(int j=1; j<sub.size(); j++) {
+						if(supNeg.equals(sub.get(j)))
+							present = true;
+					}
+					
+					if(!present)
+						return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		
+		
 }

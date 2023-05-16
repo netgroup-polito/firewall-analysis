@@ -66,5 +66,19 @@ public class AtomicRule implements Comparable<AtomicRule>{
 			System.out.print(ap + " ");
 		System.out.println("}");	
 	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		
+		s += "Atomic rule " + this.priority + ", " + this.action + "-> " + this.originalPredicate.toString() + ", {";
+		for(int ap: this.atomicPredicates)
+			s += ap + " ";
+		s += "}";	
+		
+		return s;
+	}
+	
+	
 	
 }

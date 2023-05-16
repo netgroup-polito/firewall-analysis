@@ -234,4 +234,60 @@ public class Predicate {
 		}
 		System.out.print("}");
 	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		
+		s += ": {";
+		int i=0;
+		for(IPAddress IPSrc: IPSrcList) {
+			if(IPSrcList.size() > 1 && IPSrc.toString().equals("*")) continue;
+			if(i!=0) s+= "AND";
+			if(IPSrc.isNeg()) s += "!";
+			s += IPSrc.toString();
+			i++;
+		}
+		i=0;
+		s += ", ";
+		for(PortInterval pSrc: pSrcList) {
+			if(pSrcList.size() > 1 && pSrc.toString().equals("*")) continue;
+			if(i!=0) s+= "AND";
+			if(pSrc.isNeg()) s += "!";
+			s += pSrc.toString();
+			i++;
+		}
+		i=0;
+		s += ", ";
+		for(IPAddress IPDst: IPDstList) {
+			if(IPDstList.size() > 1 && IPDst.toString().equals("*")) continue;
+			if(i!=0) s+= "AND";
+			if(IPDst.isNeg()) s += "!";
+			s += IPDst.toString();
+			i++;
+		}
+		i=0;
+		s += ", ";
+		for(PortInterval pDst: pDstList) {
+			if(pDstList.size() > 1 && pDst.toString().equals("*")) continue;
+			if(i!=0) s+= "AND";
+			if(pDst.isNeg()) s += "!";
+			s += pDst.toString();
+			i++;
+		}
+		i=0;
+		s += ", ";
+		for(L4ProtocolTypes proto: protoTypeList) {
+			if(i!=0) s += "-";
+			s += proto;
+			i++;
+		}
+		s += "}";
+		
+		return s;
+	}
+	
+	
+	
+	
 }

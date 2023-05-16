@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import it.polito.verefoo.extra.Package1LoggingClass;
 import it.polito.verefoo.graph.AtomicRule;
 import it.polito.verefoo.graph.FW;
 import it.polito.verefoo.graph.IPAddress;
@@ -27,6 +28,8 @@ public class FirewallAnalysisTask implements Runnable {
 	HashMap<String, FW> firewalls;
 	ResolutionStrategy strategy;
 	TestResults fresult;
+	
+	private static ch.qos.logback.classic.Logger logger = Package1LoggingClass.createLoggerFor("AtomicRules1", "logSimo/AtomicRules1");
 	
 	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy, TestResults fresult) {
 		this.node = node;
@@ -110,13 +113,11 @@ public class FirewallAnalysisTask implements Runnable {
 			AtomicRule newAtomicRule = new AtomicRule(rule.getAction(), count, rulePred);
 			
 			for(HashMap.Entry<Integer, Predicate> apEntry: firewallAtomicPredicates.entrySet()) {
-				Predicate intersectionPredicate = aputils.computeIntersection(apEntry.getValue(), rulePred);
-				if(intersectionPredicate != null && aputils.APCompare(intersectionPredicate, apEntry.getValue())
-						&& !apEntry.getValue().hasIPDstOnlyNegs()) {
-					//System.out.print(apEntry.getKey() + " "); apEntry.getValue().print();
+				if(aputils.isIncludedPredicateNew(apEntry.getValue(), rulePred)) {
 					newAtomicRule.addAtomicPredicates(apEntry.getKey());
 				}
 			}
+			
 			count++;
 			atomicRules.add(newAtomicRule);
 		}
