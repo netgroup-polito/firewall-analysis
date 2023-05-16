@@ -8,5 +8,4 @@
 /testfile/tmp.xml
 .settings
 .classpath
-*.log
 /pom.xml
