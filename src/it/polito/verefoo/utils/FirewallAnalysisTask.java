@@ -29,8 +29,6 @@ public class FirewallAnalysisTask implements Runnable {
 	ResolutionStrategy strategy;
 	TestResults fresult;
 	
-	private static ch.qos.logback.classic.Logger logger = Package1LoggingClass.createLoggerFor("AtomicRules1", "logSimo/AtomicRules1");
-	
 	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy, TestResults fresult) {
 		this.node = node;
 		this.aputils = aputils;
