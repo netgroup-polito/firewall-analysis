@@ -23,7 +23,7 @@
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.*</source>
+                            <source>140.192.37.-1</source>
                             <destination>*</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
@@ -39,7 +39,7 @@
                         </elements>
                         <elements>
                             <action>DENY</action>
-                            <source>140.192.37.*</source>
+                            <source>140.192.37.-1</source>
                             <destination>161.120.33.40</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
@@ -55,7 +55,7 @@
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.*</source>
+                            <source>140.192.37.-1</source>
                             <destination>*</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
@@ -63,7 +63,7 @@
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.*</source>
+                            <source>140.192.37.-1</source>
                             <destination>161.120.33.40</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
@@ -79,7 +79,7 @@
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.*</source>
+                            <source>140.192.37.-1</source>
                             <destination>161.120.33.40</destination>
                             <protocol>UDP</protocol>
                             <src_port>*</src_port>
@@ -95,8 +95,8 @@
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.38.*</source>
-                            <destination>161.120.35.*</destination>
+                            <source>140.192.38.-1</source>
+                            <destination>161.120.35.-1</destination>
                             <protocol>UDP</protocol>
                             <src_port>*</src_port>
                             <dst_port>*</dst_port>
