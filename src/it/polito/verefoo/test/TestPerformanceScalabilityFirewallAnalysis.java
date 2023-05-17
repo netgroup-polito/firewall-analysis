@@ -44,14 +44,14 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	
 	public static void main(String[] args)  {
 		
-		runs = 10;
+		runs = 1;
 		
 		/* FIREWALL ANALYSIS */
 		percReqWithPorts = 0.2; //from 0.0 to 1.0
 		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
-		nrules = 500;
-		nanomalies = 200;	//Each anomaly inserts 2 rules
+		nrules = 100;
+		nanomalies = 40;	//Each anomaly inserts 2 rules
 		
 		seed  = 66361;
 

@@ -1137,3 +1137,42 @@ NRules 500	NAnomalies 200	PRP 0.2	PRPT 0.5
 2023-05-16 18:14:54,625 [main] F.log Total time 99012	Time AP 3873	Time rewrite rule 91802	Time solve anomalies 1380	Time AND to OR 1957	Number AP 4117770
 2023-05-16 18:16:35,132 [main] F.log Total time 100505	Time AP 1584	Time rewrite rule 97687	Time solve anomalies 566	Time AND to OR 668	Number AP 4117230
 2023-05-16 18:18:09,014 [main] F.log Total time 93677	Time AP 1685	Time rewrite rule 81410	Time solve anomalies 2401	Time AND to OR 8181	Number AP 4185945
+2023-05-17 14:16:48,641 [main] F.log 
+
+
+
+
+
+
+REWRITE RULES PARALLELO
+
+
+2023-05-17 14:23:26,270 [main] F.log 
+
+NRules 100	NAnomalies 40	PRP 0.2	PRPT 0.5
+2023-05-17 14:23:27,114 [main] F.log Total time 518	Time AP 96	Time rewrite rule 385	Time solve anomalies 6	Time AND to OR 31	Number AP 80784
+2023-05-17 14:23:27,415 [main] F.log Total time 300	Time AP 50	Time rewrite rule 235	Time solve anomalies 4	Time AND to OR 11	Number AP 84456
+2023-05-17 14:23:27,751 [main] F.log Total time 333	Time AP 37	Time rewrite rule 284	Time solve anomalies 6	Time AND to OR 6	Number AP 80784
+2023-05-17 14:23:27,966 [main] F.log Total time 214	Time AP 50	Time rewrite rule 156	Time solve anomalies 2	Time AND to OR 6	Number AP 80784
+2023-05-17 14:23:29,227 [main] F.log Total time 1260	Time AP 29	Time rewrite rule 1196	Time solve anomalies 13	Time AND to OR 22	Number AP 81972
+2023-05-17 14:23:29,396 [main] F.log Total time 167	Time AP 26	Time rewrite rule 129	Time solve anomalies 4	Time AND to OR 8	Number AP 79560
+2023-05-17 14:23:29,778 [main] F.log Total time 380	Time AP 26	Time rewrite rule 323	Time solve anomalies 9	Time AND to OR 22	Number AP 82008
+2023-05-17 14:23:29,908 [main] F.log Total time 129	Time AP 27	Time rewrite rule 98	Time solve anomalies 2	Time AND to OR 2	Number AP 83214
+2023-05-17 14:23:30,043 [main] F.log Total time 133	Time AP 28	Time rewrite rule 102	Time solve anomalies 2	Time AND to OR 1	Number AP 84456
+2023-05-17 14:23:35,269 [main] F.log Total time 5224	Time AP 27	Time rewrite rule 5096	Time solve anomalies 33	Time AND to OR 68	Number AP 84456
+2023-05-17 14:24:05,919 [main] F.log 
+
+NRules 100	NAnomalies 40	PRP 0.2	PRPT 0.5
+2023-05-17 14:24:06,796 [main] F.log Total time 563	Time AP 110	Time rewrite rule 417	Time solve anomalies 6	Time AND to OR 30	Number AP 80784
+2023-05-17 14:26:29,396 [main] F.log 
+
+NRules 100	NAnomalies 40	PRP 0.2	PRPT 0.5
+2023-05-17 14:26:30,446 [main] F.log Total time 725	Time AP 102	Time rewrite rule 548	Time solve anomalies 16	Time AND to OR 59	Number AP 80784
+2023-05-17 14:28:24,650 [main] F.log 
+
+NRules 100	NAnomalies 40	PRP 0.2	PRPT 0.5
+2023-05-17 14:28:25,707 [main] F.log Total time 742	Time AP 127	Time rewrite rule 524	Time solve anomalies 19	Time AND to OR 72	Number AP 80784
+2023-05-17 14:30:43,820 [main] F.log 
+
+NRules 100	NAnomalies 40	PRP 0.2	PRPT 0.5
+2023-05-17 14:30:44,820 [main] F.log Total time 715	Time AP 96	Time rewrite rule 555	Time solve anomalies 13	Time AND to OR 51	Number AP 80784

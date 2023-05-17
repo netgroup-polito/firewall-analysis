@@ -5,7 +5,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import it.polito.verefoo.extra.Package1LoggingClass;
 import it.polito.verefoo.graph.AtomicRule;
@@ -28,6 +34,8 @@ public class FirewallAnalysisTask implements Runnable {
 	HashMap<String, FW> firewalls;
 	ResolutionStrategy strategy;
 	TestResults fresult;
+	
+	//private static ch.qos.logback.classic.Logger logger = Package1LoggingClass.createLoggerFor("AtomicRules1", "logSimo/AtomicRules1");
 	
 	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy, TestResults fresult) {
 		this.node = node;
@@ -99,26 +107,54 @@ public class FirewallAnalysisTask implements Runnable {
 		fresult.setNumberAP(firewallAtomicPredicates.size());
 		fresult.setAtomicPredicates(firewallAtomicPredicates);
 		
-		/* REWRITE FIREWALL RULES */
-		int count = 1;
-		List<AtomicRule> atomicRules = new ArrayList<>();
+		/* REWRITE FIREWALL RULES (parallel) */
+		ConcurrentHashMap<Integer, AtomicRule> atomicRulesMap = new ConcurrentHashMap<>();
 		
-		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-
-			Predicate rulePred = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-					rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
+		int nthreads = 10;
+		ExecutorService threadPool = Executors.newFixedThreadPool(nthreads);
+		List<Future<?>> tasks = new ArrayList<Future<?>>();
+		int begin = 0;
+		int step = (int) (node.getConfiguration().getFirewall().getElements().size() / nthreads);
+		int end = step;
+		
+		
+		for(int i=0; i<nthreads; i++) {
+			//To each thread assign a number of rules to convert
+			List<Elements> complexRules;
 			
-			AtomicRule newAtomicRule = new AtomicRule(rule.getAction(), count, rulePred);
-			
-			for(HashMap.Entry<Integer, Predicate> apEntry: firewallAtomicPredicates.entrySet()) {
-				if(aputils.isIncludedPredicateNew(apEntry.getValue(), rulePred)) {
-					newAtomicRule.addAtomicPredicates(apEntry.getKey());
-				}
+			if(i == nthreads - 1) {
+				//Last thread
+				complexRules = node.getConfiguration().getFirewall().getElements()
+						.subList(begin, node.getConfiguration().getFirewall().getElements().size());
+			} else {
+				complexRules = node.getConfiguration().getFirewall().getElements().subList(begin, end);
 			}
 			
-			count++;
-			atomicRules.add(newAtomicRule);
+			tasks.add(threadPool.submit(new RewriteRulesTask(begin, complexRules, atomicRulesMap, firewallAtomicPredicates)));
+			
+			begin += step;
+			end += step;
 		}
+		
+		
+		//JOIN
+		threadPool.shutdown();
+		for(Future<?> fut: tasks) {
+			try {
+				fut.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		//Order the list of AtomicRules based on their index
+		TreeMap<Integer, AtomicRule> atomicRulesMapSorted = new TreeMap<>(atomicRulesMap);
+		List<AtomicRule> atomicRules = new ArrayList<>(atomicRulesMapSorted.values());
+		
+		//DEBUG: print Atomic Rules
+//		for(AtomicRule AR: atomicRules)
+//			logger.info(AR.toString());
+		//END DEBUG
 		
 		fw.setAtomicRules(atomicRules);
 		long endRWR = System.currentTimeMillis();

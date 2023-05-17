@@ -701,7 +701,7 @@ public class VerefooProxy {
 //	}
 	
 	private void parallelConflictAnalysis() {
-		ExecutorService threadPool = Executors.newFixedThreadPool(10);
+		ExecutorService threadPool = Executors.newFixedThreadPool(1);
 		List<Future<?>> tasks = new ArrayList<Future<?>>();
 		
 		for(Node node: transformersNode.values()) {
