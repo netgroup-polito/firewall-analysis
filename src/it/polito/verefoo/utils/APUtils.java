@@ -891,17 +891,15 @@ public class APUtils {
 		
 		//Check if sub is equal/subset of sup PREDICATE
 		public boolean isIncludedPredicateNew(Predicate sub, Predicate sup) {
-
-			//Check IP source
-			if(isIncludedIPAddressListNew(sub.getIPSrcList(), sup.getIPSrcList())) {
-				//Check IP destination
-				if(isIncludedIPAddressListNew(sub.getIPDstList(), sup.getIPDstList())) {
-					//Check Port source
-					if(isIncludedPortIntervalListNew(sub.getpSrcList(), sup.getpSrcList())) {
-						//Check Port destination
-						if(isIncludedPortIntervalListNew(sub.getpDstList(), sup.getpDstList())) {
-							//Check ProtoType
-							if(isIncludedProtoTypeListNew(sub.getProtoTypeList(), sup.getProtoTypeList())) {
+			
+			if(isIncludedProtoTypeListNew(sub.getProtoTypeList(), sup.getProtoTypeList())) {
+				if(isIncludedPortIntervalListNew(sub.getpSrcList(), sup.getpSrcList())) {
+					//Check IP destination
+					if(isIncludedPortIntervalListNew(sub.getpDstList(), sup.getpDstList())){
+						//Check Port source
+						if(isIncludedIPAddressListNew(sub.getIPDstList(), sup.getIPDstList())) {
+							//Check Port destination
+							if(isIncludedIPAddressListNew(sub.getIPSrcList(), sup.getIPSrcList())){
 								return true;
 							}
 						}
