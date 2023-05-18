@@ -111,6 +111,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 	private String createPort(int interval) {
 		int restrictedInterval = (int)(interval * 0.3);
 		if(restrictedInterval > 15) restrictedInterval = 15;
+		if(restrictedInterval < 1) restrictedInterval = 1;
 		int n = rand.nextInt(restrictedInterval)+1;
 		return String.valueOf(n);
 	}
