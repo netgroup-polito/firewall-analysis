@@ -664,3 +664,18 @@ NRules 200	NAnomalies 40	PRP 0.9	PRPT 0.5
 2023-05-18 13:31:11,731 [main] F.log Total time 11860	Time AP 4280	Time rewrite rule 7577	Time solve anomalies 2	Time AND to OR 1	Number AP 4402788
 2023-05-18 13:31:22,011 [main] F.log Total time 10279	Time AP 1914	Time rewrite rule 8362	Time solve anomalies 2	Time AND to OR 1	Number AP 4429152
 2023-05-18 13:31:31,061 [main] F.log Total time 9049	Time AP 1720	Time rewrite rule 7225	Time solve anomalies 42	Time AND to OR 62	Number AP 4514328
+2023-05-18 15:17:02,164 [main] F.log 
+
+2023-05-18 15:18:18,369 [main] F.log 
+
+NRules 200	NAnomalies 40	PRP 1.0	PRPT 0.5
+2023-05-18 15:18:32,688 [main] F.log Total time 13900	Time AP 4733	Time rewrite rule 9152	Time solve anomalies 7	Time AND to OR 8	Number AP 4936176
+2023-05-18 15:18:44,601 [main] F.log Total time 11910	Time AP 3549	Time rewrite rule 8348	Time solve anomalies 4	Time AND to OR 9	Number AP 4855032
+2023-05-18 15:18:56,156 [main] F.log Total time 11551	Time AP 2799	Time rewrite rule 8748	Time solve anomalies 3	Time AND to OR 1	Number AP 5019840
+2023-05-18 15:19:06,950 [main] F.log Total time 10792	Time AP 2751	Time rewrite rule 8039	Time solve anomalies 1	Time AND to OR 1	Number AP 5019840
+2023-05-18 15:19:18,693 [main] F.log Total time 11741	Time AP 3578	Time rewrite rule 8075	Time solve anomalies 50	Time AND to OR 38	Number AP 4881396
+2023-05-18 15:19:30,200 [main] F.log Total time 11504	Time AP 2293	Time rewrite rule 9204	Time solve anomalies 3	Time AND to OR 4	Number AP 4573800
+2023-05-18 15:19:42,532 [main] F.log Total time 12330	Time AP 4645	Time rewrite rule 7679	Time solve anomalies 6	Time AND to OR 0	Number AP 5050080
+2023-05-18 15:19:53,447 [main] F.log Total time 10914	Time AP 1878	Time rewrite rule 9034	Time solve anomalies 2	Time AND to OR 0	Number AP 4910802
+2023-05-18 15:20:03,538 [main] F.log Total time 10089	Time AP 2561	Time rewrite rule 7526	Time solve anomalies 1	Time AND to OR 1	Number AP 4940208
+2023-05-18 15:20:16,632 [main] F.log Total time 13093	Time AP 4189	Time rewrite rule 8884	Time solve anomalies 19	Time AND to OR 1	Number AP 4940208
