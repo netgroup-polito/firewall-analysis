@@ -17,8 +17,8 @@ public class FW {
 	List<Predicate> allowedPredicates = new ArrayList<>();
 	List<Predicate> deniedPredicates = new ArrayList<>();
 	
-	SortedSet<PredicateRange> allowedPredicatesRange = new TreeSet<>();
-	SortedSet<PredicateRange> deniedPredicatesRange = new TreeSet<>();
+	List<PredicateRange> allowedPredicatesRange = new ArrayList<>();
+	List<PredicateRange> deniedPredicatesRange = new ArrayList<>();
 	
 	private HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
 	
@@ -95,11 +95,11 @@ public class FW {
 		return name;
 	}
 	
-	public SortedSet<PredicateRange> getAllowedPredicatesRange() {
+	public List<PredicateRange> getAllowedPredicatesRange() {
 		return allowedPredicatesRange;
 	}
 
-	public SortedSet<PredicateRange> getDeniedPredicatesRange() {
+	public List<PredicateRange> getDeniedPredicatesRange() {
 		return deniedPredicatesRange;
 	}
 

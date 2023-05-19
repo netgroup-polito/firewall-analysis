@@ -299,10 +299,17 @@ public class FirewallAnalysisTask implements Runnable {
 		fresult.setSolveAnomaliesCompTime(endSA - endRWR);
 		
 		
-		/* FROM AND TO OR */
+//		System.out.println("ALLOWED set AP " + fw.getAllowedAPs().size());
+//		System.out.println("DENIED set AP " + fw.getDeniedAPs().size());
+//		System.out.println("ALLOWED set AND " + fw.getAllowedPredicates().size());
+//		System.out.println("DENIED set AND " + fw.getDeniedPredicates().size());
 		
+		/* FROM AND TO OR */
 		for(Predicate ap: fw.getDeniedPredicates()) {
-			fw.addDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+			PredicateRange prange = fromPredicateToPredicateRange(ap);
+			//System.out.print("PREDICATE AND -> "); ap.print();
+			//System.out.print(" PREDICATE OR -> "); prange.print(); System.out.println();
+			fw.addDeniedPredicateRange(prange);
 		}
 		for(Predicate ap: fw.getAllowedPredicates()) {
 			fw.addAllowedPredicateRange(fromPredicateToPredicateRange(ap));
@@ -310,6 +317,9 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		long endAndToOr = System.currentTimeMillis();
 		fresult.setAndToORCompTime(endAndToOr - endSA);
+		
+//		System.out.println("ALLOWED set OR " + fw.getAllowedPredicatesRange().size());
+//		System.out.println("DENIED set OR " + fw.getDeniedPredicatesRange().size());
 		
 		
 		/* MERGE */
