@@ -107,6 +107,13 @@ public class FirewallAnalysisTask implements Runnable {
 		fresult.setNumberAP(firewallAtomicPredicates.size());
 		fresult.setAtomicPredicates(firewallAtomicPredicates);
 		
+		//DEBUG: print atomic predicates
+//		System.out.println("Number of AP: " + firewallAtomicPredicates.size());
+//		for(Predicate ap: firewallAtomicPredicates.values()) {
+//			ap.print(); System.out.println();
+//		}
+		//END DEBUG
+		
 		/* REWRITE FIREWALL RULES (parallel) */
 		ConcurrentHashMap<Integer, AtomicRule> atomicRulesMap = new ConcurrentHashMap<>();
 		

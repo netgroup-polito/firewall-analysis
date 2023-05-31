@@ -90,4 +90,9 @@ public class TestResults {
 	public void setAtomicPredicates(HashMap<Integer, Predicate> atomicPredicates) {
 		this.atomicPredicates = atomicPredicates;
 	}
+	
+	public void print() {
+		System.out.println("Total time "+ totalTime + "\tTime AP " + atomicPredCompTime + "\tTime rewrite rule " + rewriteRuleCompTime +
+				"\tTime solve anomalies " + solveAnomaliesCompTime + "\tTime AND to OR " + andToORCompTime + "\tNumber AP " + numberAP);
+	}
 }

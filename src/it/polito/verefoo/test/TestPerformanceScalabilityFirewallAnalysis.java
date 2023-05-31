@@ -50,8 +50,8 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 		percReqWithPorts = 0.2; //from 0.0 to 1.0
 		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
-		nrules = 927;
-		nanomalies = 309;	//Each anomaly inserts 2 rules
+		nrules = 500;
+		nanomalies = 240;	//Each anomaly inserts 2 rules
 		
 		seed  = 66361;
 
