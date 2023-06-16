@@ -32,7 +32,7 @@ import com.google.common.collect.Multiset.Entry;
 import it.polito.verefoo.VerefooSerializer;
 import it.polito.verefoo.extra.Package1LoggingClass;
 import it.polito.verefoo.extra.TestCaseGeneratorAtomicPredicates;
-import it.polito.verefoo.extra.TestCaseGeneratorFirewallAnalysis;
+import it.polito.verefoo.extra.TestCaseGeneratorFirewallAnalysisChain3Anomalies;
 import it.polito.verefoo.graph.Predicate;
 import it.polito.verefoo.jaxb.NFV;
 import it.polito.verefoo.utils.TestResults;
@@ -40,7 +40,7 @@ import it.polito.verefoo.utils.TestResults;
 /* Run some instances of TestCaseGeneratorAtomicPredicates. TestCaseGeneratorAtomicPredicates generates XML files for NFV, then this
  * class takes in input those files, for each of them runs Verefoo and print results and other statistics (time to complete, memory usage etc).
  * */
-public class TestPerformanceScalabilityFirewallAnalysis {
+public class TestPerformanceScalabilityFirewallAnalysisChain3Anomalies {
 	
 	public static void main(String[] args)  {
 		
@@ -50,8 +50,8 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 		percReqWithPorts = 0.2; //from 0.0 to 1.0
 		percReqWithProtoType = 0.5; //from 0.0 to 1.0
 		nfirewalls = 1;
-		nrules = 500;
-		nanomalies = 240;	//Each anomaly inserts 2 rules
+		nrules = 400;
+		nanomalies = 96;	//Each anomaly inserts 3 rules and 2/3 effective anomalies
 		
 		seed  = 66361;
 
@@ -119,7 +119,7 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 		
 		for(String fwname: results.keySet()) {
 			TestResults fresult = results.get(fwname);
-			String resString = new String("Total time " +  fresult.getTotalTime() + "\tTime AP " + fresult.getAtomicPredCompTime() + "\tTime rewrite rule " +
+			String resString = new String("3Chain Total time " +  fresult.getTotalTime() + "\tTime AP " + fresult.getAtomicPredCompTime() + "\tTime rewrite rule " +
 					fresult.getRewriteRuleCompTime() + "\tTime solve anomalies " + fresult.getSolveAnomaliesCompTime() + "\tTime AND to OR " 
 					+ fresult.getAndToORCompTime() + "\tNumber AP " + fresult.getNumberAP());
 			
@@ -154,10 +154,10 @@ public class TestPerformanceScalabilityFirewallAnalysis {
 	        /* Switch between automatic and manul configuration of the IP*/
 	        int k=0, i=0;
 	        try {
-	        	List<TestCaseGeneratorFirewallAnalysis> nfv = new ArrayList<>();
-	        	nfv.add(new TestCaseGeneratorFirewallAnalysis("Test case generator firewall analysis", nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, 1));
+	        	List<TestCaseGeneratorFirewallAnalysisChain3Anomalies> nfv = new ArrayList<>();
+	        	nfv.add(new TestCaseGeneratorFirewallAnalysisChain3Anomalies("Test case generator firewall analysis", nfirewalls, nrules, nanomalies, percReqWithPorts, percReqWithProtoType, 1));
 
-	        	for(TestCaseGeneratorFirewallAnalysis f : nfv){
+	        	for(TestCaseGeneratorFirewallAnalysisChain3Anomalies f : nfv){
 
 	        		// create a JAXBContext capable of handling the generated classes
 	        		//long beginAll=System.currentTimeMillis();

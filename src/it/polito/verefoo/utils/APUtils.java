@@ -681,4 +681,312 @@ public class APUtils {
 		}
 		
 		
+		
+		/* REFACTOR: new algorithm to compute Atomic Predicates */
+		
+		
+		/* IPAddressList contains the list of distinct IPAddresses from firewall rules
+		   All the IPAddresses has neg = false */
+		public List<List<IPAddress>> computeAtomicIPAddresses(List<IPAddress> IPAddressList){
+			
+			/* Split IPAddressList in 4 different lists based on the number of wildcards */
+			List<IPAddress> IPAddressesWith3Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith2Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith1Wildcards = new ArrayList<>();
+			List<IPAddress> IPAddressesWith0Wildcards = new ArrayList<>();
+			
+			for(IPAddress ip: IPAddressList) {
+				if(ip.hasWildcardsInByte() == 2)
+					IPAddressesWith3Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 3)
+					IPAddressesWith2Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 4)
+					IPAddressesWith1Wildcards.add(ip);
+				else if(ip.hasWildcardsInByte() == 5) 
+					IPAddressesWith0Wildcards.add(ip);
+			}
+			
+			
+			List<List<IPAddress>> atomicIPAddresses = new ArrayList<>();
+			List<IPAddress> supersetIPAddresses = new ArrayList<>();
+			
+			//Start with IPAddresses with 0W and insert them both in atomicIPAddresses and supersetIPAddresses
+			for(IPAddress ip0: IPAddressesWith0Wildcards) {
+				List<IPAddress> ip0AND = new ArrayList<>();
+				ip0AND.add(ip0);
+				
+				atomicIPAddresses.add(ip0AND);
+				supersetIPAddresses.add(ip0);
+			}
+			
+			//Continue with IPAddress with 1 W
+			for(IPAddress ip1: IPAddressesWith1Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip1);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip1)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip1);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			//Continue with IPAddress with 2 W
+			for(IPAddress ip2: IPAddressesWith2Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip2);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip2)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip2);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			//Continue with IPAddress with 3 W
+			for(IPAddress ip3: IPAddressesWith3Wildcards) {
+				List<IPAddress> newSupersetIPAddresses = new ArrayList<>();
+				List<IPAddress> newIPAddress = new ArrayList<>();
+				newIPAddress.add(ip3);
+				
+				for(IPAddress ipsuperset: supersetIPAddresses) {
+					
+					if(ipsuperset.isIncludedIn(ip3)) {
+						IPAddress ipsupersetNeg = new IPAddress(ipsuperset, true);
+						newIPAddress.add(ipsupersetNeg);
+					} else {
+						newSupersetIPAddresses.add(ipsuperset);
+					}
+				}
+				
+				newSupersetIPAddresses.add(ip3);
+				atomicIPAddresses.add(newIPAddress);
+				supersetIPAddresses = new ArrayList<>(newSupersetIPAddresses);
+			}
+			
+			return atomicIPAddresses;
+		}
+		
+		
+		
+		public List<List<PortInterval>> computeAtomicPortIntervals(List<PortInterval> portIntervalList){
+			List<List<PortInterval>> atomicPortIntervals = new ArrayList<>();
+			
+			List<List<PortInterval>> remainingList = new ArrayList<>();
+			for(PortInterval pi: portIntervalList) {
+				List<PortInterval> piInAND = new ArrayList<>();
+				piInAND.add(pi);
+				remainingList.add(piInAND);
+			}
+			
+			boolean listContainsSuperset = true;
+			
+			while(listContainsSuperset) {
+				
+				listContainsSuperset = false;
+				List<List<PortInterval>> superset = new ArrayList<>();
+				
+				for(int i=0; i<remainingList.size(); i++) {
+					//The first in the list is the only not neg
+					PortInterval r1 = remainingList.get(i).get(0);
+					List<PortInterval> newR1inAND = new ArrayList<>();
+					newR1inAND.add(r1);
+					boolean isSuperset = false;
+					
+					for(int j=0; j<remainingList.size(); j++) {
+						if(j == i) continue;
+						
+						PortInterval r2 = remainingList.get(j).get(0);
+						
+						if(r2.isIncludedInPortInterval(r1)) {
+							//r1 is a superset of r2
+							isSuperset = true;
+							listContainsSuperset = true;
+							PortInterval r2Neg = new PortInterval(r2.getMin(), r2.getMax(), true);
+							newR1inAND.add(r2Neg);
+						}
+					}
+					
+					if(isSuperset) {
+						superset.add(newR1inAND);
+					} else {
+						atomicPortIntervals.add(remainingList.get(i));
+					}
+				}
+				
+				remainingList = new ArrayList<>(superset);	
+			}
+
+			return atomicPortIntervals;
+		}
+		
+		
+		public List<L4ProtocolTypes> computeAtomicPrototypes(List<L4ProtocolTypes> protoTypeList) {
+			List<L4ProtocolTypes> atomicProtoTypes = new ArrayList<>();
+			
+			if(protoTypeList.contains(L4ProtocolTypes.ANY) && protoTypeList.size() == 1) {
+				//protoTypeList contains only ANY
+				atomicProtoTypes.add(L4ProtocolTypes.ANY);
+			} else if(protoTypeList.contains(L4ProtocolTypes.ANY) && protoTypeList.size() != 1) {
+				//protoTypeList contains ANY and other ProtoTypes -> add all ProtoTypes
+				atomicProtoTypes.add(L4ProtocolTypes.UDP);
+				atomicProtoTypes.add(L4ProtocolTypes.TCP);
+				atomicProtoTypes.add(L4ProtocolTypes.OTHER);
+			} else {
+				//protoTypeList does not contain ANY -> add ProtoTypes present in protoTypeList
+				atomicProtoTypes.addAll(protoTypeList);
+			}
+			
+			return atomicProtoTypes;
+		}
+		
+		
+		
+		
+		public List<Predicate> computeAtomicPredicatesNewAlgorithm(List<List<IPAddress>> IPSrcList, List<List<IPAddress>> IPDstList, 
+				List<List<PortInterval>> PSrcList, List<List<PortInterval>> PDstList, List<L4ProtocolTypes> ProtoList){
+			
+			List<Predicate> atomicPredicates = new ArrayList<>();
+			
+			for(List<IPAddress> IPSrc: IPSrcList) {
+				for(List<IPAddress> IPDst: IPDstList) {
+					for(List<PortInterval> PSrc: PSrcList) {
+						for(List<PortInterval> PDst: PDstList) {
+							for(L4ProtocolTypes proto: ProtoList) {
+								Predicate ap = new Predicate();
+								ap.setIPSrcList(IPSrc);
+								ap.setIPDstList(IPDst);
+								ap.setpSrcList(PSrc);
+								ap.setpDstList(PDst);
+								ap.addSingleProtoType(proto);
+								atomicPredicates.add(ap);
+							}
+						}
+					}
+				}
+			}
+			
+			return atomicPredicates;
+		}
+		
+		
+		
+		//Check if sub is equal/subset of sup PREDICATE
+		public boolean isIncludedPredicateNew(Predicate sub, Predicate sup) {
+			
+			if(isIncludedProtoTypeListNew(sub.getProtoTypeList(), sup.getProtoTypeList())) {
+				if(isIncludedPortIntervalListNew(sub.getpSrcList(), sup.getpSrcList())) {
+					//Check IP destination
+					if(isIncludedPortIntervalListNew(sub.getpDstList(), sup.getpDstList())){
+						//Check Port source
+						if(isIncludedIPAddressListNew(sub.getIPDstList(), sup.getIPDstList())) {
+							//Check Port destination
+							if(isIncludedIPAddressListNew(sub.getIPSrcList(), sup.getIPSrcList())){
+								return true;
+							}
+						}
+					}
+				}
+			}
+
+			return false;
+		}
+		
+		
+		//Check if sub is equal/subset of sup PROTOTYPE
+		public boolean isIncludedProtoTypeListNew(List<L4ProtocolTypes> sub, List<L4ProtocolTypes> sup) {
+			
+			//If sup = ANY return true
+			if(sup.contains(L4ProtocolTypes.ANY))
+				return true;
+			
+			//All the elements in sub should be present in sup
+			if(sup.containsAll(sub))
+				return true;
+			
+			return false;
+		}
+		
+		
+		//Check if sub is equal/subset of sup IPADDRESS
+		public boolean isIncludedIPAddressListNew(List<IPAddress> sub, List<IPAddress> sup) {
+			
+			IPAddress subFirst = sub.get(0);	//The one not neg
+			IPAddress supFirst = sup.get(0);	//The one not neg
+			
+			if(!subFirst.isIncludedIn(supFirst))
+				return false;
+			
+			//All neg of sup (if included in subFirst) should be also neg in sub
+			boolean present;
+			for(int i=1; i<sup.size(); i++) {
+				
+				IPAddress supNeg = sup.get(i);
+				if(supNeg.isIncludedIn(subFirst)) {
+					
+					present = false;
+					for(int j=1; j<sub.size(); j++) {
+						if(supNeg.equals(sub.get(j)))
+							present = true;
+					}
+					
+					if(!present)
+						return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		
+		//Check if sub is equal/subset of sup PORT INTERVAL
+		public boolean isIncludedPortIntervalListNew(List<PortInterval> sub, List<PortInterval> sup) {
+			
+			PortInterval subFirst = sub.get(0);	//The one not neg
+			PortInterval supFirst = sup.get(0);	//The one not neg
+			
+			if(!subFirst.isIncludedInPortInterval(supFirst))
+				return false;
+			
+			//All neg of sup (if included in subFirst) should be also neg in sub
+			boolean present;
+			for(int i=1; i<sup.size(); i++) {
+				
+				PortInterval supNeg = sup.get(i);
+				if(supNeg.isIncludedInPortInterval(subFirst)) {
+					
+					present = false;
+					for(int j=1; j<sub.size(); j++) {
+						if(supNeg.equals(sub.get(j)))
+							present = true;
+					}
+					
+					if(!present)
+						return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		
+		
 }

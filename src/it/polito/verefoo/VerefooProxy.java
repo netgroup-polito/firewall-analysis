@@ -95,6 +95,84 @@ public class VerefooProxy {
 		aputils = new APUtils();
 		parallelConflictAnalysis();
 		
+		
+		
+		//DEBUG: new algorithm to compute Atomic Predicates
+//		List<IPAddress> listIPAddress = new ArrayList<>();
+//		
+//		IPAddress ip1 = new IPAddress("10","0","0","-1", false);
+//		IPAddress ip2 = new IPAddress("10","0","5","-1", false);
+//		IPAddress ip3 = new IPAddress("10","0","0","1", false);
+//		IPAddress ip4 = new IPAddress("10","0","0","2", false);
+//		IPAddress ip5 = new IPAddress("10","0","5","4", false);
+//		IPAddress ip6 = new IPAddress("10","9","5","1", false);
+//		IPAddress ip7 = new IPAddress("10","-1","-1","-1", false);
+//		IPAddress ip8 = new IPAddress("10","0","-1","-1", false);
+//		IPAddress ip9 = new IPAddress("10","8","-1","-1", false);
+//		
+//		listIPAddress.add(ip1);
+//		listIPAddress.add(ip2);
+//		listIPAddress.add(ip3);
+//		listIPAddress.add(ip4);
+//		listIPAddress.add(ip5);
+//		listIPAddress.add(ip6);
+//		listIPAddress.add(ip7);
+//		listIPAddress.add(ip8);
+//		listIPAddress.add(ip9);
+//		
+//		List<List<IPAddress>> atomicIPAddresses = aputils.computeAtomicIPAddresses(listIPAddress);
+//		
+//		for(List<IPAddress> atomicIPAddress: atomicIPAddresses) {
+//			int i = 0;
+//			for(IPAddress IP: atomicIPAddress) {
+//				if(atomicIPAddress.size() > 1 && atomicIPAddress.toString().equals("*")) continue;
+//				if(i!=0) System.out.print("AND");
+//				if(IP.isNeg()) System.out.print("!");
+//				System.out.print(IP.toString());
+//				i++;
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();
+//		
+//		
+//		List<PortInterval> portIntervalList = new ArrayList<>();
+//		
+//		PortInterval pi1 = new PortInterval(50, 100, false);
+//		PortInterval pi2 = new PortInterval(61, 69, false);
+//		PortInterval pi3 = new PortInterval(200, 500, false);
+//		PortInterval pi4 = new PortInterval(5, 5, false);
+//		PortInterval pi5 = new PortInterval(65, 65, false);
+//		PortInterval pi6 = new PortInterval(251, 255, false);
+//		
+//		portIntervalList.add(pi1);
+//		portIntervalList.add(pi2);
+//		portIntervalList.add(pi3);
+//		portIntervalList.add(pi4);
+//		portIntervalList.add(pi5);
+//		portIntervalList.add(pi6);
+//		
+//		List<List<PortInterval>> atomicPortIntervals = aputils.computeAtomicPortIntervals(portIntervalList);
+//		
+//		for(List<PortInterval> atomicPortInterval: atomicPortIntervals) {
+//			int i=0;
+//			for(PortInterval pi: atomicPortInterval) {
+//				if(atomicPortInterval.size() > 1 && pi.toString().equals("*")) continue;
+//				if(i!=0) System.out.print("AND");
+//				if(pi.isNeg()) System.out.print("!");
+//				System.out.print(pi.toString());
+//				i++;
+//			}
+//			System.out.println();
+//		}
+		//END DEBUG
+		
+		
+		
+		
+		
+		
+		
 		//DEBUG: print firewall Atomic Predicates
 //		for(FW fw: firewalls.values()) {
 //			System.out.println("FIREWALL " + fw.getName() + " Number of APs " + fw.getFirewallAtomicPredicates().size());
@@ -623,7 +701,7 @@ public class VerefooProxy {
 //	}
 	
 	private void parallelConflictAnalysis() {
-		ExecutorService threadPool = Executors.newFixedThreadPool(10);
+		ExecutorService threadPool = Executors.newFixedThreadPool(1);
 		List<Future<?>> tasks = new ArrayList<Future<?>>();
 		
 		for(Node node: transformersNode.values()) {
@@ -647,413 +725,6 @@ public class VerefooProxy {
 		}	
 	}
 	
-//	private HashMap<Integer, Predicate> generateAtomicPredicatesForFirewallAnalysis(){
-//		List<Predicate> predicates = new ArrayList<>();
-//		List<Predicate> atomicPredicates = new ArrayList<>();
-//		
-//		for(Node node: transformersNode.values()) {
-//			
-//			if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
-//				
-//				List<Predicate> allowedList = new ArrayList<>();
-//				List<Predicate> deniedList = new ArrayList<>();
-//				
-//				boolean deniedListChanged = false;
-//				for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-//					if(rule.getAction().equals(ActionTypes.DENY)) {
-//						//deny <--- deny V rule-i
-//						deniedList.add(new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol()));
-//						deniedListChanged = true;
-//					} else {
-//						//allowed <--- allowed V (rule-i AND !denied)
-//						Predicate toAdd = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-//						List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//						for(Predicate allow: allowedToAdd) {
-//							if(!aputils.isPredicateContainedIn(allow, allowedList))
-//								allowedList.add(allow);
-//						}
-//					}
-//				}
-//				//Check default action: if DENY do nothing
-//				if(node.getConfiguration().getFirewall().getDefaultAction().equals(ActionTypes.ALLOW)) {
-//					Predicate toAdd = new Predicate("*", false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//					List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//					for(Predicate allow: allowedToAdd) {
-//						if(!aputils.isPredicateContainedIn(allow, allowedList))
-//							allowedList.add(allow);
-//					}
-//				}
-//				
-//				for(Predicate p: allowedList) {
-//					if(!predicates.contains(p))
-//						predicates.add(p);
-//				}	
-//			}
-//		}
-//		
-//		//Now we have the list of predicates on which we have to compute the set of atomic predicates, so compute atomic predicates
-//		atomicPredicates = aputils.computeAtomicPredicates(atomicPredicates, predicates);
-//		
-//		//Give to each atomic predicate an identifier
-//		int index = 0;
-//		for(Predicate p: atomicPredicates) {
-//			networkAtomicPredicates.put(index, p);
-//			index++;
-//		}
-//		
-//		//DEBUG: print atomic predicates
-//		System.out.println("ATOMIC PREDICATES " + networkAtomicPredicates.size());
-////		for(HashMap.Entry<Integer, Predicate> entry: networkAtomicPredicates.entrySet()) {
-////			System.out.print(entry.getKey() + " ");
-////			entry.getValue().print();
-////		}
-//		//END DEBUG
-//		
-//		return networkAtomicPredicates;
-//	}
-	
-	
-	
-	/* Starting from source and destination of each requirement, compute related atomic predicates. Then add to the computed set
-	 * also atomic predicates representing input packet classes for each transformer (here we are considering only NAT and firewall)*/
-//	private HashMap<Integer, Predicate> generateAtomicPredicateNew(){
-//		List<Predicate> predicates = new ArrayList<>();
-//		List<Predicate> atomicPredicates = new ArrayList<>();
-//		List<String> srcList = new ArrayList<>();
-//		List<String> dstList = new ArrayList<>();
-//		List<String> srcPList = new ArrayList<>();
-//		List<String> dstPList = new ArrayList<>();
-//		List<L4ProtocolTypes> dstProtoList = new ArrayList<>();
-//
-//		//Generate predicates representing source and predicates representing destination of each requirement
-//		for(SecurityRequirement sr : securityRequirements.values()) {
-//			Property property = sr.getOriginalProperty();
-//			String IPSrc = property.getSrc();
-//			String IPDst = property.getDst();
-//			String pSrc = property.getSrcPort() != null &&  !property.getSrcPort().equals("null") ? property.getSrcPort() : "*";
-//			String pDst = property.getDstPort() != null &&  !property.getDstPort().equals("null") ? property.getDstPort() : "*";
-//			L4ProtocolTypes proto = property.getLv4Proto() != null ? property.getLv4Proto() : L4ProtocolTypes.ANY;
-//			srcList.add("*"); dstList.add("*"); srcPList.add("*"); dstPList.add("*"); dstProtoList.add(L4ProtocolTypes.ANY);
-//			
-//			//if we have already inserted this source into the list, we can skip it
-//			if(!srcList.contains(IPSrc) || !srcPList.contains(pSrc)) {
-//				if(!srcList.contains(IPSrc))
-//					srcList.add(IPSrc);
-//				else IPSrc = "*";
-//				if(!srcPList.contains(pSrc)) 
-//					srcPList.add(pSrc);
-//				else pSrc = "*";
-//				
-//				Predicate srcPredicate = new Predicate(IPSrc, false, "*", false, pSrc, false, "*", false, L4ProtocolTypes.ANY);
-//				predicates.add(srcPredicate);
-//			}
-//			
-//			//if we have already inserted this destination into the list, we can skip it
-//			if(!dstList.contains(IPDst) || !dstPList.contains(pDst) || !dstProtoList.contains(proto)) {
-//				if(!dstList.contains(IPDst)) dstList.add(IPDst);
-//				else IPDst = "*";
-//				if(!dstPList.contains(pDst)) dstPList.add(pDst);
-//				else pDst = "*";
-//				if(!dstProtoList.contains(proto)) dstProtoList.add(proto);
-//				else proto = L4ProtocolTypes.ANY;
-//				
-//				Predicate dstPredicate = new Predicate("*", false, IPDst, false, "*", false, pDst, false, proto);
-//				predicates.add(dstPredicate);
-//			}
-//		}
-//
-//		//Generate predicates representing input packet class for each transformers
-//		for(Node node: transformersNode.values()) {
-//			if(node.getFunctionalType() == FunctionalTypes.NAT) {
-//				//Compute list of shadowed and reconverted (only those related to requirements sources), considering NAT source addresses list
-//				List<String> shadowedAddressesListSrc = new ArrayList<>();
-//				List<String> shadowedAddressesListDst = new ArrayList<>();
-//				for(String shadowedAddress: node.getConfiguration().getNat().getSource()) {
-//					for(String ips: srcList) {
-//						if(shadowedAddress.equals(ips) || aputils.isIncludedIPString(shadowedAddress, ips)) {
-//							shadowedAddressesListSrc.add(shadowedAddress);
-//							break;
-//						}
-//					}
-//					for(String ipd: dstList) {
-//						if(shadowedAddress.equals(ipd) || aputils.isIncludedIPString(shadowedAddress, ipd)) {
-//							shadowedAddressesListDst.add(shadowedAddress);
-//							break;
-//						}
-//					}
-//				}
-//				//Generate and add shadowing predicates
-//				for(String shadowed: shadowedAddressesListSrc) {
-//					if(!srcList.contains(shadowed)) {
-//						Predicate shpred = new Predicate(shadowed, false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//						predicates.add(shpred);
-//					}
-//				}
-//				//Generate and add reconverted predicates
-//				for(String shadowed: shadowedAddressesListDst) {
-//					if(!dstList.contains(shadowed)) {
-//						Predicate rcvedpred = new Predicate("*", false, shadowed, false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//						predicates.add(rcvedpred);
-//					}
-//				}
-//				//Reconversion predicate
-//				if(!dstList.contains(node.getName())) {
-//					Predicate rcpred = new Predicate("*", false, node.getName(), false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//					predicates.add(rcpred);
-//				}
-//				//Add shadowed predicate: this is enough, all the others have already been added
-//				predicates.add(new Predicate(node.getName(), false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY));	
-//			} 
-//				//If the node is a firewall, compute its allowed rules list
-//				//Algorithm 1 Yang_Lam 2015
-//				else if(node.getFunctionalType() == FunctionalTypes.FIREWALL) {
-//				
-//				List<Predicate> allowedList = new ArrayList<>();
-//				List<Predicate> deniedList = new ArrayList<>();
-//				
-//				boolean deniedListChanged = false;
-//				for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-//					if(rule.getAction().equals(ActionTypes.DENY)) {
-//						//deny <--- deny V rule-i
-//						deniedList.add(new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol()));
-//						deniedListChanged = true;
-//					} else {
-//						//allowed <--- allowed V (rule-i AND !denied)
-//						Predicate toAdd = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-//						List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//						for(Predicate allow: allowedToAdd) {
-//							if(!aputils.isPredicateContainedIn(allow, allowedList))
-//								allowedList.add(allow);
-//						}
-//					}
-//				}
-//				//Check default action: if DENY do nothing
-//				if(node.getConfiguration().getFirewall().getDefaultAction().equals(ActionTypes.ALLOW)) {
-//					Predicate toAdd = new Predicate("*", false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//					List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//					for(Predicate allow: allowedToAdd) {
-//						if(!aputils.isPredicateContainedIn(allow, allowedList))
-//							allowedList.add(allow);
-//					}
-//				}
-//				
-//				//Insert allowed list into predicates (with optimization)
-//				for(Predicate p: allowedList) {
-//					for(IPAddress IPSrc: p.getIPSrcList()) {
-//						String ips = IPSrc.toString();
-//						if(!srcList.contains(ips)) {
-//							srcList.add(ips);
-//							predicates.add(new Predicate(ips, false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(IPAddress IPDst: p.getIPDstList()) {
-//						String ipd = IPDst.toString();
-//						if(!dstList.contains(ipd)) {
-//							dstList.add(ipd);
-//							predicates.add(new Predicate("*", false, ipd, false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pSrc: p.getpSrcList()) {
-//						String ps = pSrc.toString();
-//						if(!srcPList.contains(ps)) {
-//							srcPList.add(ps);
-//							predicates.add(new Predicate("*", false, "*", false, ps, false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pDst: p.getpDstList()) {
-//						String pd = pDst.toString();
-//						if(!dstPList.contains(pd)) {
-//							dstPList.add(pd);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, pd, false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(L4ProtocolTypes proto: p.getProtoTypeList()) {
-//						if(!dstProtoList.contains(proto)) {
-//							dstProtoList.add(proto);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, "*", false, proto));
-//						}
-//					}
-//				}
-//				
-//				//the algorithm returns the allowed predicates list (if we want also the denied predicates list, we can compute allowed list negation)
-//				allocationNodes.get(node.getName()).setForwardBehaviourPredicateList(allowedList);
-//			} else if(node.getFunctionalType() == FunctionalTypes.STATEFUL_FIREWALL) {
-//				
-//				AllocationNode an  = allocationNodes.get(node.getName());
-//				StatefulPacketFilter spf = (StatefulPacketFilter) an.getPlacedNF();
-//				
-//				
-//				List<Predicate> allowedList = new ArrayList<>();
-//				List<Predicate> deniedList = new ArrayList<>();
-//				int aIndex = 0;
-//		   		int dIndex = 0;
-//		   		int acIndex = 0;
-//				
-//				boolean deniedListChanged = false;
-//				for(Elements rule: node.getConfiguration().getStatefulFirewall().getElements()) {
-//					if(rule.getAction().equals(ActionTypes.DENY)) {
-//						//deny <--- deny V rule-i
-//						Predicate predicate = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-//						deniedList.add(predicate);
-//						spf.addDenyPredicate(dIndex++, predicate);
-//						deniedListChanged = true;
-//					} else if (rule.getAction().equals(ActionTypes.ALLOW)) {
-//						//allowed <--- allowed V (rule-i AND !denied)
-//						Predicate toAdd = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-//						List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//						for(Predicate allow: allowedToAdd) {
-//							if(!aputils.isPredicateContainedIn(allow, allowedList))
-//								allowedList.add(allow);
-//						}
-//						//spf.addAllowPredicate(aIndex++, toAdd);
-//					} else {
-//						Predicate predicate = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-//								rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-//						Predicate invPredicate = new Predicate(rule.getDestination(), false, rule.getSource(), false, 
-//								rule.getDstPort(), false, rule.getSrcPort(), false, rule.getProtocol());
-//						if(node.getConfiguration().getStatefulFirewall().getDefaultAction().equals(ActionTypes.DENY)) {
-//							List<Predicate> allowedToAdd = aputils.computeAllowedForRule(predicate, deniedList, deniedListChanged);
-//							for(Predicate allow: allowedToAdd) {
-//								if(!aputils.isPredicateContainedIn(allow, allowedList))
-//									allowedList.add(allow);
-//							}
-//						}
-//						spf.addAllowCondPredicate(acIndex, predicate);
-//						spf.addAllowCondInvPredicate(acIndex++, invPredicate);
-//					}
-//				}
-//				//Check default action: if DENY do nothing
-//				if(node.getConfiguration().getStatefulFirewall().getDefaultAction().equals(ActionTypes.ALLOW)) {
-//					Predicate toAdd = new Predicate("*", false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY);
-//					List<Predicate> allowedToAdd = aputils.computeAllowedForRule(toAdd, deniedList, deniedListChanged);
-//					for(Predicate allow: allowedToAdd) {
-//						if(!aputils.isPredicateContainedIn(allow, allowedList))
-//							allowedList.add(allow);
-//					}
-//				}
-//				
-//				//Insert allowed list into predicates (with optimization)
-//				for(Predicate p: allowedList) {
-//					
-//					//insert allowed list in the map of SPF
-//					spf.addAllowPredicate(aIndex++, p);
-//					
-//					
-//					for(IPAddress IPSrc: p.getIPSrcList()) {
-//						String ips = IPSrc.toString();
-//						if(!srcList.contains(ips)) {
-//							srcList.add(ips);
-//							predicates.add(new Predicate(ips, false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(IPAddress IPDst: p.getIPDstList()) {
-//						String ipd = IPDst.toString();
-//						if(!dstList.contains(ipd)) {
-//							dstList.add(ipd);
-//							predicates.add(new Predicate("*", false, ipd, false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pSrc: p.getpSrcList()) {
-//						String ps = pSrc.toString();
-//						if(!srcPList.contains(ps)) {
-//							srcPList.add(ps);
-//							predicates.add(new Predicate("*", false, "*", false, ps, false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pDst: p.getpDstList()) {
-//						String pd = pDst.toString();
-//						if(!dstPList.contains(pd)) {
-//							dstPList.add(pd);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, pd, false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(L4ProtocolTypes proto: p.getProtoTypeList()) {
-//						if(!dstProtoList.contains(proto)) {
-//							dstProtoList.add(proto);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, "*", false, proto));
-//						}
-//					}
-//				}
-//				
-//				//Insert predicates related to the "conditional allow" rules
-//				List<Predicate> mergedList = new ArrayList<>();
-//				mergedList.addAll(spf.getAllowCondPredicates().values());
-//				mergedList.addAll(spf.getAllowCondInvPredicates().values());
-//				for(Predicate p : mergedList) {
-//					for(IPAddress IPSrc: p.getIPSrcList()) {
-//						String ips = IPSrc.toString();
-//						if(!srcList.contains(ips)) {
-//							srcList.add(ips);
-//							predicates.add(new Predicate(ips, false, "*", false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(IPAddress IPDst: p.getIPDstList()) {
-//						String ipd = IPDst.toString();
-//						if(!dstList.contains(ipd)) {
-//							dstList.add(ipd);
-//							predicates.add(new Predicate("*", false, ipd, false, "*", false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pSrc: p.getpSrcList()) {
-//						String ps = pSrc.toString();
-//						if(!srcPList.contains(ps)) {
-//							srcPList.add(ps);
-//							predicates.add(new Predicate("*", false, "*", false, ps, false, "*", false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(PortInterval pDst: p.getpDstList()) {
-//						String pd = pDst.toString();
-//						if(!dstPList.contains(pd)) {
-//							dstPList.add(pd);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, pd, false, L4ProtocolTypes.ANY));
-//						}
-//					}
-//					for(L4ProtocolTypes proto: p.getProtoTypeList()) {
-//						if(!dstProtoList.contains(proto)) {
-//							dstProtoList.add(proto);
-//							predicates.add(new Predicate("*", false, "*", false, "*", false, "*", false, proto));
-//						}
-//					}
-//				}
-//				
-//				//the algorithm returns the allowed predicates list (if we want also the denied predicates list, we can compute allowed list negation)
-//				allocationNodes.get(node.getName()).setForwardBehaviourPredicateList(allowedList);
-//				
-//			}
-//		}
-//
-//		//DEBUG: interesting predicates for requirements source and destination
-//		System.out.println("INTERESTING PREDICATES: " + predicates.size());
-////		for(Predicate p: predicates)
-////			p.print();
-//		//END DEBUG
-//
-//		//Now we have the list of predicates on which we have to compute the set of atomic predicates, so compute atomic predicates
-//		atomicPredicates = aputils.computeAtomicPredicates(atomicPredicates, predicates);
-//		
-//		//Give to each atomic predicate an identifier
-//		int index = 0;
-//		for(Predicate p: atomicPredicates) {
-//			networkAtomicPredicates.put(index, p);
-//			index++;
-//		}
-//		
-//		//DEBUG: print atomic predicates
-////		System.out.println("ATOMIC PREDICATES " + networkAtomicPredicates.size());
-////		for(HashMap.Entry<Integer, Predicate> entry: networkAtomicPredicates.entrySet()) {
-////			System.out.print(entry.getKey() + " ");
-////			entry.getValue().print();
-////		}
-//		//END DEBUG
-//	
-//		return networkAtomicPredicates;
-//	}
 
 
 	/**

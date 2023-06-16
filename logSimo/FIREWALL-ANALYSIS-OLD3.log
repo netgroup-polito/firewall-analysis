@@ -1,0 +1,1011 @@
+
+TEST 1
+TEST STRATEGIA DI RISOLUZIONE
+
+ALLOW FIRST
+
+2023-05-30 15:54:15,878 [main] F.log 
+
+NRules 100	NAnomalies 20	PRP 0.2	PRPT 0.5
+2023-05-30 15:54:16,698 [main] F.log Total time 410	Time AP 140	Time rewrite rule 250	Time solve anomalies 10	Time AND to OR 10	Number AP 130032
+2023-05-30 15:54:16,915 [main] F.log Total time 211	Time AP 51	Time rewrite rule 150	Time solve anomalies 0	Time AND to OR 10	Number AP 136224
+2023-05-30 15:54:17,175 [main] F.log Total time 250	Time AP 50	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 0	Number AP 131580
+2023-05-30 15:54:17,485 [main] F.log Total time 310	Time AP 100	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 10	Number AP 131544
+2023-05-30 15:54:17,755 [main] F.log Total time 270	Time AP 70	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 0	Number AP 131544
+2023-05-30 15:54:18,005 [main] F.log Total time 241	Time AP 51	Time rewrite rule 190	Time solve anomalies 0	Time AND to OR 0	Number AP 131580
+2023-05-30 15:54:18,295 [main] F.log Total time 290	Time AP 70	Time rewrite rule 200	Time solve anomalies 10	Time AND to OR 10	Number AP 134676
+2023-05-30 15:54:18,585 [main] F.log Total time 290	Time AP 60	Time rewrite rule 230	Time solve anomalies 0	Time AND to OR 0	Number AP 130032
+2023-05-30 15:54:18,875 [main] F.log Total time 290	Time AP 70	Time rewrite rule 190	Time solve anomalies 10	Time AND to OR 20	Number AP 128484
+2023-05-30 15:54:19,198 [main] F.log Total time 322	Time AP 92	Time rewrite rule 190	Time solve anomalies 10	Time AND to OR 30	Number AP 131580
+2023-05-30 15:54:31,368 [main] F.log 
+
+NRules 250	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-30 15:54:39,288 [main] F.log Total time 7480	Time AP 2090	Time rewrite rule 5280	Time solve anomalies 50	Time AND to OR 60	Number AP 1956150
+2023-05-30 15:54:55,661 [main] F.log Total time 16366	Time AP 1850	Time rewrite rule 5150	Time solve anomalies 750	Time AND to OR 8616	Number AP 1843380
+2023-05-30 15:55:05,137 [main] F.log Total time 9469	Time AP 1090	Time rewrite rule 6729	Time solve anomalies 50	Time AND to OR 1600	Number AP 1937520
+2023-05-30 15:55:13,195 [main] F.log Total time 8049	Time AP 725	Time rewrite rule 6534	Time solve anomalies 260	Time AND to OR 530	Number AP 1956240
+2023-05-30 15:55:25,761 [main] F.log Total time 12561	Time AP 2081	Time rewrite rule 4230	Time solve anomalies 530	Time AND to OR 5720	Number AP 1703559
+2023-05-30 15:55:32,450 [main] F.log Total time 6681	Time AP 1372	Time rewrite rule 5260	Time solve anomalies 39	Time AND to OR 10	Number AP 1946880
+2023-05-30 15:55:38,462 [main] F.log Total time 6001	Time AP 871	Time rewrite rule 4930	Time solve anomalies 70	Time AND to OR 130	Number AP 1956240
+2023-05-30 15:55:46,052 [main] F.log Total time 7581	Time AP 701	Time rewrite rule 6590	Time solve anomalies 280	Time AND to OR 10	Number AP 1695330
+2023-05-30 15:55:50,611 [main] F.log Total time 4553	Time AP 772	Time rewrite rule 3751	Time solve anomalies 20	Time AND to OR 10	Number AP 1662960
+2023-05-30 15:55:57,757 [main] F.log Total time 7136	Time AP 822	Time rewrite rule 6184	Time solve anomalies 50	Time AND to OR 80	Number AP 1975050
+2023-05-30 15:56:39,913 [main] F.log 
+
+NRules 500	NAnomalies 100	PRP 0.2	PRPT 0.5
+2023-05-30 15:57:31,033 [main] F.log Total time 50710	Time AP 6802	Time rewrite rule 35838	Time solve anomalies 6520	Time AND to OR 1550	Number AP 7454025
+2023-05-30 15:58:14,007 [main] F.log Total time 42965	Time AP 8850	Time rewrite rule 33975	Time solve anomalies 50	Time AND to OR 90	Number AP 7417620
+2023-05-30 16:04:43,881 [main] F.log Total time 51950	Time AP 3380	Time rewrite rule 35170	Time solve anomalies 1300	Time AND to OR 12100	Number AP 7472520
+2023-05-30 16:05:28,727 [main] F.log Total time 44844	Time AP 8171	Time rewrite rule 35403	Time solve anomalies 400	Time AND to OR 870	Number AP 7435800
+2023-05-30 16:06:07,449 [main] F.log Total time 38716	Time AP 3391	Time rewrite rule 34595	Time solve anomalies 320	Time AND to OR 410	Number AP 7435890
+2023-05-30 16:06:52,277 [main] F.log Total time 44822	Time AP 6722	Time rewrite rule 36930	Time solve anomalies 920	Time AND to OR 250	Number AP 7472520
+2023-05-30 16:07:30,615 [main] F.log Total time 38332	Time AP 3851	Time rewrite rule 33301	Time solve anomalies 410	Time AND to OR 770	Number AP 7472520
+2023-05-30 16:08:14,967 [main] F.log Total time 44342	Time AP 6512	Time rewrite rule 36450	Time solve anomalies 550	Time AND to OR 830	Number AP 7435890
+2023-05-30 16:09:03,346 [main] F.log Total time 48375	Time AP 3691	Time rewrite rule 35130	Time solve anomalies 6174	Time AND to OR 3380	Number AP 7527600
+
+
+DENY FIRST
+
+2023-05-30 16:14:38,657 [main] F.log 
+
+NRules 500	NAnomalies 100	PRP 0.2	PRPT 0.5
+2023-05-30 16:15:50,210 [main] F.log Total time 71133	Time AP 6730	Time rewrite rule 37400	Time solve anomalies 1400	Time AND to OR 25603	Number AP 7454025
+2023-05-30 16:16:31,246 [main] F.log Total time 41026	Time AP 7590	Time rewrite rule 33356	Time solve anomalies 50	Time AND to OR 30	Number AP 7417620
+2023-05-30 16:17:17,147 [main] F.log Total time 45890	Time AP 7240	Time rewrite rule 36080	Time solve anomalies 2570	Time AND to OR 0	Number AP 7527645
+2023-05-30 16:17:57,743 [main] F.log Total time 40588	Time AP 4611	Time rewrite rule 34287	Time solve anomalies 1210	Time AND to OR 480	Number AP 7472520
+2023-05-30 16:18:43,223 [main] F.log Total time 45477	Time AP 4801	Time rewrite rule 39496	Time solve anomalies 530	Time AND to OR 650	Number AP 7435800
+2023-05-30 16:19:25,639 [main] F.log Total time 42411	Time AP 4511	Time rewrite rule 36800	Time solve anomalies 350	Time AND to OR 750	Number AP 7435890
+2023-05-30 16:20:17,626 [main] F.log Total time 51981	Time AP 6151	Time rewrite rule 33380	Time solve anomalies 1200	Time AND to OR 11250	Number AP 7472520
+2023-05-30 16:20:59,423 [main] F.log Total time 41788	Time AP 3471	Time rewrite rule 37377	Time solve anomalies 400	Time AND to OR 540	Number AP 7472520
+2023-05-30 16:21:38,309 [main] F.log Total time 38886	Time AP 3251	Time rewrite rule 34565	Time solve anomalies 430	Time AND to OR 640	Number AP 7435890
+2023-05-30 16:22:21,210 [main] F.log Total time 42891	Time AP 4841	Time rewrite rule 36520	Time solve anomalies 890	Time AND to OR 640	Number AP 7527600
+2023-05-30 16:23:03,728 [main] F.log 
+
+NRules 250	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-30 16:23:11,758 [main] F.log Total time 7620	Time AP 2080	Time rewrite rule 5160	Time solve anomalies 70	Time AND to OR 310	Number AP 1956150
+2023-05-30 16:23:20,081 [main] F.log Total time 8320	Time AP 1540	Time rewrite rule 6200	Time solve anomalies 580	Time AND to OR 0	Number AP 1843380
+2023-05-30 16:23:26,291 [main] F.log Total time 6200	Time AP 1920	Time rewrite rule 4150	Time solve anomalies 60	Time AND to OR 70	Number AP 1937520
+2023-05-30 16:23:32,148 [main] F.log Total time 5850	Time AP 1030	Time rewrite rule 4570	Time solve anomalies 180	Time AND to OR 70	Number AP 1956240
+2023-05-30 16:23:40,477 [main] F.log Total time 8320	Time AP 740	Time rewrite rule 7020	Time solve anomalies 560	Time AND to OR 0	Number AP 1703559
+2023-05-30 16:23:47,104 [main] F.log Total time 6620	Time AP 830	Time rewrite rule 5620	Time solve anomalies 50	Time AND to OR 120	Number AP 1946880
+2023-05-30 16:23:55,825 [main] F.log Total time 8712	Time AP 772	Time rewrite rule 7630	Time solve anomalies 60	Time AND to OR 250	Number AP 1956240
+2023-05-30 16:24:04,939 [main] F.log Total time 9111	Time AP 591	Time rewrite rule 3370	Time solve anomalies 430	Time AND to OR 4720	Number AP 1695330
+2023-05-30 16:24:10,519 [main] F.log Total time 5572	Time AP 1032	Time rewrite rule 4450	Time solve anomalies 30	Time AND to OR 60	Number AP 1662960
+2023-05-30 16:24:15,738 [main] F.log Total time 5212	Time AP 1032	Time rewrite rule 4060	Time solve anomalies 50	Time AND to OR 70	Number AP 1975050
+2023-05-30 17:21:43,099 [main] F.log 
+
+NRules 100	NAnomalies 20	PRP 0.2	PRPT 0.5
+2023-05-30 17:21:43,969 [main] F.log Total time 450	Time AP 160	Time rewrite rule 240	Time solve anomalies 20	Time AND to OR 30	Number AP 130032
+2023-05-30 17:21:44,230 [main] F.log Total time 251	Time AP 71	Time rewrite rule 180	Time solve anomalies 0	Time AND to OR 0	Number AP 136224
+2023-05-30 17:21:44,530 [main] F.log Total time 300	Time AP 70	Time rewrite rule 220	Time solve anomalies 0	Time AND to OR 10	Number AP 131580
+2023-05-30 17:21:44,750 [main] F.log Total time 220	Time AP 100	Time rewrite rule 120	Time solve anomalies 0	Time AND to OR 0	Number AP 131544
+2023-05-30 17:21:44,980 [main] F.log Total time 230	Time AP 60	Time rewrite rule 170	Time solve anomalies 0	Time AND to OR 0	Number AP 131544
+2023-05-30 17:21:45,240 [main] F.log Total time 251	Time AP 41	Time rewrite rule 210	Time solve anomalies 0	Time AND to OR 0	Number AP 131580
+2023-05-30 17:21:45,490 [main] F.log Total time 250	Time AP 70	Time rewrite rule 170	Time solve anomalies 10	Time AND to OR 0	Number AP 134676
+2023-05-30 17:21:45,720 [main] F.log Total time 230	Time AP 50	Time rewrite rule 180	Time solve anomalies 0	Time AND to OR 0	Number AP 130032
+2023-05-30 17:21:45,940 [main] F.log Total time 220	Time AP 50	Time rewrite rule 160	Time solve anomalies 10	Time AND to OR 0	Number AP 128484
+2023-05-30 17:21:46,220 [main] F.log Total time 280	Time AP 100	Time rewrite rule 170	Time solve anomalies 10	Time AND to OR 0	Number AP 131580
+
+
+PRIORITY FIRST
+
+2023-05-30 17:23:58,500 [main] F.log 
+
+NRules 100	NAnomalies 20	PRP 0.2	PRPT 0.5
+2023-05-30 17:23:59,380 [main] F.log Total time 460	Time AP 160	Time rewrite rule 250	Time solve anomalies 10	Time AND to OR 40	Number AP 130032
+2023-05-30 17:23:59,658 [main] F.log Total time 271	Time AP 91	Time rewrite rule 180	Time solve anomalies 0	Time AND to OR 0	Number AP 136224
+2023-05-30 17:23:59,938 [main] F.log Total time 270	Time AP 50	Time rewrite rule 220	Time solve anomalies 0	Time AND to OR 0	Number AP 131580
+2023-05-30 17:24:00,188 [main] F.log Total time 240	Time AP 90	Time rewrite rule 140	Time solve anomalies 0	Time AND to OR 10	Number AP 131544
+2023-05-30 17:24:00,428 [main] F.log Total time 240	Time AP 50	Time rewrite rule 190	Time solve anomalies 0	Time AND to OR 0	Number AP 131544
+2023-05-30 17:24:00,670 [main] F.log Total time 231	Time AP 51	Time rewrite rule 180	Time solve anomalies 0	Time AND to OR 0	Number AP 131580
+2023-05-30 17:24:00,940 [main] F.log Total time 270	Time AP 70	Time rewrite rule 180	Time solve anomalies 0	Time AND to OR 20	Number AP 134676
+2023-05-30 17:24:01,180 [main] F.log Total time 240	Time AP 50	Time rewrite rule 190	Time solve anomalies 0	Time AND to OR 0	Number AP 130032
+2023-05-30 17:24:01,420 [main] F.log Total time 240	Time AP 70	Time rewrite rule 140	Time solve anomalies 10	Time AND to OR 20	Number AP 128484
+2023-05-30 17:24:01,720 [main] F.log Total time 300	Time AP 90	Time rewrite rule 180	Time solve anomalies 10	Time AND to OR 20	Number AP 131580
+2023-05-30 17:24:14,243 [main] F.log 
+
+NRules 250	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-30 17:24:22,243 [main] F.log Total time 7600	Time AP 2080	Time rewrite rule 5070	Time solve anomalies 80	Time AND to OR 370	Number AP 1956150
+2023-05-30 17:24:36,789 [main] F.log Total time 14540	Time AP 1330	Time rewrite rule 4160	Time solve anomalies 590	Time AND to OR 8460	Number AP 1843380
+2023-05-30 17:24:47,901 [main] F.log Total time 11100	Time AP 1120	Time rewrite rule 8220	Time solve anomalies 1630	Time AND to OR 130	Number AP 1937520
+2023-05-30 17:24:54,604 [main] F.log Total time 6700	Time AP 780	Time rewrite rule 5020	Time solve anomalies 280	Time AND to OR 620	Number AP 1956240
+2023-05-30 17:25:09,023 [main] F.log Total time 14411	Time AP 1661	Time rewrite rule 6200	Time solve anomalies 570	Time AND to OR 5980	Number AP 1703559
+2023-05-30 17:25:18,132 [main] F.log Total time 9101	Time AP 1181	Time rewrite rule 7520	Time solve anomalies 70	Time AND to OR 330	Number AP 1946880
+2023-05-30 17:25:25,428 [main] F.log Total time 7292	Time AP 802	Time rewrite rule 5970	Time solve anomalies 90	Time AND to OR 430	Number AP 1956240
+2023-05-30 17:25:32,381 [main] F.log Total time 6951	Time AP 751	Time rewrite rule 4540	Time solve anomalies 480	Time AND to OR 1180	Number AP 1695330
+2023-05-30 17:25:36,143 [main] F.log Total time 3752	Time AP 642	Time rewrite rule 3020	Time solve anomalies 30	Time AND to OR 60	Number AP 1662960
+2023-05-30 17:25:45,949 [main] F.log Total time 9802	Time AP 722	Time rewrite rule 7400	Time solve anomalies 70	Time AND to OR 1610	Number AP 1975050
+2023-05-30 17:26:01,503 [main] F.log 
+
+NRules 500	NAnomalies 100	PRP 0.2	PRPT 0.5
+NRules 500	NAnomalies 100	PRP 0.2	PRPT 0.5
+2023-05-31 11:06:25,101 [main] F.log Total time 73020	Time AP 6600	Time rewrite rule 35250	Time solve anomalies 6900	Time AND to OR 24270	Number AP 7454025
+2023-05-31 11:07:05,398 [main] F.log Total time 40290	Time AP 6610	Time rewrite rule 33500	Time solve anomalies 80	Time AND to OR 100	Number AP 7417620
+2023-05-31 11:50:51,979 [main] F.log Total time 49860	Time AP 3310	Time rewrite rule 33900	Time solve anomalies 1430	Time AND to OR 11220	Number AP 7472520
+2023-05-31 11:51:33,460 [main] F.log Total time 41471	Time AP 7041	Time rewrite rule 32140	Time solve anomalies 540	Time AND to OR 1750	Number AP 7435800
+2023-05-31 11:52:17,707 [main] F.log Total time 44242	Time AP 7612	Time rewrite rule 34999	Time solve anomalies 511	Time AND to OR 1120	Number AP 7435890
+2023-05-31 11:53:08,330 [main] F.log Total time 50621	Time AP 3521	Time rewrite rule 37240	Time solve anomalies 1380	Time AND to OR 8480	Number AP 7472520
+2023-05-31 11:53:50,768 [main] F.log Total time 42431	Time AP 7021	Time rewrite rule 33380	Time solve anomalies 520	Time AND to OR 1510	Number AP 7472520
+2023-05-31 11:54:34,757 [main] F.log Total time 43981	Time AP 7801	Time rewrite rule 33840	Time solve anomalies 560	Time AND to OR 1780	Number AP 7435890
+2023-05-31 11:55:28,780 [main] F.log Total time 54021	Time AP 3241	Time rewrite rule 35040	Time solve anomalies 1450	Time AND to OR 14290	Number AP 7527600
+
+
+
+CONFRONTO AL SHAER
+
+100 Worst case
+Total time 80	Time AP 20	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 10	Number AP 1504
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 30	Time AP 0	Time rewrite rule 10	Time solve anomalies 20	Time AND to OR 0	Number AP 1504
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1504
+
+90 Worst case
+Total time 70	Time AP 20	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 0	Number AP 1344
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1344
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1344
+
+80 Worst case
+Total time 60	Time AP 20	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 10	Number AP 1184
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 0	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1184
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1184
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1184
+
+70 Worst case
+Total time 50	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 10	Number AP 1024
+Total time 30	Time AP 0	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 0	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 1024
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1024
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1024
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1024
+
+60 Worst case
+Total time 50	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 10	Number AP 864
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 10	Number AP 864
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 864
+Total time 20	Time AP 0	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 864
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 864
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 864
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 864
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 864
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 864
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 864
+
+50 Worst case
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 10	Number AP 704
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+Total time 30	Time AP 0	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 704
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 704
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 704
+
+40 Worst case
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 10	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 544
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 544
+
+30 Worst case
+Total time 20	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 10	Number AP 384
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 384
+
+20 Wort case
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 224
+
+10 Worst case
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 64
+
+
+
+100 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+
+90 distinct source
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+
+80 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+
+70 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 69
+
+60 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 60
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 60
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+
+50 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+
+40 distinct source
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+
+30 distinct source
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+
+20 distinct source
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+
+10 distinct source
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+
+
+
+100 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 100
+
+90 distinct destinations
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 90
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 90
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 90
+
+80 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 80
+
+70 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 70
+
+60 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+
+50 distinct destinations
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 50
+
+40 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 40
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 40
+
+
+30 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 30
+
+20 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 20
+
+10 distinct destinations
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 10
+
+
+100 caso intermedio
+Total time 550	Time AP 110	Time rewrite rule 360	Time solve anomalies 70	Time AND to OR 10	Number AP 38148
+Total time 250	Time AP 30	Time rewrite rule 150	Time solve anomalies 70	Time AND to OR 0	Number AP 38148
+Total time 260	Time AP 60	Time rewrite rule 110	Time solve anomalies 90	Time AND to OR 0	Number AP 38148
+Total time 200	Time AP 30	Time rewrite rule 100	Time solve anomalies 70	Time AND to OR 0	Number AP 38148
+Total time 220	Time AP 60	Time rewrite rule 90	Time solve anomalies 70	Time AND to OR 0	Number AP 38148
+Total time 230	Time AP 30	Time rewrite rule 130	Time solve anomalies 70	Time AND to OR 0	Number AP 38148
+Total time 190	Time AP 40	Time rewrite rule 100	Time solve anomalies 50	Time AND to OR 0	Number AP 38148
+Total time 200	Time AP 30	Time rewrite rule 110	Time solve anomalies 60	Time AND to OR 0	Number AP 38148
+Total time 190	Time AP 30	Time rewrite rule 100	Time solve anomalies 60	Time AND to OR 0	Number AP 38148
+Total time 190	Time AP 30	Time rewrite rule 100	Time solve anomalies 60	Time AND to OR 0	Number AP 38148
+
+
+90 caso intermedio
+Total time 350	Time AP 80	Time rewrite rule 200	Time solve anomalies 60	Time AND to OR 10	Number AP 28830
+Total time 170	Time AP 40	Time rewrite rule 70	Time solve anomalies 60	Time AND to OR 0	Number AP 28830
+Total time 170	Time AP 40	Time rewrite rule 90	Time solve anomalies 40	Time AND to OR 0	Number AP 28830
+Total time 150	Time AP 30	Time rewrite rule 80	Time solve anomalies 40	Time AND to OR 0	Number AP 28830
+Total time 160	Time AP 40	Time rewrite rule 70	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+Total time 150	Time AP 40	Time rewrite rule 60	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+Total time 140	Time AP 20	Time rewrite rule 70	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+Total time 150	Time AP 20	Time rewrite rule 80	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+Total time 130	Time AP 30	Time rewrite rule 50	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+Total time 160	Time AP 20	Time rewrite rule 90	Time solve anomalies 50	Time AND to OR 0	Number AP 28830
+
+80 caso intermedio
+Total time 470	Time AP 70	Time rewrite rule 350	Time solve anomalies 40	Time AND to OR 10	Number AP 21168
+Total time 150	Time AP 30	Time rewrite rule 60	Time solve anomalies 60	Time AND to OR 0	Number AP 21168
+Total time 100	Time AP 10	Time rewrite rule 60	Time solve anomalies 30	Time AND to OR 0	Number AP 21168
+Total time 120	Time AP 30	Time rewrite rule 50	Time solve anomalies 40	Time AND to OR 0	Number AP 21168
+Total time 110	Time AP 30	Time rewrite rule 50	Time solve anomalies 30	Time AND to OR 0	Number AP 21168
+Total time 130	Time AP 40	Time rewrite rule 50	Time solve anomalies 40	Time AND to OR 0	Number AP 21168
+Total time 120	Time AP 40	Time rewrite rule 50	Time solve anomalies 30	Time AND to OR 0	Number AP 21168
+Total time 110	Time AP 20	Time rewrite rule 50	Time solve anomalies 40	Time AND to OR 0	Number AP 21168
+Total time 100	Time AP 10	Time rewrite rule 60	Time solve anomalies 30	Time AND to OR 0	Number AP 21168
+Total time 110	Time AP 20	Time rewrite rule 60	Time solve anomalies 30	Time AND to OR 0	Number AP 21168
+
+70 caso intermedio
+Total time 300	Time AP 50	Time rewrite rule 160	Time solve anomalies 90	Time AND to OR 0	Number AP 15000
+Total time 100	Time AP 50	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 0	Number AP 15000
+Total time 80	Time AP 30	Time rewrite rule 20	Time solve anomalies 30	Time AND to OR 0	Number AP 15000
+Total time 80	Time AP 30	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 0	Number AP 15000
+Total time 70	Time AP 20	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 0	Number AP 15000
+Total time 60	Time AP 10	Time rewrite rule 40	Time solve anomalies 10	Time AND to OR 0	Number AP 15000
+Total time 70	Time AP 20	Time rewrite rule 40	Time solve anomalies 10	Time AND to OR 0	Number AP 15000
+Total time 60	Time AP 10	Time rewrite rule 30	Time solve anomalies 20	Time AND to OR 0	Number AP 15000
+Total time 60	Time AP 20	Time rewrite rule 30	Time solve anomalies 10	Time AND to OR 0	Number AP 15000
+Total time 50	Time AP 10	Time rewrite rule 30	Time solve anomalies 10	Time AND to OR 0	Number AP 15000
+
+60 caso intermedio
+Total time 130	Time AP 30	Time rewrite rule 80	Time solve anomalies 20	Time AND to OR 0	Number AP 8820
+Total time 80	Time AP 20	Time rewrite rule 40	Time solve anomalies 20	Time AND to OR 0	Number AP 8820
+Total time 60	Time AP 10	Time rewrite rule 40	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 40	Time AP 10	Time rewrite rule 10	Time solve anomalies 20	Time AND to OR 0	Number AP 8820
+Total time 50	Time AP 20	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 30	Time AP 0	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+Total time 40	Time AP 10	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 8820
+
+50 caso intermedio
+Total time 110	Time AP 20	Time rewrite rule 70	Time solve anomalies 20	Time AND to OR 0	Number AP 5508
+Total time 40	Time AP 20	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 50	Time AP 20	Time rewrite rule 20	Time solve anomalies 10	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 0	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 5508
+
+40 caso intermedio
+Total time 80	Time AP 20	Time rewrite rule 40	Time solve anomalies 10	Time AND to OR 10	Number AP 3150
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 3150
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 3150
+Total time 30	Time AP 10	Time rewrite rule 10	Time solve anomalies 10	Time AND to OR 0	Number AP 3150
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 3150
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 3150
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 3150
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 3150
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 3150
+Total time 20	Time AP 10	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 3150
+
+30 caso intermedio
+Total time 30	Time AP 10	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 20	Time AP 0	Time rewrite rule 20	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 10	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 10	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 0	Time solve anomalies 10	Time AND to OR 0	Number AP 1210
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 1210
+
+20 caso intermedio
+Total time 20	Time AP 10	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+Total time 10	Time AP 0	Time rewrite rule 10	Time solve anomalies 0	Time AND to OR 0	Number AP 448
+
+10 caso intermedio
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+Total time 0	Time AP 0	Time rewrite rule 0	Time solve anomalies 0	Time AND to OR 0	Number AP 60
+
+
+
+
+TEST 2
+
+25% percentuale regole anomale
+
+NRules 500	NAnomalies 62	PRP 0.2	PRPT 0.5
+2023-05-31 13:51:10,903 [main] F.log Total time 50010	Time AP 7580	Time rewrite rule 41570	Time solve anomalies 180	Time AND to OR 680	Number AP 9011520
+2023-05-31 13:52:04,859 [main] F.log Total time 53950	Time AP 11990	Time rewrite rule 41250	Time solve anomalies 150	Time AND to OR 560	Number AP 8991405
+2023-05-31 13:52:58,577 [main] F.log Total time 53710	Time AP 10100	Time rewrite rule 43150	Time solve anomalies 190	Time AND to OR 270	Number AP 8911125
+2023-05-31 13:54:03,210 [main] F.log Total time 64630	Time AP 8060	Time rewrite rule 37550	Time solve anomalies 1460	Time AND to OR 17560	Number AP 8951220
+2023-05-31 13:55:00,430 [main] F.log Total time 57211	Time AP 7021	Time rewrite rule 38240	Time solve anomalies 1370	Time AND to OR 10580	Number AP 8951220
+2023-05-31 13:55:47,927 [main] F.log Total time 47491	Time AP 8441	Time rewrite rule 38720	Time solve anomalies 180	Time AND to OR 150	Number AP 8971290
+2023-05-31 13:56:40,555 [main] F.log Total time 52621	Time AP 10111	Time rewrite rule 41290	Time solve anomalies 320	Time AND to OR 900	Number AP 8991405
+2023-05-31 13:57:30,850 [main] F.log Total time 50291	Time AP 8721	Time rewrite rule 40400	Time solve anomalies 1060	Time AND to OR 110	Number AP 8991360
+2023-05-31 13:58:19,852 [main] F.log Total time 48991	Time AP 9461	Time rewrite rule 39330	Time solve anomalies 130	Time AND to OR 70	Number AP 8871075
+2023-05-31 13:59:15,988 [main] F.log Total time 56132	Time AP 4153	Time rewrite rule 39879	Time solve anomalies 1510	Time AND to OR 10590	Number AP 8991405
+2023-05-31 14:57:52,863 [main] F.log 
+
+NRules 250	NAnomalies 31	PRP 0.2	PRPT 0.5
+2023-05-31 14:58:01,793 [main] F.log Total time 8520	Time AP 2270	Time rewrite rule 5950	Time solve anomalies 270	Time AND to OR 30	Number AP 2145150
+2023-05-31 14:58:18,705 [main] F.log Total time 16900	Time AP 1880	Time rewrite rule 5200	Time solve anomalies 790	Time AND to OR 9030	Number AP 2268000
+2023-05-31 14:58:25,592 [main] F.log Total time 6880	Time AP 2420	Time rewrite rule 4350	Time solve anomalies 40	Time AND to OR 70	Number AP 2288160
+2023-05-31 14:58:31,703 [main] F.log Total time 6100	Time AP 1230	Time rewrite rule 4810	Time solve anomalies 20	Time AND to OR 40	Number AP 2308500
+2023-05-31 14:58:41,160 [main] F.log Total time 9451	Time AP 2021	Time rewrite rule 7390	Time solve anomalies 10	Time AND to OR 30	Number AP 2116716
+2023-05-31 14:58:48,275 [main] F.log Total time 7111	Time AP 1001	Time rewrite rule 6070	Time solve anomalies 30	Time AND to OR 10	Number AP 2288250
+2023-05-31 14:58:54,654 [main] F.log Total time 6372	Time AP 1182	Time rewrite rule 5100	Time solve anomalies 30	Time AND to OR 60	Number AP 2298420
+2023-05-31 14:59:00,868 [main] F.log Total time 6211	Time AP 2001	Time rewrite rule 4190	Time solve anomalies 10	Time AND to OR 10	Number AP 2154684
+2023-05-31 14:59:08,617 [main] F.log Total time 7742	Time AP 902	Time rewrite rule 6790	Time solve anomalies 20	Time AND to OR 30	Number AP 2164050
+2023-05-31 14:59:17,362 [main] F.log Total time 8742	Time AP 942	Time rewrite rule 6490	Time solve anomalies 280	Time AND to OR 1030	Number AP 2308590
+2023-05-31 15:00:42,692 [main] F.log 
+
+NRules 100	NAnomalies 12	PRP 0.2	PRPT 0.5
+2023-05-31 15:00:43,501 [main] F.log Total time 400	Time AP 151	Time rewrite rule 239	Time solve anomalies 0	Time AND to OR 10	Number AP 150696
+2023-05-31 15:00:43,724 [main] F.log Total time 221	Time AP 71	Time rewrite rule 150	Time solve anomalies 0	Time AND to OR 0	Number AP 154008
+2023-05-31 15:00:43,984 [main] F.log Total time 250	Time AP 50	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 0	Number AP 149058
+2023-05-31 15:00:44,264 [main] F.log Total time 270	Time AP 120	Time rewrite rule 130	Time solve anomalies 20	Time AND to OR 0	Number AP 157356
+2023-05-31 15:00:44,564 [main] F.log Total time 300	Time AP 70	Time rewrite rule 220	Time solve anomalies 0	Time AND to OR 10	Number AP 150660
+2023-05-31 15:00:44,817 [main] F.log Total time 242	Time AP 72	Time rewrite rule 170	Time solve anomalies 0	Time AND to OR 0	Number AP 150696
+2023-05-31 15:00:45,177 [main] F.log Total time 360	Time AP 70	Time rewrite rule 290	Time solve anomalies 0	Time AND to OR 0	Number AP 157356
+2023-05-31 15:00:45,437 [main] F.log Total time 260	Time AP 60	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 0	Number AP 147420
+2023-05-31 15:00:45,757 [main] F.log Total time 320	Time AP 110	Time rewrite rule 200	Time solve anomalies 0	Time AND to OR 10	Number AP 150696
+2023-05-31 15:00:45,981 [main] F.log Total time 222	Time AP 72	Time rewrite rule 150	Time solve anomalies 0	Time AND to OR 0	Number AP 129735
+
+
+50% percentuale regole anomale
+
+2023-05-31 15:01:33,364 [main] F.log 
+
+NRules 100	NAnomalies 25	PRP 0.2	PRPT 0.5
+2023-05-31 15:01:34,214 [main] F.log Total time 440	Time AP 160	Time rewrite rule 190	Time solve anomalies 30	Time AND to OR 60	Number AP 121014
+2023-05-31 15:01:34,711 [main] F.log Total time 491	Time AP 51	Time rewrite rule 230	Time solve anomalies 40	Time AND to OR 170	Number AP 118080
+2023-05-31 15:01:34,931 [main] F.log Total time 210	Time AP 40	Time rewrite rule 170	Time solve anomalies 0	Time AND to OR 0	Number AP 121032
+2023-05-31 15:01:35,111 [main] F.log Total time 180	Time AP 50	Time rewrite rule 130	Time solve anomalies 0	Time AND to OR 0	Number AP 119556
+2023-05-31 15:01:35,341 [main] F.log Total time 230	Time AP 60	Time rewrite rule 160	Time solve anomalies 10	Time AND to OR 0	Number AP 113760
+2023-05-31 15:01:35,539 [main] F.log Total time 191	Time AP 41	Time rewrite rule 150	Time solve anomalies 0	Time AND to OR 0	Number AP 122508
+2023-05-31 15:01:36,019 [main] F.log Total time 470	Time AP 60	Time rewrite rule 170	Time solve anomalies 50	Time AND to OR 190	Number AP 123984
+2023-05-31 15:01:36,209 [main] F.log Total time 190	Time AP 50	Time rewrite rule 140	Time solve anomalies 0	Time AND to OR 0	Number AP 121032
+2023-05-31 15:01:36,499 [main] F.log Total time 290	Time AP 50	Time rewrite rule 130	Time solve anomalies 40	Time AND to OR 70	Number AP 119556
+2023-05-31 15:01:36,683 [main] F.log Total time 182	Time AP 62	Time rewrite rule 120	Time solve anomalies 0	Time AND to OR 0	Number AP 100845
+2023-05-31 15:01:49,903 [main] F.log 
+
+NRules 500	NAnomalies 125	PRP 0.2	PRPT 0.5
+2023-05-31 15:03:17,012 [main] F.log Total time 86699	Time AP 6100	Time rewrite rule 37710	Time solve anomalies 4220	Time AND to OR 38669	Number AP 6532245
+2023-05-31 15:03:55,729 [main] F.log Total time 38710	Time AP 3330	Time rewrite rule 34110	Time solve anomalies 400	Time AND to OR 870	Number AP 6549300
+2023-05-31 15:04:35,951 [main] F.log Total time 40210	Time AP 5160	Time rewrite rule 33270	Time solve anomalies 900	Time AND to OR 880	Number AP 6583680
+2023-05-31 15:05:14,416 [main] F.log Total time 38461	Time AP 6861	Time rewrite rule 29350	Time solve anomalies 2250	Time AND to OR 0	Number AP 6515100
+2023-05-31 15:05:54,601 [main] F.log Total time 40180	Time AP 3410	Time rewrite rule 31720	Time solve anomalies 480	Time AND to OR 4570	Number AP 6600825
+2023-05-31 15:06:27,152 [main] F.log Total time 32541	Time AP 2831	Time rewrite rule 28710	Time solve anomalies 360	Time AND to OR 640	Number AP 6515100
+2023-05-31 15:07:08,281 [main] F.log Total time 41121	Time AP 7451	Time rewrite rule 31650	Time solve anomalies 2020	Time AND to OR 0	Number AP 6583770
+2023-05-31 15:07:43,642 [main] F.log Total time 35351	Time AP 3121	Time rewrite rule 30760	Time solve anomalies 1190	Time AND to OR 280	Number AP 6497595
+2023-05-31 15:08:23,646 [main] F.log Total time 40001	Time AP 4951	Time rewrite rule 33639	Time solve anomalies 541	Time AND to OR 870	Number AP 6548850
+2023-05-31 15:15:21,917 [main] F.log 
+
+NRules 250	NAnomalies 62	PRP 0.2	PRPT 0.5
+2023-05-31 15:15:30,727 [main] F.log Total time 8400	Time AP 2060	Time rewrite rule 6030	Time solve anomalies 100	Time AND to OR 210	Number AP 1755270
+2023-05-31 15:15:38,285 [main] F.log Total time 7550	Time AP 2000	Time rewrite rule 5460	Time solve anomalies 50	Time AND to OR 40	Number AP 1746405
+2023-05-31 15:15:43,456 [main] F.log Total time 5160	Time AP 780	Time rewrite rule 4200	Time solve anomalies 70	Time AND to OR 110	Number AP 1711125
+2023-05-31 15:15:51,316 [main] F.log Total time 7851	Time AP 551	Time rewrite rule 6720	Time solve anomalies 580	Time AND to OR 0	Number AP 1498224
+2023-05-31 15:15:57,695 [main] F.log Total time 6371	Time AP 1831	Time rewrite rule 4320	Time solve anomalies 100	Time AND to OR 120	Number AP 1728720
+2023-05-31 15:16:04,236 [main] F.log Total time 6531	Time AP 611	Time rewrite rule 5820	Time solve anomalies 60	Time AND to OR 40	Number AP 1505868
+2023-05-31 15:16:13,335 [main] F.log Total time 9091	Time AP 771	Time rewrite rule 7350	Time solve anomalies 260	Time AND to OR 710	Number AP 1746405
+2023-05-31 15:16:19,649 [main] F.log Total time 6312	Time AP 772	Time rewrite rule 5330	Time solve anomalies 180	Time AND to OR 30	Number AP 1746360
+2023-05-31 15:16:26,807 [main] F.log Total time 7151	Time AP 691	Time rewrite rule 6400	Time solve anomalies 30	Time AND to OR 30	Number AP 1580670
+2023-05-31 15:16:39,517 [main] F.log Total time 12701	Time AP 741	Time rewrite rule 8220	Time solve anomalies 280	Time AND to OR 3460	Number AP 1746405
+
+
+75%  percentuale regole anomale2023-05-31 15:18:21,087 [main] F.log 
+
+NRules 100	NAnomalies 37	PRP 0.2	PRPT 0.5
+2023-05-31 15:18:22,027 [main] F.log Total time 530	Time AP 100	Time rewrite rule 380	Time solve anomalies 10	Time AND to OR 40	Number AP 90738
+2023-05-31 15:18:22,401 [main] F.log Total time 371	Time AP 21	Time rewrite rule 290	Time solve anomalies 60	Time AND to OR 0	Number AP 71400
+2023-05-31 15:18:22,591 [main] F.log Total time 180	Time AP 40	Time rewrite rule 110	Time solve anomalies 0	Time AND to OR 30	Number AP 75600
+2023-05-31 15:18:22,761 [main] F.log Total time 170	Time AP 30	Time rewrite rule 120	Time solve anomalies 10	Time AND to OR 10	Number AP 89460
+2023-05-31 15:18:22,941 [main] F.log Total time 180	Time AP 60	Time rewrite rule 110	Time solve anomalies 0	Time AND to OR 10	Number AP 90738
+2023-05-31 15:18:23,091 [main] F.log Total time 150	Time AP 30	Time rewrite rule 110	Time solve anomalies 10	Time AND to OR 0	Number AP 90738
+2023-05-31 15:18:23,241 [main] F.log Total time 141	Time AP 21	Time rewrite rule 80	Time solve anomalies 10	Time AND to OR 30	Number AP 75615
+2023-05-31 15:18:23,391 [main] F.log Total time 150	Time AP 30	Time rewrite rule 90	Time solve anomalies 30	Time AND to OR 0	Number AP 75615
+2023-05-31 15:18:23,551 [main] F.log Total time 160	Time AP 30	Time rewrite rule 110	Time solve anomalies 10	Time AND to OR 10	Number AP 90720
+2023-05-31 15:18:23,721 [main] F.log Total time 160	Time AP 30	Time rewrite rule 110	Time solve anomalies 0	Time AND to OR 20	Number AP 93312
+2023-05-31 15:18:41,635 [main] F.log 
+
+NRules 250	NAnomalies 93	PRP 0.2	PRPT 0.5
+2023-05-31 15:18:47,805 [main] F.log Total time 5760	Time AP 690	Time rewrite rule 2890	Time solve anomalies 290	Time AND to OR 1890	Number AP 1150380
+2023-05-31 15:18:51,175 [main] F.log Total time 3350	Time AP 580	Time rewrite rule 2630	Time solve anomalies 60	Time AND to OR 80	Number AP 1122744
+2023-05-31 15:18:55,388 [main] F.log Total time 4210	Time AP 680	Time rewrite rule 3210	Time solve anomalies 320	Time AND to OR 0	Number AP 1247490
+2023-05-31 15:18:59,554 [main] F.log Total time 4160	Time AP 1270	Time rewrite rule 2390	Time solve anomalies 140	Time AND to OR 360	Number AP 1129590
+2023-05-31 15:19:04,627 [main] F.log Total time 5071	Time AP 511	Time rewrite rule 4330	Time solve anomalies 100	Time AND to OR 130	Number AP 1023360
+2023-05-31 15:19:10,590 [main] F.log Total time 5961	Time AP 531	Time rewrite rule 5150	Time solve anomalies 140	Time AND to OR 140	Number AP 1122744
+2023-05-31 15:19:16,852 [main] F.log Total time 6260	Time AP 1120	Time rewrite rule 4320	Time solve anomalies 220	Time AND to OR 600	Number AP 1136436
+2023-05-31 15:19:24,647 [main] F.log Total time 7785	Time AP 383	Time rewrite rule 5630	Time solve anomalies 140	Time AND to OR 1632	Number AP 1232550
+2023-05-31 15:19:27,297 [main] F.log Total time 2641	Time AP 341	Time rewrite rule 2070	Time solve anomalies 80	Time AND to OR 150	Number AP 1061736
+2023-05-31 15:19:31,823 [main] F.log Total time 4522	Time AP 472	Time rewrite rule 3530	Time solve anomalies 520	Time AND to OR 0	Number AP 1217610
+2023-05-31 15:19:48,750 [main] F.log 
+
+NRules 500	NAnomalies 187	PRP 0.2	PRPT 0.5
+2023-05-31 15:20:49,690 [main] F.log Total time 60510	Time AP 4550	Time rewrite rule 23490	Time solve anomalies 6280	Time AND to OR 26190	Number AP 4436775
+2023-05-31 15:21:18,568 [main] F.log Total time 28520	Time AP 4620	Time rewrite rule 21790	Time solve anomalies 1300	Time AND to OR 810	Number AP 4507740
+2023-05-31 15:21:46,361 [main] F.log Total time 27790	Time AP 3730	Time rewrite rule 21810	Time solve anomalies 2250	Time AND to OR 0	Number AP 4479300
+2023-05-31 15:22:12,474 [main] F.log Total time 26111	Time AP 4481	Time rewrite rule 19860	Time solve anomalies 1170	Time AND to OR 600	Number AP 4536000
+2023-05-31 15:22:43,017 [main] F.log Total time 30541	Time AP 2071	Time rewrite rule 21750	Time solve anomalies 6720	Time AND to OR 0	Number AP 4536000
+2023-05-31 15:23:10,335 [main] F.log Total time 27315	Time AP 1831	Time rewrite rule 23474	Time solve anomalies 2010	Time AND to OR 0	Number AP 4479210
+2023-05-31 15:23:46,743 [main] F.log Total time 36401	Time AP 4351	Time rewrite rule 19890	Time solve anomalies 1320	Time AND to OR 10840	Number AP 4550535
+2023-05-31 15:24:21,153 [main] F.log Total time 34402	Time AP 1922	Time rewrite rule 20320	Time solve anomalies 2200	Time AND to OR 9960	Number AP 4408425
+2023-05-31 15:24:52,435 [main] F.log Total time 31272	Time AP 3922	Time rewrite rule 25290	Time solve anomalies 1040	Time AND to OR 1020	Number AP 4521285
+2023-05-31 15:25:24,487 [main] F.log Total time 32042	Time AP 2122	Time rewrite rule 19990	Time solve anomalies 1870	Time AND to OR 8060	Number AP 4564800
+
+
+
+
+
+TEST 3
+
+30 anomalie
+2023-05-31 15:27:07,100 [main] F.log 
+
+NRules 500	NAnomalies 30	PRP 0.2	PRPT 0.5
+2023-05-31 15:28:09,750 [main] F.log Total time 62240	Time AP 14890	Time rewrite rule 47250	Time solve anomalies 70	Time AND to OR 30	Number AP 10238760
+2023-05-31 16:22:55,280 [main] F.log Total time 0	Time AP 13500	Time rewrite rule 45340	Time solve anomalies 4010	Time AND to OR 0	Number AP 10217340
+2023-05-31 16:23:44,431 [main] F.log Total time 49150	Time AP 4480	Time rewrite rule 44540	Time solve anomalies 80	Time AND to OR 50	Number AP 10195875
+2023-05-31 16:24:43,272 [main] F.log Total time 58831	Time AP 9071	Time rewrite rule 49510	Time solve anomalies 210	Time AND to OR 40	Number AP 10238625
+2023-05-31 16:25:38,788 [main] F.log Total time 55501	Time AP 10511	Time rewrite rule 44880	Time solve anomalies 60	Time AND to OR 50	Number AP 10153080
+2023-05-31 16:26:33,220 [main] F.log Total time 54431	Time AP 4811	Time rewrite rule 49190	Time solve anomalies 120	Time AND to OR 310	Number AP 10217340
+2023-05-31 16:27:27,127 [main] F.log Total time 53901	Time AP 9771	Time rewrite rule 43890	Time solve anomalies 70	Time AND to OR 170	Number AP 10260270
+2023-05-31 16:28:21,021 [main] F.log Total time 53891	Time AP 11091	Time rewrite rule 42670	Time solve anomalies 70	Time AND to OR 60	Number AP 10217250
+2023-05-31 16:29:13,218 [main] F.log Total time 52191	Time AP 4251	Time rewrite rule 47570	Time solve anomalies 60	Time AND to OR 310	Number AP 10238760
+2023-05-31 16:34:44,195 [main] F.log Total time 0	Time AP 9981	Time rewrite rule 44240	Time solve anomalies 4420	Time AND to OR 0	Number AP 10238760
+
+
+2023-05-31 16:36:39,910 [main] F.log 
+
+NRules 250	NAnomalies 30	PRP 0.2	PRPT 0.5
+2023-05-31 16:36:48,790 [main] F.log Total time 8470	Time AP 2180	Time rewrite rule 6040	Time solve anomalies 210	Time AND to OR 40	Number AP 2009592
+2023-05-31 16:37:07,486 [main] F.log Total time 18690	Time AP 2010	Time rewrite rule 5590	Time solve anomalies 990	Time AND to OR 10100	Number AP 2308590
+2023-05-31 16:37:16,062 [main] F.log Total time 8570	Time AP 2340	Time rewrite rule 6150	Time solve anomalies 30	Time AND to OR 50	Number AP 2298375
+2023-05-31 16:37:22,949 [main] F.log Total time 6882	Time AP 1112	Time rewrite rule 5720	Time solve anomalies 20	Time AND to OR 30	Number AP 2318625
+2023-05-31 16:37:28,959 [main] F.log Total time 6001	Time AP 1011	Time rewrite rule 4950	Time solve anomalies 20	Time AND to OR 20	Number AP 2126208
+2023-05-31 16:37:38,506 [main] F.log Total time 9541	Time AP 851	Time rewrite rule 8630	Time solve anomalies 30	Time AND to OR 30	Number AP 2308590
+2023-05-31 16:37:45,293 [main] F.log Total time 6782	Time AP 902	Time rewrite rule 5760	Time solve anomalies 30	Time AND to OR 90	Number AP 2173752
+2023-05-31 16:37:50,407 [main] F.log Total time 5112	Time AP 822	Time rewrite rule 4260	Time solve anomalies 30	Time AND to OR 0	Number AP 2154600
+2023-05-31 16:37:57,497 [main] F.log Total time 7081	Time AP 851	Time rewrite rule 6190	Time solve anomalies 20	Time AND to OR 20	Number AP 2164176
+2023-05-31 16:38:07,955 [main] F.log Total time 10452	Time AP 842	Time rewrite rule 8670	Time solve anomalies 300	Time AND to OR 640	Number AP 2318760
+2023-05-31 16:38:31,224 [main] F.log 
+
+NRules 100	NAnomalies 30	PRP 0.2	PRPT 0.5
+2023-05-31 16:38:32,194 [main] F.log Total time 560	Time AP 120	Time rewrite rule 400	Time solve anomalies 30	Time AND to OR 10	Number AP 106704
+2023-05-31 16:38:32,615 [main] F.log Total time 411	Time AP 51	Time rewrite rule 160	Time solve anomalies 60	Time AND to OR 140	Number AP 105336
+2023-05-31 16:38:32,845 [main] F.log Total time 220	Time AP 80	Time rewrite rule 130	Time solve anomalies 10	Time AND to OR 0	Number AP 103950
+2023-05-31 16:38:33,065 [main] F.log Total time 210	Time AP 40	Time rewrite rule 170	Time solve anomalies 0	Time AND to OR 0	Number AP 106650
+2023-05-31 16:38:33,265 [main] F.log Total time 200	Time AP 50	Time rewrite rule 140	Time solve anomalies 10	Time AND to OR 0	Number AP 101232
+2023-05-31 16:38:33,494 [main] F.log Total time 221	Time AP 51	Time rewrite rule 140	Time solve anomalies 10	Time AND to OR 20	Number AP 105336
+2023-05-31 16:38:33,684 [main] F.log Total time 190	Time AP 40	Time rewrite rule 130	Time solve anomalies 10	Time AND to OR 10	Number AP 108108
+2023-05-31 16:38:33,894 [main] F.log Total time 210	Time AP 60	Time rewrite rule 130	Time solve anomalies 10	Time AND to OR 10	Number AP 105300
+2023-05-31 16:38:34,144 [main] F.log Total time 250	Time AP 70	Time rewrite rule 160	Time solve anomalies 0	Time AND to OR 20	Number AP 106704
+2023-05-31 16:38:34,444 [main] F.log Total time 300	Time AP 70	Time rewrite rule 130	Time solve anomalies 40	Time AND to OR 60	Number AP 106704
+
+
+50 anomalie
+
+
+2023-05-31 16:39:15,209 [main] F.log 
+
+NRules 100	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-31 16:39:16,039 [main] F.log Total time 420	Time AP 90	Time rewrite rule 260	Time solve anomalies 10	Time AND to OR 60	Number AP 61560
+2023-05-31 16:39:16,264 [main] F.log Total time 221	Time AP 31	Time rewrite rule 120	Time solve anomalies 20	Time AND to OR 50	Number AP 63720
+2023-05-31 16:39:16,404 [main] F.log Total time 140	Time AP 30	Time rewrite rule 90	Time solve anomalies 10	Time AND to OR 10	Number AP 59508
+2023-05-31 16:39:16,604 [main] F.log Total time 200	Time AP 30	Time rewrite rule 90	Time solve anomalies 10	Time AND to OR 70	Number AP 61596
+2023-05-31 16:39:16,834 [main] F.log Total time 230	Time AP 50	Time rewrite rule 80	Time solve anomalies 30	Time AND to OR 70	Number AP 62658
+2023-05-31 16:39:16,954 [main] F.log Total time 120	Time AP 30	Time rewrite rule 80	Time solve anomalies 10	Time AND to OR 0	Number AP 60552
+2023-05-31 16:39:17,094 [main] F.log Total time 140	Time AP 30	Time rewrite rule 80	Time solve anomalies 10	Time AND to OR 20	Number AP 61596
+2023-05-31 16:39:17,218 [main] F.log Total time 121	Time AP 21	Time rewrite rule 80	Time solve anomalies 20	Time AND to OR 0	Number AP 61560
+2023-05-31 16:39:17,318 [main] F.log Total time 100	Time AP 20	Time rewrite rule 80	Time solve anomalies 0	Time AND to OR 0	Number AP 57420
+2023-05-31 16:39:17,468 [main] F.log Total time 150	Time AP 40	Time rewrite rule 80	Time solve anomalies 10	Time AND to OR 20	Number AP 53100
+2023-05-31 16:39:27,762 [main] F.log 
+
+NRules 250	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-31 16:39:35,592 [main] F.log Total time 7430	Time AP 2090	Time rewrite rule 5200	Time solve anomalies 60	Time AND to OR 80	Number AP 1956150
+2023-05-31 16:39:51,073 [main] F.log Total time 15470	Time AP 1840	Time rewrite rule 5330	Time solve anomalies 790	Time AND to OR 7510	Number AP 1843380
+2023-05-31 16:39:58,692 [main] F.log Total time 7610	Time AP 1300	Time rewrite rule 6020	Time solve anomalies 50	Time AND to OR 240	Number AP 1937520
+2023-05-31 16:40:06,533 [main] F.log Total time 7830	Time AP 860	Time rewrite rule 5990	Time solve anomalies 280	Time AND to OR 700	Number AP 1956240
+2023-05-31 16:40:16,567 [main] F.log Total time 10031	Time AP 961	Time rewrite rule 3810	Time solve anomalies 560	Time AND to OR 4700	Number AP 1703559
+2023-05-31 16:40:23,573 [main] F.log Total time 7001	Time AP 2361	Time rewrite rule 4590	Time solve anomalies 40	Time AND to OR 10	Number AP 1946880
+2023-05-31 16:40:32,103 [main] F.log Total time 8523	Time AP 753	Time rewrite rule 7400	Time solve anomalies 80	Time AND to OR 290	Number AP 1956240
+2023-05-31 16:40:39,532 [main] F.log Total time 7422	Time AP 712	Time rewrite rule 6420	Time solve anomalies 270	Time AND to OR 20	Number AP 1695330
+2023-05-31 16:40:44,005 [main] F.log Total time 4472	Time AP 692	Time rewrite rule 3740	Time solve anomalies 30	Time AND to OR 10	Number AP 1662960
+2023-05-31 16:40:54,078 [main] F.log Total time 10071	Time AP 811	Time rewrite rule 7710	Time solve anomalies 50	Time AND to OR 1500	Number AP 1975050
+2023-05-31 16:41:23,560 [main] F.log 
+
+NRules 500	NAnomalies 50	PRP 0.2	PRPT 0.5
+2023-05-31 16:42:17,670 [main] F.log Total time 53690	Time AP 7730	Time rewrite rule 45190	Time solve anomalies 560	Time AND to OR 210	Number AP 9459900
+2023-05-31 16:47:53,280 [main] F.log Total time 0	Time AP 15169	Time rewrite rule 43860	Time solve anomalies 3960	Time AND to OR 0	Number AP 9501300
+2023-05-31 16:48:42,428 [main] F.log Total time 48970	Time AP 4030	Time rewrite rule 44610	Time solve anomalies 100	Time AND to OR 230	Number AP 9418770
+2023-05-31 16:49:47,998 [main] F.log Total time 65560	Time AP 8600	Time rewrite rule 41130	Time solve anomalies 1410	Time AND to OR 14420	Number AP 9459990
+2023-05-31 16:50:47,445 [main] F.log Total time 59440	Time AP 5320	Time rewrite rule 40220	Time solve anomalies 1340	Time AND to OR 12560	Number AP 9480645
+2023-05-31 16:51:41,624 [main] F.log Total time 54161	Time AP 6771	Time rewrite rule 44690	Time solve anomalies 2700	Time AND to OR 0	Number AP 9439380
+2023-05-31 16:52:35,476 [main] F.log Total time 53851	Time AP 7741	Time rewrite rule 45610	Time solve anomalies 120	Time AND to OR 380	Number AP 9459990
+2023-05-31 16:53:23,022 [main] F.log Total time 47541	Time AP 3881	Time rewrite rule 42420	Time solve anomalies 1240	Time AND to OR 0	Number AP 8829240
+2023-05-31 16:54:11,816 [main] F.log Total time 48790	Time AP 4230	Time rewrite rule 44460	Time solve anomalies 70	Time AND to OR 30	Number AP 9377550
+2023-05-31 16:55:03,921 [main] F.log Total time 52102	Time AP 7962	Time rewrite rule 43620	Time solve anomalies 150	Time AND to OR 370	Number AP 9501300
+
+
+
+80 anomalies
+2023-05-31 16:56:29,762 [main] F.log 
+
+NRules 500	NAnomalies 80	PRP 0.2	PRPT 0.5
+2023-05-31 16:57:24,522 [main] F.log Total time 54340	Time AP 7200	Time rewrite rule 43830	Time solve anomalies 3310	Time AND to OR 0	Number AP 8301150
+2023-05-31 16:58:13,750 [main] F.log Total time 49220	Time AP 10800	Time rewrite rule 37110	Time solve anomalies 320	Time AND to OR 990	Number AP 8243280
+2023-05-31 16:59:03,315 [main] F.log Total time 49560	Time AP 7560	Time rewrite rule 40850	Time solve anomalies 940	Time AND to OR 210	Number AP 8262450
+2023-05-31 17:00:04,614 [main] F.log Total time 61292	Time AP 5890	Time rewrite rule 38372	Time solve anomalies 1620	Time AND to OR 15410	Number AP 8223930
+2023-05-31 17:00:52,626 [main] F.log Total time 48002	Time AP 8072	Time rewrite rule 39360	Time solve anomalies 160	Time AND to OR 410	Number AP 8243280
+2023-05-31 17:01:38,383 [main] F.log Total time 45751	Time AP 8411	Time rewrite rule 36070	Time solve anomalies 850	Time AND to OR 420	Number AP 8281845
+
+
+2023-05-31 17:16:11,168 [main] F.log 
+
+NRules 250	NAnomalies 80	PRP 0.2	PRPT 0.5
+2023-05-31 17:16:17,378 [main] F.log Total time 5790	Time AP 700	Time rewrite rule 2900	Time solve anomalies 231	Time AND to OR 1959	Number AP 1159920
+2023-05-31 17:16:23,626 [main] F.log Total time 6240	Time AP 1720	Time rewrite rule 4150	Time solve anomalies 120	Time AND to OR 250	Number AP 1425780
+2023-05-31 17:16:30,836 [main] F.log Total time 7200	Time AP 550	Time rewrite rule 6020	Time solve anomalies 230	Time AND to OR 400	Number AP 1242540
+2023-05-31 17:16:39,053 [main] F.log Total time 8211	Time AP 641	Time rewrite rule 3180	Time solve anomalies 580	Time AND to OR 3810	Number AP 1417680
+2023-05-31 17:16:47,471 [main] F.log Total time 8411	Time AP 721	Time rewrite rule 5970	Time solve anomalies 110	Time AND to OR 1610	Number AP 1425780
+2023-05-31 17:16:52,014 [main] F.log Total time 4541	Time AP 541	Time rewrite rule 3670	Time solve anomalies 130	Time AND to OR 200	Number AP 1441845
+2023-05-31 17:16:56,207 [main] F.log Total time 4193	Time AP 463	Time rewrite rule 2810	Time solve anomalies 230	Time AND to OR 690	Number AP 1449900
+2023-05-31 17:17:03,055 [main] F.log Total time 6843	Time AP 1273	Time rewrite rule 5270	Time solve anomalies 80	Time AND to OR 220	Number AP 1323252
+2023-05-31 17:17:07,090 [main] F.log Total time 4022	Time AP 572	Time rewrite rule 3240	Time solve anomalies 90	Time AND to OR 120	Number AP 1330686
+2023-05-31 17:17:14,442 [main] F.log Total time 7351	Time AP 571	Time rewrite rule 6280	Time solve anomalies 500	Time AND to OR 0	Number AP 1441845
+
+
+
+NRules 100	NAnomalies 32	PRP 0.2	PRPT 0.5
+2023-06-01 15:54:02,397 [main] F.log 3Chain Total time 331	Time AP 66	Time rewrite rule 223	Time solve anomalies 26	Time AND to OR 16	Number AP 40608
+2023-06-01 15:54:02,513 [main] F.log 3Chain Total time 114	Time AP 50	Time rewrite rule 45	Time solve anomalies 19	Time AND to OR 0	Number AP 39744
+2023-06-01 15:54:02,670 [main] F.log 3Chain Total time 154	Time AP 16	Time rewrite rule 56	Time solve anomalies 17	Time AND to OR 65	Number AP 38916
+2023-06-01 15:54:02,771 [main] F.log 3Chain Total time 99	Time AP 25	Time rewrite rule 59	Time solve anomalies 7	Time AND to OR 8	Number AP 40608
+2023-06-01 15:54:02,860 [main] F.log 3Chain Total time 87	Time AP 13	Time rewrite rule 50	Time solve anomalies 9	Time AND to OR 15	Number AP 33840
+2023-06-01 15:54:02,930 [main] F.log 3Chain Total time 67	Time AP 19	Time rewrite rule 39	Time solve anomalies 8	Time AND to OR 1	Number AP 33135
+2023-06-01 15:54:03,021 [main] F.log 3Chain Total time 90	Time AP 17	Time rewrite rule 57	Time solve anomalies 7	Time AND to OR 9	Number AP 39762
+2023-06-01 15:54:03,099 [main] F.log 3Chain Total time 77	Time AP 15	Time rewrite rule 52	Time solve anomalies 9	Time AND to OR 1	Number AP 38880
+2023-06-01 15:54:03,207 [main] F.log 3Chain Total time 108	Time AP 19	Time rewrite rule 49	Time solve anomalies 14	Time AND to OR 26	Number AP 39744
+2023-06-01 15:54:03,286 [main] F.log 3Chain Total time 78	Time AP 14	Time rewrite rule 50	Time solve anomalies 4	Time AND to OR 10	Number AP 41472
+
+
+
+TEST 4
+
+300 regole
+
+2023-05-31 17:19:09,102 [main] F.log 
+
+NRules 300	NAnomalies 80	PRP 0.2	PRPT 0.5
+2023-05-31 17:19:20,122 [main] F.log Total time 10580	Time AP 2160	Time rewrite rule 7760	Time solve anomalies 650	Time AND to OR 10	Number AP 2212140
+2023-05-31 17:19:30,458 [main] F.log Total time 10330	Time AP 1480	Time rewrite rule 8140	Time solve anomalies 140	Time AND to OR 570	Number AP 2339280
+2023-05-31 17:19:39,311 [main] F.log Total time 8850	Time AP 2550	Time rewrite rule 5910	Time solve anomalies 270	Time AND to OR 120	Number AP 2349450
+2023-05-31 17:19:58,432 [main] F.log Total time 19111	Time AP 1171	Time rewrite rule 6840	Time solve anomalies 840	Time AND to OR 10260	Number AP 2173668
+2023-05-31 17:20:07,702 [main] F.log Total time 9260	Time AP 2230	Time rewrite rule 6790	Time solve anomalies 100	Time AND to OR 140	Number AP 2339280
+2023-05-31 17:20:17,962 [main] F.log Total time 10251	Time AP 1081	Time rewrite rule 8550	Time solve anomalies 280	Time AND to OR 340	Number AP 2359845
+2023-05-31 17:20:26,796 [main] F.log Total time 8832	Time AP 2082	Time rewrite rule 6080	Time solve anomalies 180	Time AND to OR 490	Number AP 2370150
+2023-05-31 17:20:38,391 [main] F.log Total time 11592	Time AP 952	Time rewrite rule 10180	Time solve anomalies 120	Time AND to OR 340	Number AP 2329020
+2023-05-31 17:20:47,947 [main] F.log Total time 9552	Time AP 2662	Time rewrite rule 6370	Time solve anomalies 180	Time AND to OR 340	Number AP 2339235
+2023-05-31 17:20:59,008 [main] F.log Total time 11052	Time AP 932	Time rewrite rule 9270	Time solve anomalies 230	Time AND to OR 620	Number AP 2359845
+2023-05-31 17:21:14,160 [main] F.log 
+
+NRules 300	NAnomalies 64	PRP 0.2	PRPT 0.5 (300 regole, 160 anomalie)
+2023-06-01 16:00:56,824 [main] F.log 3Chain Total time 6851	Time AP 796	Time rewrite rule 5840	Time solve anomalies 209	Time AND to OR 6	Number AP 1540125
+2023-06-01 16:01:05,298 [main] F.log 3Chain Total time 8470	Time AP 1630	Time rewrite rule 6470	Time solve anomalies 130	Time AND to OR 240	Number AP 1531710
+2023-06-01 16:01:14,602 [main] F.log 3Chain Total time 9301	Time AP 641	Time rewrite rule 4499	Time solve anomalies 280	Time AND to OR 3881	Number AP 1507005
+2023-06-01 16:01:23,973 [main] F.log 3Chain Total time 9361	Time AP 441	Time rewrite rule 8370	Time solve anomalies 80	Time AND to OR 470	Number AP 1429680
+2023-06-01 16:01:32,077 [main] F.log 3Chain Total time 8101	Time AP 441	Time rewrite rule 7530	Time solve anomalies 70	Time AND to OR 60	Number AP 1421784
+2023-06-01 16:01:41,466 [main] F.log 3Chain Total time 9381	Time AP 601	Time rewrite rule 8610	Time solve anomalies 170	Time AND to OR 0	Number AP 1515150
+2023-06-01 16:01:49,114 [main] F.log 3Chain Total time 7641	Time AP 511	Time rewrite rule 6820	Time solve anomalies 130	Time AND to OR 180	Number AP 1437408
+2023-06-01 16:01:58,130 [main] F.log 3Chain Total time 9012	Time AP 492	Time rewrite rule 8320	Time solve anomalies 180	Time AND to OR 20	Number AP 1506960
+2023-06-01 16:02:06,560 [main] F.log 3Chain Total time 8422	Time AP 502	Time rewrite rule 7610	Time solve anomalies 130	Time AND to OR 180	Number AP 1498680
+2023-06-01 16:02:13,858 [main] F.log 3Chain Total time 7291	Time AP 491	Time rewrite rule 6440	Time solve anomalies 130	Time AND to OR 230	Number AP 1421910
+
+
+NRules 300	NAnomalies 96	PRP 0.2	PRPT 0.5 (300 regole, 240 anomalie)
+2023-06-01 16:05:20,802 [main] F.log 3Chain Total time 3158	Time AP 387	Time rewrite rule 2432	Time solve anomalies 335	Time AND to OR 4	Number AP 630252
+2023-06-01 16:05:25,821 [main] F.log 3Chain Total time 5015	Time AP 293	Time rewrite rule 3392	Time solve anomalies 270	Time AND to OR 1060	Number AP 625086
+2023-06-01 16:05:29,667 [main] F.log 3Chain Total time 3840	Time AP 270	Time rewrite rule 3180	Time solve anomalies 390	Time AND to OR 0	Number AP 609840
+2023-06-01 16:05:33,079 [main] F.log 3Chain Total time 3401	Time AP 371	Time rewrite rule 2560	Time solve anomalies 270	Time AND to OR 200	Number AP 594594
+2023-06-01 16:05:36,242 [main] F.log 3Chain Total time 3161	Time AP 331	Time rewrite rule 2580	Time solve anomalies 240	Time AND to OR 10	Number AP 574770
+2023-06-01 16:05:40,075 [main] F.log 3Chain Total time 3831	Time AP 211	Time rewrite rule 3130	Time solve anomalies 230	Time AND to OR 260	Number AP 653310
+2023-06-01 16:05:44,850 [main] F.log 3Chain Total time 4772	Time AP 192	Time rewrite rule 2900	Time solve anomalies 280	Time AND to OR 1400	Number AP 620004
+2023-06-01 16:05:48,461 [main] F.log 3Chain Total time 3602	Time AP 192	Time rewrite rule 3110	Time solve anomalies 270	Time AND to OR 30	Number AP 610650
+2023-06-01 16:05:52,420 [main] F.log 3Chain Total time 3952	Time AP 262	Time rewrite rule 3170	Time solve anomalies 300	Time AND to OR 220	Number AP 637065
+2023-06-01 16:05:58,930 [main] F.log 3Chain Total time 6502	Time AP 272	Time rewrite rule 3550	Time solve anomalies 390	Time AND to OR 2290	Number AP 653400
+
+
+400 regole
+
+2023-05-31 17:21:42,241 [main] F.log 
+
+NRules 400	NAnomalies 80	PRP 0.2	PRPT 0.5
+2023-05-31 17:22:10,431 [main] F.log Total time 27780	Time AP 5050	Time rewrite rule 17220	Time solve anomalies 5500	Time AND to OR 10	Number AP 4885650
+2023-05-31 17:22:35,779 [main] F.log Total time 25343	Time AP 6590	Time rewrite rule 18093	Time solve anomalies 180	Time AND to OR 480	Number AP 4841280
+2023-05-31 17:23:00,857 [main] F.log Total time 25070	Time AP 4950	Time rewrite rule 18600	Time solve anomalies 1520	Time AND to OR 0	Number AP 4855950
+2023-05-31 17:23:34,708 [main] F.log Total time 33841	Time AP 5811	Time rewrite rule 20210	Time solve anomalies 890	Time AND to OR 6930	Number AP 4826430
+2023-05-31 17:23:53,699 [main] F.log Total time 18981	Time AP 2401	Time rewrite rule 16350	Time solve anomalies 110	Time AND to OR 120	Number AP 4841280
+2023-05-31 17:24:15,804 [main] F.log Total time 22101	Time AP 5181	Time rewrite rule 16520	Time solve anomalies 180	Time AND to OR 220	Number AP 4870845
+2023-05-31 17:24:42,898 [main] F.log Total time 27091	Time AP 2501	Time rewrite rule 18450	Time solve anomalies 780	Time AND to OR 5360	Number AP 4885650
+2023-05-31 17:25:07,766 [main] F.log Total time 24861	Time AP 3731	Time rewrite rule 20550	Time solve anomalies 200	Time AND to OR 380	Number AP 4826520
+2023-05-31 17:25:27,390 [main] F.log Total time 19621	Time AP 2381	Time rewrite rule 16850	Time solve anomalies 190	Time AND to OR 200	Number AP 4841235
+2023-05-31 17:25:56,267 [main] F.log Total time 28872	Time AP 2512	Time rewrite rule 17280	Time solve anomalies 1140	Time AND to OR 7940	Number AP 4870845
+2023-05-31 17:27:01,392 [main] F.log 
+
+NRules 400	NAnomalies 160	PRP 0.2	PRPT 0.5
+2023-05-31 17:27:40,562 [main] F.log Total time 38750	Time AP 2440	Time rewrite rule 13120	Time solve anomalies 1080	Time AND to OR 22110	Number AP 2646270
+2023-05-31 17:27:59,688 [main] F.log Total time 19120	Time AP 1490	Time rewrite rule 14520	Time solve anomalies 2270	Time AND to OR 840	Number AP 2701080
+2023-05-31 17:28:14,878 [main] F.log Total time 15180	Time AP 1240	Time rewrite rule 12570	Time solve anomalies 1370	Time AND to OR 0	Number AP 2690100
+2023-05-31 17:28:38,532 [main] F.log Total time 23650	Time AP 1650	Time rewrite rule 14760	Time solve anomalies 1200	Time AND to OR 6040	Number AP 2668140
+2023-05-31 17:28:58,442 [main] F.log Total time 19901	Time AP 1571	Time rewrite rule 11100	Time solve anomalies 1360	Time AND to OR 5870	Number AP 2711610
+2023-05-31 17:29:17,141 [main] F.log Total time 18691	Time AP 1341	Time rewrite rule 14360	Time solve anomalies 2990	Time AND to OR 0	Number AP 2734200
+2023-05-31 17:29:28,490 [main] F.log Total time 11342	Time AP 922	Time rewrite rule 9570	Time solve anomalies 850	Time AND to OR 0	Number AP 2667870
+2023-05-31 17:29:46,189 [main] F.log Total time 17691	Time AP 1421	Time rewrite rule 9980	Time solve anomalies 1170	Time AND to OR 5120	Number AP 2690100
+2023-05-31 17:30:06,083 [main] F.log Total time 19892	Time AP 1342	Time rewrite rule 14890	Time solve anomalies 280	Time AND to OR 3380	Number AP 2712150
+2023-05-31 17:30:28,580 [main] F.log Total time 22492	Time AP 1212	Time rewrite rule 10410	Time solve anomalies 1250	Time AND to OR 9620	Number AP 2712150
+
+
+
+NRules 400	NAnomalies 96	PRP 0.2	PRPT 0.5 (400 regole, 240 anomalie)
+2023-06-01 16:12:01,331 [main] F.log 3Chain Total time 12574	Time AP 2118	Time rewrite rule 9986	Time solve anomalies 430	Time AND to OR 40	Number AP 2079252
+2023-06-01 16:12:13,552 [main] F.log 3Chain Total time 12210	Time AP 1511	Time rewrite rule 10009	Time solve anomalies 310	Time AND to OR 380	Number AP 2217735
+2023-06-01 16:12:27,647 [main] F.log 3Chain Total time 14090	Time AP 2540	Time rewrite rule 10870	Time solve anomalies 680	Time AND to OR 0	Number AP 2187900
+2023-06-01 16:12:40,163 [main] F.log 3Chain Total time 12511	Time AP 1261	Time rewrite rule 7590	Time solve anomalies 460	Time AND to OR 3200	Number AP 2158065
+2023-06-01 16:12:52,569 [main] F.log 3Chain Total time 12391	Time AP 961	Time rewrite rule 11190	Time solve anomalies 200	Time AND to OR 40	Number AP 2118825
+2023-06-01 16:13:06,122 [main] F.log 3Chain Total time 13551	Time AP 2431	Time rewrite rule 10420	Time solve anomalies 400	Time AND to OR 300	Number AP 2187810
+2023-06-01 16:13:15,850 [main] F.log 3Chain Total time 9721	Time AP 971	Time rewrite rule 8360	Time solve anomalies 200	Time AND to OR 190	Number AP 2207790
+2023-06-01 16:13:24,269 [main] F.log 3Chain Total time 8411	Time AP 851	Time rewrite rule 6900	Time solve anomalies 650	Time AND to OR 10	Number AP 2109150
+2023-06-01 16:13:38,253 [main] F.log 3Chain Total time 13971	Time AP 931	Time rewrite rule 12730	Time solve anomalies 290	Time AND to OR 20	Number AP 2158065
+2023-06-01 16:13:54,485 [main] F.log 3Chain Total time 16231	Time AP 1141	Time rewrite rule 8940	Time solve anomalies 880	Time AND to OR 5270	Number AP 2187900
+
+
+500 regole
+
+500 - 80 prendere da sopra
+
+2023-05-31 17:30:58,006 [main] F.log 
+
+NRules 500	NAnomalies 160	PRP 0.2	PRPT 0.5
+2023-05-31 17:31:33,656 [main] F.log Total time 35230	Time AP 5360	Time rewrite rule 23810	Time solve anomalies 510	Time AND to OR 5550	Number AP 5278770
+2023-05-31 17:32:10,202 [main] F.log Total time 36540	Time AP 5740	Time rewrite rule 24100	Time solve anomalies 740	Time AND to OR 5960	Number AP 5356080
+2023-05-31 17:32:43,500 [main] F.log Total time 33290	Time AP 5710	Time rewrite rule 25220	Time solve anomalies 2360	Time AND to OR 0	Number AP 5340600
+2023-05-31 17:33:51,554 [main] F.log Total time 68050	Time AP 3550	Time rewrite rule 23740	Time solve anomalies 2640	Time AND to OR 38120	Number AP 5309640
+2023-05-31 17:34:37,357 [main] F.log Total time 45801	Time AP 3171	Time rewrite rule 22920	Time solve anomalies 2270	Time AND to OR 17440	Number AP 5371110
+2023-05-31 17:35:08,739 [main] F.log Total time 31371	Time AP 2811	Time rewrite rule 24770	Time solve anomalies 1500	Time AND to OR 2290	Number AP 5042520
+2023-05-31 17:35:42,590 [main] F.log Total time 33841	Time AP 5511	Time rewrite rule 26830	Time solve anomalies 1500	Time AND to OR 0	Number AP 5309370
+2023-05-31 17:36:15,989 [main] F.log Total time 33391	Time AP 2901	Time rewrite rule 26310	Time solve anomalies 1420	Time AND to OR 2760	Number AP 5340600
+2023-05-31 17:36:48,318 [main] F.log Total time 32323	Time AP 2533	Time rewrite rule 28310	Time solve anomalies 590	Time AND to OR 890	Number AP 5371650
+2023-05-31 17:37:24,679 [main] F.log Total time 36352	Time AP 2322	Time rewrite rule 23250	Time solve anomalies 1530	Time AND to OR 9250	Number AP 5371650
+2023-05-31 17:38:31,283 [main] F.log 
+
+NRules 500	NAnomalies 240	PRP 0.2	PRPT 0.5
+2023-05-31 17:38:55,073 [main] F.log Total time 23370	Time AP 2610	Time rewrite rule 14470	Time solve anomalies 3940	Time AND to OR 2350	Number AP 3006990
+2023-05-31 17:39:13,833 [main] F.log Total time 18750	Time AP 1660	Time rewrite rule 15810	Time solve anomalies 1280	Time AND to OR 0	Number AP 3017925
+2023-05-31 17:39:40,517 [main] F.log Total time 26680	Time AP 1850	Time rewrite rule 16810	Time solve anomalies 1600	Time AND to OR 6420	Number AP 3030300
+2023-05-31 17:40:01,347 [main] F.log Total time 20821	Time AP 2301	Time rewrite rule 16840	Time solve anomalies 1680	Time AND to OR 0	Number AP 2902815
+2023-05-31 17:40:24,475 [main] F.log Total time 23121	Time AP 3391	Time rewrite rule 17360	Time solve anomalies 1190	Time AND to OR 1180	Number AP 3052800
+2023-05-31 17:40:44,798 [main] F.log Total time 20321	Time AP 2781	Time rewrite rule 15860	Time solve anomalies 1680	Time AND to OR 0	Number AP 2960370
+2023-05-31 17:41:08,710 [main] F.log Total time 23901	Time AP 3251	Time rewrite rule 17720	Time solve anomalies 1550	Time AND to OR 1380	Number AP 3065040
+2023-05-31 17:41:32,545 [main] F.log Total time 23831	Time AP 2461	Time rewrite rule 18500	Time solve anomalies 1190	Time AND to OR 1680	Number AP 3041595
+2023-05-31 17:41:51,261 [main] F.log Total time 18712	Time AP 2702	Time rewrite rule 14520	Time solve anomalies 1490	Time AND to OR 0	Number AP 3041955
+2023-05-31 17:42:23,889 [main] F.log Total time 32621	Time AP 1651	Time rewrite rule 18440	Time solve anomalies 2630	Time AND to OR 9900	Number AP 3112560
+2023-06-01 15:54:01,649 [main] F.log 
+2023-06-01 16:00:49,551 [main] F.log 
+
+
+

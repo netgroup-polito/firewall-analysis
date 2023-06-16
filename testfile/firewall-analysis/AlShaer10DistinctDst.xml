@@ -8,108 +8,100 @@
           <webclient nameWebServer="20.0.0.1"/>
         </configuration>
       </node>
-      <node functional_type="FIREWALL" name="20.0.0.1">
+      <node functional_type="FIREWALL" name="20.0.0.1" >
         <neighbour name="10.0.0.-1"/>
 		<neighbour name="20.0.0.2"/>
         <configuration description="A simple description" name="conf1">
-            <firewall defaultAction="ALLOW">
-                        <elements>
-                            <action>DENY</action>
-                            <source>140.192.37.20</source>
-                            <destination>*</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>80</dst_port>
-                        </elements>
+            <firewall defaultAction="DENY">
+                        
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.-1</source>
-                            <destination>*</destination>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.1</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
-                            <dst_port>80</dst_port>
-                        </elements>
-                        <elements>
-                            <action>ALLOW</action>
-                            <source>*</source>
-                            <destination>161.120.33.40</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>80</dst_port>
+                            <dst_port>*</dst_port>
                         </elements>
                         <elements>
                             <action>DENY</action>
-                            <source>140.192.37.-1</source>
-                            <destination>161.120.33.40</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>80</dst_port>
-                        </elements>
-                        <elements>
-                            <action>DENY</action>
-                            <source>140.192.37.30</source>
-                            <destination>*</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>21</dst_port>
-                        </elements>
-                        <elements>
-                            <action>ALLOW</action>
-                            <source>140.192.37.-1</source>
-                            <destination>*</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>21</dst_port>
-                        </elements>
-                        <elements>
-                            <action>ALLOW</action>
-                            <source>140.192.37.-1</source>
-                            <destination>161.120.33.40</destination>
-                            <protocol>TCP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>21</dst_port>
-                        </elements>
-                        <elements>
-                            <action>DENY</action>
-                            <source>*</source>
-                            <destination>*</destination>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.2</destination>
                             <protocol>TCP</protocol>
                             <src_port>*</src_port>
                             <dst_port>*</dst_port>
                         </elements>
                         <elements>
                             <action>ALLOW</action>
-                            <source>140.192.37.-1</source>
-                            <destination>161.120.33.40</destination>
-                            <protocol>UDP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>53</dst_port>
-                        </elements>
-                        <elements>
-                            <action>ALLOW</action>
-                            <source>*</source>
-                            <destination>161.120.33.40</destination>
-                            <protocol>UDP</protocol>
-                            <src_port>*</src_port>
-                            <dst_port>53</dst_port>
-                        </elements>
-                        <elements>
-                            <action>ALLOW</action>
-                            <source>140.192.38.-1</source>
-                            <destination>161.120.35.-1</destination>
-                            <protocol>UDP</protocol>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.3</destination>
+                            <protocol>TCP</protocol>
                             <src_port>*</src_port>
                             <dst_port>*</dst_port>
                         </elements>
                         <elements>
                             <action>DENY</action>
-                            <source>*</source>
-                            <destination>*</destination>
-                            <protocol>UDP</protocol>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.4</destination>
+                            <protocol>TCP</protocol>
                             <src_port>*</src_port>
                             <dst_port>*</dst_port>
                         </elements>
-                   
+                        <elements>
+                            <action>ALLOW</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.5</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                        <elements>
+                            <action>DENY</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.6</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                        <elements>
+                            <action>ALLOW</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.7</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                        <elements>
+                            <action>DENY</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.8</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                        <elements>
+                            <action>ALLOW</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.9</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                        <elements>
+                            <action>DENY</action>
+                            <source>10.0.0.1</source>
+                            <destination>20.0.0.10</destination>
+                            <protocol>TCP</protocol>
+                            <src_port>*</src_port>
+                            <dst_port>*</dst_port>
+                        </elements>
+                         
+                        
+                        
+                        
+	                    
+                     
+                  
+
                     </firewall>
         </configuration>
       </node>

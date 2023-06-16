@@ -5,8 +5,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
+import it.polito.verefoo.extra.Package1LoggingClass;
 import it.polito.verefoo.graph.AtomicRule;
 import it.polito.verefoo.graph.FW;
 import it.polito.verefoo.graph.IPAddress;
@@ -17,6 +24,7 @@ import it.polito.verefoo.graph.PredicateRange;
 import it.polito.verefoo.graph.ResolutionStrategy;
 import it.polito.verefoo.jaxb.ActionTypes;
 import it.polito.verefoo.jaxb.Elements;
+import it.polito.verefoo.jaxb.L4ProtocolTypes;
 import it.polito.verefoo.jaxb.Node;
 
 public class FirewallAnalysisTask implements Runnable {
@@ -26,6 +34,8 @@ public class FirewallAnalysisTask implements Runnable {
 	HashMap<String, FW> firewalls;
 	ResolutionStrategy strategy;
 	TestResults fresult;
+	
+	//private static ch.qos.logback.classic.Logger logger = Package1LoggingClass.createLoggerFor("AtomicRules1", "logSimo/AtomicRules1");
 	
 	public FirewallAnalysisTask(Node node, HashMap<String, FW> firewalls, APUtils aputils, ResolutionStrategy strategy, TestResults fresult) {
 		this.node = node;
@@ -42,18 +52,44 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		/* COMPUTE FIREWALL ATOMIC PREDICATES */
 		long beginAP = System.currentTimeMillis();
-		List<Predicate> predicates = new ArrayList<>();
+		
 		List<Predicate> atomicPredicates = new ArrayList<>();
 		HashMap<Integer, Predicate> firewallAtomicPredicates = new HashMap<>();
+		List<IPAddress> distinctIPSrcList = new ArrayList<>();
+		List<IPAddress> distinctIPDstList = new ArrayList<>();
+		List<PortInterval> distinctPSrcList = new ArrayList<>();
+		List<PortInterval> distinctPDstList = new ArrayList<>();
+		List<L4ProtocolTypes> distinctProtoList = new ArrayList<>();
 		
 		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-			Predicate newp = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-					rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
-			predicates.add(newp);
+			
+			IPAddress ipsrc = new IPAddress(rule.getSource(), false);
+			if(!distinctIPSrcList.contains(ipsrc))
+				distinctIPSrcList.add(ipsrc);
+			
+			IPAddress ipdst = new IPAddress(rule.getDestination(), false);
+			if(!distinctIPDstList.contains(ipdst))
+				distinctIPDstList.add(ipdst);
+			
+			PortInterval psrc = new PortInterval(rule.getSrcPort(), false);
+			if(!distinctPSrcList.contains(psrc))
+				distinctPSrcList.add(psrc);
+			
+			PortInterval pdst = new PortInterval(rule.getDstPort(), false);
+			if(!distinctPDstList.contains(pdst))
+				distinctPDstList.add(pdst);
+			
+			L4ProtocolTypes proto = rule.getProtocol();
+			if(!distinctProtoList.contains(proto))
+				distinctProtoList.add(proto);
+			
 		}
 		
 		//Starting from this list of predicates we can compute the corresponding set of Atomic Predicates
-		atomicPredicates = aputils.computeAtomicPredicates(atomicPredicates, predicates);
+		atomicPredicates = aputils.computeAtomicPredicatesNewAlgorithm(
+				aputils.computeAtomicIPAddresses(distinctIPSrcList), aputils.computeAtomicIPAddresses(distinctIPDstList), 
+				aputils.computeAtomicPortIntervals(distinctPSrcList), aputils.computeAtomicPortIntervals(distinctPDstList),
+				aputils.computeAtomicPrototypes(distinctProtoList));
 		
 		//Assign to each Atomic Predicate an identifier
 		int index = 0;
@@ -69,29 +105,63 @@ public class FirewallAnalysisTask implements Runnable {
 		long endAP = System.currentTimeMillis();
 		fresult.setAtomicPredCompTime(endAP - beginAP);
 		fresult.setNumberAP(firewallAtomicPredicates.size());
+		fresult.setAtomicPredicates(firewallAtomicPredicates);
 		
-		/* REWRITE FIREWALL RULES */
-		int count = 1;
-		List<AtomicRule> atomicRules = new ArrayList<>();
+		//DEBUG: print atomic predicates
+//		System.out.println("Number of AP: " + firewallAtomicPredicates.size());
+//		for(Predicate ap: firewallAtomicPredicates.values()) {
+//			ap.print(); System.out.println();
+//		}
+		//END DEBUG
 		
-		for(Elements rule: node.getConfiguration().getFirewall().getElements()) {
-
-			Predicate rulePred = new Predicate(rule.getSource(), false, rule.getDestination(), false, 
-					rule.getSrcPort(), false, rule.getDstPort(), false, rule.getProtocol());
+		/* REWRITE FIREWALL RULES (parallel) */
+		ConcurrentHashMap<Integer, AtomicRule> atomicRulesMap = new ConcurrentHashMap<>();
+		
+		int nthreads = 10;
+		ExecutorService threadPool = Executors.newFixedThreadPool(nthreads);
+		List<Future<?>> tasks = new ArrayList<Future<?>>();
+		int begin = 0;
+		int step = (int) (node.getConfiguration().getFirewall().getElements().size() / nthreads);
+		int end = step;
+		
+		
+		for(int i=0; i<nthreads; i++) {
+			//To each thread assign a number of rules to convert
+			List<Elements> complexRules;
 			
-			AtomicRule newAtomicRule = new AtomicRule(rule.getAction(), count, rulePred);
-			
-			for(HashMap.Entry<Integer, Predicate> apEntry: firewallAtomicPredicates.entrySet()) {
-				Predicate intersectionPredicate = aputils.computeIntersection(apEntry.getValue(), rulePred);
-				if(intersectionPredicate != null && aputils.APCompare(intersectionPredicate, apEntry.getValue())
-						&& !apEntry.getValue().hasIPDstOnlyNegs()) {
-					//System.out.print(apEntry.getKey() + " "); apEntry.getValue().print();
-					newAtomicRule.addAtomicPredicates(apEntry.getKey());
-				}
+			if(i == nthreads - 1) {
+				//Last thread
+				complexRules = node.getConfiguration().getFirewall().getElements()
+						.subList(begin, node.getConfiguration().getFirewall().getElements().size());
+			} else {
+				complexRules = node.getConfiguration().getFirewall().getElements().subList(begin, end);
 			}
-			count++;
-			atomicRules.add(newAtomicRule);
+			
+			tasks.add(threadPool.submit(new RewriteRulesTask(begin, complexRules, atomicRulesMap, firewallAtomicPredicates)));
+			
+			begin += step;
+			end += step;
 		}
+		
+		
+		//JOIN
+		threadPool.shutdown();
+		for(Future<?> fut: tasks) {
+			try {
+				fut.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		//Order the list of AtomicRules based on their index
+		TreeMap<Integer, AtomicRule> atomicRulesMapSorted = new TreeMap<>(atomicRulesMap);
+		List<AtomicRule> atomicRules = new ArrayList<>(atomicRulesMapSorted.values());
+		
+		//DEBUG: print Atomic Rules
+//		for(AtomicRule AR: atomicRules)
+//			logger.info(AR.toString());
+		//END DEBUG
 		
 		fw.setAtomicRules(atomicRules);
 		long endRWR = System.currentTimeMillis();
@@ -236,10 +306,17 @@ public class FirewallAnalysisTask implements Runnable {
 		fresult.setSolveAnomaliesCompTime(endSA - endRWR);
 		
 		
-		/* FROM AND TO OR */
+//		System.out.println("ALLOWED set AP " + fw.getAllowedAPs().size());
+//		System.out.println("DENIED set AP " + fw.getDeniedAPs().size());
+//		System.out.println("ALLOWED set AND " + fw.getAllowedPredicates().size());
+//		System.out.println("DENIED set AND " + fw.getDeniedPredicates().size());
 		
+		/* FROM AND TO OR */
 		for(Predicate ap: fw.getDeniedPredicates()) {
-			fw.addDeniedPredicateRange(fromPredicateToPredicateRange(ap));
+			PredicateRange prange = fromPredicateToPredicateRange(ap);
+			//System.out.print("PREDICATE AND -> "); ap.print();
+			//System.out.print(" PREDICATE OR -> "); prange.print(); System.out.println();
+			fw.addDeniedPredicateRange(prange);
 		}
 		for(Predicate ap: fw.getAllowedPredicates()) {
 			fw.addAllowedPredicateRange(fromPredicateToPredicateRange(ap));
@@ -247,6 +324,9 @@ public class FirewallAnalysisTask implements Runnable {
 		
 		long endAndToOr = System.currentTimeMillis();
 		fresult.setAndToORCompTime(endAndToOr - endSA);
+		
+//		System.out.println("ALLOWED set OR " + fw.getAllowedPredicatesRange().size());
+//		System.out.println("DENIED set OR " + fw.getDeniedPredicatesRange().size());
 		
 		
 		/* MERGE */

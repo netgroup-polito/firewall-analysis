@@ -16,7 +16,7 @@ import it.polito.verefoo.jaxb.*;
 import it.polito.verefoo.utils.Tuple;
 
 // Auxiliary class to generate  test cases for performance tests (used by TestPerformanceScalabilityAtomicPredicates)
-public class TestCaseGeneratorFirewallAnalysis {
+public class TestCaseGeneratorFirewallAnalysisChain3Anomalies {
 	NFV nfv;
 	String name;
 	
@@ -40,7 +40,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 	List<Node> allFirewalls;
 	List<Tuple<String, Node>> lastAPs;
 		
-	public TestCaseGeneratorFirewallAnalysis(String name, int nfirewalls, int nrules, int nanomalies, 
+	public TestCaseGeneratorFirewallAnalysisChain3Anomalies(String name, int nfirewalls, int nrules, int nanomalies, 
 			double percReqWithPorts, double percReqWithProtoType, int seed) {
 		this.name = name;
 		this.rand = new Random(seed); 
@@ -133,12 +133,31 @@ public class TestCaseGeneratorFirewallAnalysis {
 	String createIPSupersetOf(String ip1) {
 		String ip2;
 		
+		String[] ip1v = ip1.split(Pattern.quote("."));
+		ip2 = new String(ip1v[0] + "." + ip1v[1] + "." + ip1v[2] + ".-1");
+		
+		return ip2;
+	}
+	
+	String createIPSuperset2Of(String ip1) {
+		String ip2;
+		
 		if(rand.nextInt(5) < 1) {
 			ip2 = new String("*");
 		} else {
 			String[] ip1v = ip1.split(Pattern.quote("."));
-			ip2 = new String(ip1v[0] + "." + ip1v[1] + "." + ip1v[2] + ".-1");
+			ip2 = new String(ip1v[0] + "." + ip1v[1] + ".-1.-1");
 		}
+		
+		return ip2;
+	}
+	
+	String createIPSubsetOf(String ip1) {
+		String ip2;
+		
+		String[] ip1v = ip1.split(Pattern.quote("."));
+		int lastByte = rand.nextInt(256);
+		ip2 = new String(ip1v[0] + "." + ip1v[1] + "." + ip1v[2] + "." + lastByte);
 		
 		return ip2;
 	}
@@ -282,7 +301,7 @@ public class TestCaseGeneratorFirewallAnalysis {
 			}
 			
 			//GENERATE REMAINING RULES
-			for(int i=0; i<nrules-nanomalies*2; i++) {
+			for(int i=0; i<nrules-nanomalies*3; i++) {
 				
 				Elements R = new Elements();
 				
@@ -378,54 +397,173 @@ public class TestCaseGeneratorFirewallAnalysis {
 		
 		Elements Rx = new Elements();
 		Elements Ry = new Elements();
+		Elements Rz = new Elements();
 		
 		if(rand.nextBoolean()) {
 			Rx.setAction(ActionTypes.DENY);
 			Ry.setAction(ActionTypes.ALLOW);
+			Rz.setAction(ActionTypes.DENY);
 		} else {
 			Rx.setAction(ActionTypes.ALLOW);
 			Ry.setAction(ActionTypes.DENY);
+			Rz.setAction(ActionTypes.ALLOW);
 		}
 		
-		//IP source: IPsrc1 is a subset of IPsrc2
-		String IPsrc1 = createIPSource();
-		String IPsrc2;
-		if(rand.nextBoolean()) {
-			//IPsrc2 superset of IPsrc1
-			IPsrc2 = createIPSupersetOf(IPsrc1);
-		} else {
-			//IPsrc2 = IPsrc1
-			IPsrc2 = new String(IPsrc1);
-		}
+		//IP SOURCE
+		int RxRy = rand.nextInt(3);
 		
-		if(rand.nextBoolean()) {
-			Rx.setSource(IPsrc1);
-			Ry.setSource(IPsrc2);
-		} else {
-			Rx.setSource(IPsrc2);
-			Ry.setSource(IPsrc1);
-		}
+		if(RxRy == 0) {
+			//IP source Rx = IP source Ry
+			String IPsrcX = createIPSource();
+			String IPsrcY = new String(IPsrcX);
+			String IPsrcZ;
 			
-		//IP dest: IPdst1 is a subset of IPdst2
-		String IPdst1 = createIPDestination();
-		String IPdst2;
-		if(rand.nextBoolean()) {
-			//IPdst2 superset of IPdst1
-			IPdst2 = createIPSupersetOf(IPdst1);
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP source Ry = IP source Rz
+				IPsrcZ = new String(IPsrcY);
+			} else if(RyRz == 1) {
+				// IP source Ry is a subset of IP source Rz
+				IPsrcZ = createIPSupersetOf(IPsrcY);
+			}
+			else {
+				// IP source Ry is a superset of IP source Rz
+				IPsrcZ = createIPSource();
+				IPsrcY = createIPSupersetOf(IPsrcZ);
+				IPsrcX = new String(IPsrcY);
+			}
+			
+			Rx.setSource(IPsrcX);
+			Ry.setSource(IPsrcY);
+			Rz.setSource(IPsrcZ);
+			
+		} else if(RxRy == 1 ) {
+			// IP source Rx is a subset of IP source Ry
+			String IPsrcX = createIPSource();
+			String IPsrcY = createIPSupersetOf(IPsrcX);
+			String IPsrcZ;
+			
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP source Ry = IP source Rz
+				IPsrcZ = new String(IPsrcY);
+			} else if(RyRz == 1) {
+				// IP source Ry is a subset of IP source Rz
+				IPsrcZ = createIPSuperset2Of(IPsrcY);
+			}
+			else {
+				// IP source Ry is a superset of IP source Rz
+				IPsrcZ = createIPSubsetOf(IPsrcY);
+			}
+			
+			Rx.setSource(IPsrcX);
+			Ry.setSource(IPsrcY);
+			Rz.setSource(IPsrcZ);
+			
 		} else {
-			//IPdst2 = IPdst1
-			IPdst2 = new String(IPdst1);
+			//IP source Rx is a superset of IP source of Ry
+			String IPsrcY = createIPSource();
+			String IPsrcX = createIPSupersetOf(IPsrcY);
+			String IPsrcZ;
+			
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP source Ry = IP source Rz
+				IPsrcZ = new String(IPsrcY);
+			} else if(RyRz == 1) {
+				// IP source Ry is a subset of IP source Rz
+				IPsrcZ = createIPSupersetOf(IPsrcY);
+			}
+			else {
+				// IP source Ry is a superset of IP source Rz
+				IPsrcZ = createIPSource();
+				IPsrcY = createIPSupersetOf(IPsrcZ);
+				IPsrcX = createIPSuperset2Of(IPsrcY);
+			}
+			
+			Rx.setSource(IPsrcX);
+			Ry.setSource(IPsrcY);
+			Rz.setSource(IPsrcZ);
+		}
+
+		
+		//IP DESTINATION
+		RxRy = rand.nextInt(3);
+		
+		if(RxRy == 0) {
+			//IP destination Rx = IP destination Ry
+			String IPdstX = createIPDestination();
+			String IPdstY = new String(IPdstX);
+			String IPdstZ;
+			
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP destination Ry = IP destination Rz
+				IPdstZ = new String(IPdstY);
+			} else if(RyRz == 1) {
+				// IP destination Ry is a subset of IP destination Rz
+				IPdstZ = createIPSupersetOf(IPdstY);
+			}
+			else {
+				// IP destination Ry is a superset of IP destination Rz
+				IPdstZ = createIPDestination();
+				IPdstY = createIPSupersetOf(IPdstZ);
+				IPdstX = new String(IPdstY);
+			}
+			
+			Rx.setDestination(IPdstX);
+			Ry.setDestination(IPdstY);
+			Rz.setDestination(IPdstZ);
+			
+		} else if(RxRy == 1 ) {
+			// IP destination Rx is a subset of IP destination Ry
+			String IPdstX = createIPDestination();
+			String IPdstY = createIPSupersetOf(IPdstX);
+			String IPdstZ;
+			
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP destination Ry = IP destination Rz
+				IPdstZ = new String(IPdstY);
+			} else if(RyRz == 1) {
+				// IP destination Ry is a subset of IP destination Rz
+				IPdstZ = createIPSuperset2Of(IPdstY);
+			}
+			else {
+				// IP destination Ry is a superset of IP destination Rz
+				IPdstZ = createIPSubsetOf(IPdstY);
+			}
+			
+			Rx.setDestination(IPdstX);
+			Ry.setDestination(IPdstY);
+			Rz.setDestination(IPdstZ);
+			
+		} else {
+			//IP destination Rx is a superset of IP destination of Ry
+			String IPdstY = createIPDestination();
+			String IPdstX = createIPSupersetOf(IPdstY);
+			String IPdstZ;
+			
+			int RyRz = rand.nextInt(3);
+			if(RyRz == 0) {
+				// IP destination Ry = IP destination Rz
+				IPdstZ = new String(IPdstY);
+			} else if(RyRz == 1) {
+				// IP destination Ry is a subset of IP destination Rz
+				IPdstZ = createIPSupersetOf(IPdstY);
+			}
+			else {
+				// IP destination Ry is a superset of IP destination Rz
+				IPdstZ = createIPDestination();
+				IPdstY = createIPSupersetOf(IPdstZ);
+				IPdstX = createIPSuperset2Of(IPdstY);
+			}
+			
+			Rx.setDestination(IPdstX);
+			Ry.setDestination(IPdstY);
+			Rz.setDestination(IPdstZ);
 		}
 		
-		if(rand.nextBoolean()) {
-			Rx.setDestination(IPdst1);
-			Ry.setDestination(IPdst2);
-		} else {
-			Rx.setDestination(IPdst2);
-			Ry.setDestination(IPdst1);
-		}
-		
-		//TODO: modificare anche numero di porta e protocollo
 		Rx.setSrcPort("*");
 		Rx.setDstPort("*");
 		Rx.setProtocol(L4ProtocolTypes.ANY);
@@ -434,9 +572,17 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setDstPort("*");
 		Ry.setProtocol(L4ProtocolTypes.ANY);
 		
+		Rz.setSrcPort("*");
+		Rz.setDstPort("*");
+		Rz.setProtocol(L4ProtocolTypes.ANY);
+		
+		
 		firewall.getConfiguration().getFirewall().getElements().add(Rx);
 		firewall.getConfiguration().getFirewall().getElements().add(Ry);
+		firewall.getConfiguration().getFirewall().getElements().add(Rz);
 	}
+	
+	
 	
 	private void createShadowingAnomaly(Node firewall) {
 		//SHADOWING ANOMALIES => Ry shadowed by Rx if Rx[order]<Ry[order], Rx[action] != Ry[action], Rx Rem Ry or Ry Rim Rx
@@ -445,44 +591,87 @@ public class TestCaseGeneratorFirewallAnalysis {
 		
 		Elements Rx = new Elements();
 		Elements Ry = new Elements();
+		Elements Rz = new Elements();
 		
 		if(rand.nextBoolean()) {
 			Rx.setAction(ActionTypes.DENY);
 			Ry.setAction(ActionTypes.ALLOW);
+			Rz.setAction(ActionTypes.DENY);
 		} else {
 			Rx.setAction(ActionTypes.ALLOW);
 			Ry.setAction(ActionTypes.DENY);
+			Rz.setAction(ActionTypes.ALLOW);
 		}
 		
 		//IP source
-		String IPsrcy = createIPSource();
-		String IPsrcx;
+		String IPsrcZ = createIPSource();
+		String IPsrcY;
+		String IPsrcX;
 		
 		if(rand.nextBoolean()) {
-			//Superset
-			IPsrcx = createIPSupersetOf(IPsrcy);
+			// IPsrcY = IPsrcZ
+			IPsrcY = new String(IPsrcZ);
+			
+			if(rand.nextBoolean()) {
+				//IPsrcX = IPsrcY
+				IPsrcX = new String(IPsrcY);
+			} else {
+				//IPsrcX superset of IPsrcY
+				IPsrcX = createIPSupersetOf(IPsrcY);
+			}
+			
 		} else {
-			//Equal
-			IPsrcx = new String(IPsrcy);
+			//IPsrcY superset of IPsrcZ
+			IPsrcY = createIPSupersetOf(IPsrcZ);
+
+			if(rand.nextBoolean()) {
+				//IPsrcX = IPsrcY
+				IPsrcX = new String(IPsrcY);
+			} else {
+				//IPsrcX superset of IPsrcY
+				IPsrcX = createIPSuperset2Of(IPsrcY);
+			}
+
 		}
 		
-		Rx.setSource(IPsrcx);
-		Ry.setSource(IPsrcy);
-		
+		Rx.setSource(IPsrcX);
+		Ry.setSource(IPsrcY);
+		Rz.setSource(IPsrcZ);
+
 		//IP dst
-		String IPdsty = createIPDestination();
-		String IPdstx;
-		
+		String IPdstZ = createIPDestination();
+		String IPdstY;
+		String IPdstX;
+
 		if(rand.nextBoolean()) {
-			//Superset
-			IPdstx = createIPSupersetOf(IPdsty);
+			// IPdstY = IPdstZ
+			IPdstY = new String(IPdstZ);
+
+			if(rand.nextBoolean()) {
+				//IPdstX = IPdstY
+				IPdstX = new String(IPdstY);
+			} else {
+				//IPdstX superset of IPdstY
+				IPdstX = createIPSupersetOf(IPdstY);
+			}
+
 		} else {
-			//Equal
-			IPdstx = new String(IPdsty);
+			//IPdstY superset of IPdstZ
+			IPdstY = createIPSupersetOf(IPdstZ);
+
+			if(rand.nextBoolean()) {
+				//IPdstX = IPdstY
+				IPdstX = new String(IPdstY);
+			} else {
+				//IPdstX superset of IPdstY
+				IPdstX = createIPSuperset2Of(IPdstY);
+			}
+
 		}
-		
-		Rx.setDestination(IPdstx);
-		Ry.setDestination(IPdsty);
+
+		Rx.setDestination(IPdstX);
+		Ry.setDestination(IPdstY);
+		Rz.setDestination(IPdstZ);
 		
 		//TODO: modificare anche numero di porta e protocollo
 		Rx.setSrcPort("*");
@@ -492,9 +681,14 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setSrcPort("*");
 		Ry.setDstPort("*");
 		Ry.setProtocol(L4ProtocolTypes.ANY);
+		
+		Rz.setSrcPort("*");
+		Rz.setDstPort("*");
+		Rz.setProtocol(L4ProtocolTypes.ANY);
 				
 		firewall.getConfiguration().getFirewall().getElements().add(Rx);
 		firewall.getConfiguration().getFirewall().getElements().add(Ry);
+		firewall.getConfiguration().getFirewall().getElements().add(Rz);
 	}
 	
 	private void createGeneralizationAnomaly(Node firewall) {
@@ -504,40 +698,60 @@ public class TestCaseGeneratorFirewallAnalysis {
 		
 		Elements Rx = new Elements();
 		Elements Ry = new Elements();
+		Elements Rz = new Elements();
 		
 		if(rand.nextBoolean()) {
 			Rx.setAction(ActionTypes.DENY);
 			Ry.setAction(ActionTypes.ALLOW);
+			Rz.setAction(ActionTypes.DENY);
 		} else {
 			Rx.setAction(ActionTypes.ALLOW);
 			Ry.setAction(ActionTypes.DENY);
+			Rz.setAction(ActionTypes.ALLOW);
 		}
 		
 		//IP source
-		String IPsrcx = createIPSource();
-		String IPsrcy;
+		String IPsrcX = createIPSource();
+		String IPsrcY;
+		String IPsrcZ;
 		
 		if(rand.nextBoolean() || different == 0) {
-			IPsrcy = createIPSupersetOf(IPsrcx);
+			IPsrcY = createIPSupersetOf(IPsrcX);
 		} else {
-			IPsrcy = new String(IPsrcx);
+			IPsrcY = new String(IPsrcX);
 		}
 		
-		Rx.setSource(IPsrcx);
-		Ry.setSource(IPsrcy);
+		if(rand.nextBoolean()){
+			IPsrcZ = createIPSupersetOf(IPsrcY);
+		} else {
+			IPsrcZ = new String(IPsrcY);
+		}
+		
+		Rx.setSource(IPsrcX);
+		Ry.setSource(IPsrcY);
+		Rz.setSource(IPsrcZ);
 		
 		//IP dst
-		String IPdstx = createIPDestination();
-		String IPdsty;
+		String IPdstX = createIPDestination();
+		String IPdstY;
+		String IPdstZ;
 		
 		if(rand.nextBoolean() || different == 1) {
-			IPdsty = createIPSupersetOf(IPdstx);
+			IPdstY = createIPSupersetOf(IPdstX);
 		} else {
-			IPdsty = new String(IPdstx);
+			IPdstY = new String(IPdstX);
 		}
 		
-		Rx.setDestination(IPdstx);
-		Ry.setDestination(IPdsty);
+		if(rand.nextBoolean()){
+			IPdstZ = createIPSupersetOf(IPdstY);
+		} else {
+			IPdstZ = new String(IPdstY);
+		}
+		
+		Rx.setDestination(IPdstX);
+		Ry.setDestination(IPdstY);
+		Rz.setDestination(IPdstZ);
+		
 		
 		//TODO: modificare anche numero di porta e protocollo
 		Rx.setSrcPort("*");
@@ -547,9 +761,14 @@ public class TestCaseGeneratorFirewallAnalysis {
 		Ry.setSrcPort("*");
 		Ry.setDstPort("*");
 		Ry.setProtocol(L4ProtocolTypes.ANY);
+		
+		Rz.setSrcPort("*");
+		Rz.setDstPort("*");
+		Rz.setProtocol(L4ProtocolTypes.ANY);
 						
 		firewall.getConfiguration().getFirewall().getElements().add(Rx);
 		firewall.getConfiguration().getFirewall().getElements().add(Ry);
+		firewall.getConfiguration().getFirewall().getElements().add(Rz);
 		
 	}
 	
@@ -561,56 +780,103 @@ public class TestCaseGeneratorFirewallAnalysis {
 		
 		Elements Rx = new Elements();
 		Elements Ry = new Elements();
+		Elements Rz = new Elements();
 		
 		if(rand.nextBoolean()) {
 			Rx.setAction(ActionTypes.DENY);
 			Ry.setAction(ActionTypes.DENY);
+			Rz.setAction(ActionTypes.DENY);
 		} else {
 			Rx.setAction(ActionTypes.ALLOW);
 			Ry.setAction(ActionTypes.ALLOW);
+			Rz.setAction(ActionTypes.ALLOW);
 		}
-		
 		//IP source
-		String IPsrcy = createIPSource();
-		String IPsrcx;
-		
+		String IPsrcZ = createIPSource();
+		String IPsrcY;
+		String IPsrcX;
+
 		if(rand.nextBoolean()) {
-			//Superset
-			IPsrcx = createIPSupersetOf(IPsrcy);
+			// IPsrcY = IPsrcZ
+			IPsrcY = new String(IPsrcZ);
+
+			if(rand.nextBoolean()) {
+				//IPsrcX = IPsrcY
+				IPsrcX = new String(IPsrcY);
+			} else {
+				//IPsrcX superset of IPsrcY
+				IPsrcX = createIPSupersetOf(IPsrcY);
+			}
+
 		} else {
-			//Equal
-			IPsrcx = new String(IPsrcy);
+			//IPsrcY superset of IPsrcZ
+			IPsrcY = createIPSupersetOf(IPsrcZ);
+
+			if(rand.nextBoolean()) {
+				//IPsrcX = IPsrcY
+				IPsrcX = new String(IPsrcY);
+			} else {
+				//IPsrcX superset of IPsrcY
+				IPsrcX = createIPSuperset2Of(IPsrcY);
+			}
+
 		}
-		
-		Rx.setSource(IPsrcx);
-		Ry.setSource(IPsrcy);
-		
+
+		Rx.setSource(IPsrcX);
+		Ry.setSource(IPsrcY);
+		Rz.setSource(IPsrcZ);
+
 		//IP dst
-		String IPdsty = createIPDestination();
-		String IPdstx;
-		
+		String IPdstZ = createIPDestination();
+		String IPdstY;
+		String IPdstX;
+
 		if(rand.nextBoolean()) {
-			//Superset
-			IPdstx = createIPSupersetOf(IPdsty);
+			// IPdstY = IPdstZ
+			IPdstY = new String(IPdstZ);
+
+			if(rand.nextBoolean()) {
+				//IPdstX = IPdstY
+				IPdstX = new String(IPdstY);
+			} else {
+				//IPdstX superset of IPdstY
+				IPdstX = createIPSupersetOf(IPdstY);
+			}
+
 		} else {
-			//Equal
-			IPdstx = new String(IPdsty);
+			//IPdstY superset of IPdstZ
+			IPdstY = createIPSupersetOf(IPdstZ);
+
+			if(rand.nextBoolean()) {
+				//IPdstX = IPdstY
+				IPdstX = new String(IPdstY);
+			} else {
+				//IPdstX superset of IPdstY
+				IPdstX = createIPSuperset2Of(IPdstY);
+			}
+
 		}
-		
-		Rx.setDestination(IPdstx);
-		Ry.setDestination(IPdsty);
-		
+
+		Rx.setDestination(IPdstX);
+		Ry.setDestination(IPdstY);
+		Rz.setDestination(IPdstZ);
+
 		//TODO: modificare anche numero di porta e protocollo
 		Rx.setSrcPort("*");
 		Rx.setDstPort("*");
 		Rx.setProtocol(L4ProtocolTypes.ANY);
-				
+
+		Rz.setSrcPort("*");
+		Rz.setDstPort("*");
+		Rz.setProtocol(L4ProtocolTypes.ANY);
+		
 		Ry.setSrcPort("*");
 		Ry.setDstPort("*");
 		Ry.setProtocol(L4ProtocolTypes.ANY);
 				
 		firewall.getConfiguration().getFirewall().getElements().add(Rx);
 		firewall.getConfiguration().getFirewall().getElements().add(Ry);
+		firewall.getConfiguration().getFirewall().getElements().add(Rz);
 	}
 	
 	
